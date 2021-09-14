@@ -1,4 +1,4 @@
-import type { InferGetStaticPropsType, NextPage } from "next";
+import type { GetStaticPropsContext, InferGetStaticPropsType, NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
 
@@ -11,8 +11,8 @@ import utilStyles from "../styles/utils.module.css";
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
-const Home: NextPage<Props> = ({ posts }) => (
-  <Layout home>
+const Home: NextPage<Props> = ({ posts, preview }) => (
+  <Layout home preview={preview}>
     <Head>
       <title>{siteTitle}</title>
     </Head>
@@ -42,7 +42,7 @@ const Home: NextPage<Props> = ({ posts }) => (
   </Layout>
 );
 
-export const getStaticProps = async () => {
+export const getStaticProps = async ({ preview = false }: GetStaticPropsContext) => {
   const apiPostFields = ["id", "publishedAt", "title"] as const;
   type ApiPostFields = typeof apiPostFields[number];
   type ApiPost = Pick<Api.Post, ApiPostFields>;
@@ -54,6 +54,7 @@ export const getStaticProps = async () => {
   return {
     props: {
       posts: contents,
+      preview,
     },
     revalidate: 60,
   };
