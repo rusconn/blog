@@ -2,12 +2,12 @@ import type { GetStaticPropsContext, InferGetStaticPropsType, NextPage } from "n
 import Head from "next/head";
 import Link from "next/link";
 
-import Layout, { siteTitle } from "../components/layout";
-import Date from "../components/date";
-import * as Api from "../libs/api";
-import { pagesPath } from "../libs/$path";
+import Layout, { siteTitle } from "@/components/layout";
+import Date from "@/components/date";
+import * as Api from "@/libs/api";
+import { pagesPath } from "@/libs/$path";
 
-import utilStyles from "../styles/utils.module.css";
+import utilStyles from "@/styles/utils.module.css";
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 

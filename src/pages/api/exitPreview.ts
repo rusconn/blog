@@ -1,6 +1,6 @@
 import type { NextApiHandler } from "next";
 
-import { pagesPath } from "../../libs/$path";
+import { pagesPath } from "@/libs/$path";
 
 type Message = {
   message: string;

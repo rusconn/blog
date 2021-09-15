@@ -3,11 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaGithub } from "react-icons/fa";
 
-import routes from "../libs/routes";
-import { pagesPath, staticPath } from "../libs/$path";
+import routes from "@/libs/routes";
+import { pagesPath, staticPath } from "@/libs/$path";
 
-import styles from "./layout.module.css";
-import utilStyles from "../styles/utils.module.css";
+import styles from "@/components/layout.module.css";
+import utilStyles from "@/styles/utils.module.css";
 
 type Props = {
   children: React.ReactNode;

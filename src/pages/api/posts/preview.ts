@@ -2,9 +2,9 @@
 
 import type { NextApiHandler } from "next";
 
-import * as Api from "../../../libs/api";
-import { PREVIEW_MODE_MAX_AGE } from "../../../libs/config";
-import routes from "../../../libs/routes";
+import * as Api from "@/libs/api";
+import { PREVIEW_MODE_MAX_AGE } from "@/libs/config";
+import routes from "@/libs/routes";
 
 type Message = {
   message: string;

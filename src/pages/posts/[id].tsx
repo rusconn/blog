@@ -1,11 +1,11 @@
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 
-import Layout from "../../components/layout";
-import DateComponent from "../../components/date";
-import * as Api from "../../libs/api";
+import Layout from "@/components/layout";
+import DateComponent from "@/components/date";
+import * as Api from "@/libs/api";
 
-import utilStyles from "../../styles/utils.module.css";
+import utilStyles from "@/styles/utils.module.css";
 
 // Infer できない: https://github.com/vercel/next.js/issues/15913
 type Props = {

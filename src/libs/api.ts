@@ -2,7 +2,7 @@ import { createClient } from "microcms-js-sdk";
 import type { GetRequest } from "microcms-js-sdk/dist/cjs/types";
 import type { MarkRequired, StrictOmit } from "ts-essentials";
 
-import { API_DOMAIN, API_KEY } from "./config";
+import { API_DOMAIN, API_KEY } from "@/libs/config";
 
 type GetParam = StrictOmit<GetRequest, "endpoint">;
 type GetListParam = StrictOmit<GetParam, "contentId">;
