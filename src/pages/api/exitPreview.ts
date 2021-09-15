@@ -1,6 +1,6 @@
 import type { NextApiHandler } from "next";
 
-import routes from "../../libs/routes";
+import { pagesPath } from "../../libs/$path";
 
 type Message = {
   message: string;
@@ -8,7 +8,7 @@ type Message = {
 
 const handler: NextApiHandler<Message> = (_req, res) => {
   res.clearPreviewData();
-  res.redirect(routes.top);
+  res.redirect(pagesPath.$url().pathname);
 };
 
 export default handler;

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { FaGithub } from "react-icons/fa";
 
 import routes from "../libs/routes";
+import { pagesPath, staticPath } from "../libs/$path";
 
 import styles from "./layout.module.css";
 import utilStyles from "../styles/utils.module.css";
@@ -31,7 +32,7 @@ const Layout = ({ children, home, preview }: Props) => (
     )}
     <div className={styles.container}>
       <Head>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href={staticPath.favicon_ico} />
         <meta name="description" content="web software engineer rusconn's personal blog" />
         <meta name="og:title" content={siteTitle} />
         <meta name="og:site_name" content={siteTitle} />
@@ -40,18 +41,30 @@ const Layout = ({ children, home, preview }: Props) => (
       <header className={styles.header}>
         {home ? (
           <>
-            <Image priority src="/images/profile.png" height={144} width={144} alt={name} />
+            <Image
+              priority
+              src={staticPath.images.profile_png}
+              height={144}
+              width={144}
+              alt={name}
+            />
             <h1 className={utilStyles.heading2Xl}>{name}</h1>
           </>
         ) : (
           <>
-            <Link href={routes.top}>
+            <Link href={pagesPath.$url()}>
               <a>
-                <Image priority src="/images/profile.png" height={96} width={96} alt={name} />
+                <Image
+                  priority
+                  src={staticPath.images.profile_png}
+                  height={96}
+                  width={96}
+                  alt={name}
+                />
               </a>
             </Link>
             <h2 className={utilStyles.headingLg}>
-              <Link href={routes.top}>
+              <Link href={pagesPath.$url()}>
                 <a className={utilStyles.colorInherit}>{name}</a>
               </Link>
             </h2>
@@ -61,7 +74,7 @@ const Layout = ({ children, home, preview }: Props) => (
       <main>{children}</main>
       {!home && (
         <div className={styles.backToHome}>
-          <Link href={routes.top}>
+          <Link href={pagesPath.$url()}>
             <a>← Back to home</a>
           </Link>
         </div>
