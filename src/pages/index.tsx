@@ -5,7 +5,7 @@ import Link from "next/link";
 import Layout, { siteTitle } from "../components/layout";
 import Date from "../components/date";
 import * as Api from "../libs/api";
-import routes from "../libs/routes";
+import { pagesPath } from "../libs/$path";
 
 import utilStyles from "../styles/utils.module.css";
 
@@ -28,7 +28,7 @@ const Home: NextPage<Props> = ({ posts, preview }) => (
       <ul className={utilStyles.list}>
         {posts.map(({ id, publishedAt, title }) => (
           <li className={utilStyles.listItem} key={id}>
-            <Link href={routes.postsPost(id)} prefetch={false}>
+            <Link href={pagesPath.posts._id(id).$url()} prefetch={false}>
               <a>{title}</a>
             </Link>
             <br />
