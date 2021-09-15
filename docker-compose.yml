@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  node:
+    build: ./docker
+    working_dir: /usr/node
+    volumes:
+      - ./:/usr/node:cached
+      - next:/usr/node/.next
+      - node_modules:/usr/node/node_modules
+    command: sh -c "npm install && npm run dev"
+    ports:
+      - 3000:3000
+
+volumes:
+  next:
+    driver: local
+  node_modules:
+    driver: local
