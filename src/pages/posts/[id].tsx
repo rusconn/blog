@@ -6,6 +6,7 @@ import DateComponent from "@/components/date";
 import * as Api from "@/libs/api";
 
 import utilStyles from "@/styles/utils.module.css";
+import "github-markdown-css";
 
 // Infer できない: https://github.com/vercel/next.js/issues/15913
 type Props = {
@@ -29,8 +30,11 @@ const Post: NextPage<Props> = ({ post, preview }) => (
       <div className={utilStyles.lightText}>
         <DateComponent dateString={post.publishedAt} />
       </div>
-      {/* eslint-disable-next-line react/no-danger */}
-      <div dangerouslySetInnerHTML={{ __html: post.body }} />
+      <div
+        className={`markdown-body ${utilStyles.markdownMargin}`}
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: post.body }}
+      />
     </article>
   </Layout>
 );
