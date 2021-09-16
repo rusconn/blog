@@ -18,8 +18,10 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "cheerio": "^1.0.0-rc.10",
     "date-fns": "^2.23.0",
     "github-markdown-css": "^4.0.0",
+    "highlight.js": "^11.2.0",
     "microcms-js-sdk": "^1.2.0",
     "next": "11.1.2",
     "pathpida": "^0.17.0",
