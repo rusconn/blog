@@ -4,9 +4,11 @@ import Head from "next/head";
 import Layout from "@/components/layout";
 import DateComponent from "@/components/date";
 import * as Api from "@/libs/api";
+import highlightCodes from "@/libs/html";
 
 import utilStyles from "@/styles/utils.module.css";
 import "github-markdown-css";
+import "highlight.js/styles/github.css";
 
 // Infer できない: https://github.com/vercel/next.js/issues/15913
 type Props = {
@@ -33,7 +35,7 @@ const Post: NextPage<Props> = ({ post, preview }) => (
       <div
         className={`markdown-body ${utilStyles.markdownMargin}`}
         // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{ __html: post.body }}
+        dangerouslySetInnerHTML={{ __html: highlightCodes(post.body) }}
       />
     </article>
   </Layout>
