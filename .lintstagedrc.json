@@ -1,5 +1,5 @@
 {
-  "*.{ts,tsx}": "sh -c 'npm run typecheck'",
-  "*.{js,jsx,ts,tsx}": "npm run lint:fix",
-  "*.{js,jsx,ts,tsx,json,css}": "npm run format"
+  "*.{ts,tsx}": "sh -c 'npm run fix:type'",
+  "*.{js,jsx,ts,tsx}": "npm run fix:lint",
+  "*.{js,jsx,ts,tsx,json,css}": "npm run fix:format"
 }
