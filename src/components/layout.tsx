@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { FaGithub } from "react-icons/fa";
+import { FaGithub, FaTwitter } from "react-icons/fa";
 
 import routes from "@/libs/routes";
 import { pagesPath, staticPath } from "@/libs/$path";
@@ -81,6 +81,15 @@ const Layout = ({ children, home, preview }: Props) => (
       )}
       <footer>
         <div className={styles.snsLinks}>
+          <a
+            className={styles.snsLink}
+            href="https://twitter.com/rusconn"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="rusconnのTwitterへ"
+          >
+            <FaTwitter className={styles.snsIcon} />
+          </a>
           <a
             className={styles.snsLink}
             href="https://github.com/rusconn"
