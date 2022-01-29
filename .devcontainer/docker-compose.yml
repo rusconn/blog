@@ -1,0 +1,10 @@
+version: "3.8"
+
+services:
+  blog:
+    image: rusconn/blog
+    build:
+      context: .devcontainer
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: sleep infinity
