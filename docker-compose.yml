@@ -1,13 +1,13 @@
 version: "3.8"
 
 services:
-  node:
-    build: ./docker
-    working_dir: /usr/node
+  blog:
+    image: node:17.3.0-bullseye-slim
+    working_dir: /blog
     volumes:
-      - ./:/usr/node:cached
-      - next:/usr/node/.next
-      - node_modules:/usr/node/node_modules
+      - ./:/blog:cached
+      - next:/blog/.next
+      - node_modules:/blog/node_modules
     command: sh -c "npm install && npm run dev"
     ports:
       - 3000:3000

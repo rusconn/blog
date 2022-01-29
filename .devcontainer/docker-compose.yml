@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+  blog:
+    build:
+      context: https://github.com/rusconn/dockerfiles.git#main
+      dockerfile: Dockerfile.basic
+      args:
+        - IMAGE=node:17.3.0-bullseye-slim
+    image: rusconn/blog
+    volumes:
+      # Uncomment the next line to use Docker from inside the container. See https://aka.ms/vscode-remote/samples/docker-from-docker-compose for details.
+      - /var/run/docker.sock:/var/run/docker.sock
+
+    # Overrides default command so things don't shut down after the process ends.
+    command: /bin/sh -c "sleep infinity"
