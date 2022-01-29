@@ -8,6 +8,7 @@ services:
       - ./:/blog:cached
       - next:/blog/.next
       - node_modules:/blog/node_modules
+      - yarn-cache:/usr/local/share/.cache/yarn/v6
     command: sh -c "yarn && yarn dev"
     ports:
       - 3000:3000
@@ -16,4 +17,6 @@ volumes:
   next:
     driver: local
   node_modules:
+    driver: local
+  yarn-cache:
     driver: local
