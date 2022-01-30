@@ -22,7 +22,8 @@
     "esbenp.prettier-vscode",
     "artdiniz.quitcontrol-vscode",
     "humao.rest-client",
-    "graphql.vscode-graphql"
+    "graphql.vscode-graphql",
+    "styled-components.vscode-styled-components"
   ],
   "runServices": ["blog"],
   "shutdownAction": "stopCompose"
