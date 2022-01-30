@@ -2,13 +2,13 @@
 // prettier-ignore
 export const pagesPath = {
   posts: {
-    _id: (id: string | number) => ({
-      $url: (url?: { hash?: string }) => ({ pathname: '/posts/[id]' as const, query: { id }, hash: url?.hash })
+    _slug: (slug: string | number) => ({
+      $url: (url?: { hash?: string }) => ({ pathname: '/posts/[slug]' as const, query: { slug }, hash: url?.hash })
     })
   },
   tags: {
-    _id: (id: string | number) => ({
-      $url: (url?: { hash?: string }) => ({ pathname: '/tags/[id]' as const, query: { id }, hash: url?.hash })
+    _slug: (slug: string | number) => ({
+      $url: (url?: { hash?: string }) => ({ pathname: '/tags/[slug]' as const, query: { slug }, hash: url?.hash })
     })
   },
   $url: (url?: { hash?: string }) => ({ pathname: '/' as const, hash: url?.hash })

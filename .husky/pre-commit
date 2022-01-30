@@ -2,4 +2,5 @@
 . "$(dirname "$0")/_/husky.sh"
 
 yarn fix:path
+yarn fix:generate
 yarn lint-staged

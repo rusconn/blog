@@ -1,82 +1,53 @@
-import { createClient } from "microcms-js-sdk";
-import type { GetRequest } from "microcms-js-sdk/dist/cjs/types";
-import type { MarkRequired, StrictOmit } from "ts-essentials";
+import { ApolloClient, InMemoryCache, HttpLink, from } from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
 
-import { API_DOMAIN, API_KEY } from "@/libs/config";
+import {
+  GRAPHCMS_PROD_AUTH_TOKEN,
+  GRAPHCMS_DEV_AUTH_TOKEN,
+  GRAPHCMS_PROJECT_API,
+} from "@/libs/config";
+import { Node } from "@/generated/graphql";
 
-type GetParam = StrictOmit<GetRequest, "endpoint">;
-type GetListParam = StrictOmit<GetParam, "contentId">;
-type GetOneParam = MarkRequired<GetParam, "contentId">;
-
-const ApiClient = class {
-  private client;
-
-  private postsBase = "posts";
-
-  private tagsBase = "tags";
-
-  constructor() {
-    this.client = createClient({
-      serviceDomain: API_DOMAIN,
-      apiKey: API_KEY,
-    });
-  }
-
-  private getList<T>(request: GetRequest) {
-    return this.client.get<ListResponse<T>>(request);
-  }
-
-  private get<T>(request: GetRequest) {
-    return this.client.get<T>(request);
-  }
-
-  getPosts<T extends Partial<Post>>(param: GetListParam = {}) {
-    return this.getList<T>({ ...param, endpoint: this.postsBase });
-  }
-
-  getPost<T extends Partial<Post>>(param: GetOneParam) {
-    return this.get<T>({ ...param, endpoint: this.postsBase });
-  }
-
-  getTags<T extends Partial<Tag>>(param: GetListParam = {}) {
-    return this.getList<T>({ ...param, endpoint: this.tagsBase });
-  }
-
-  getTag<T extends Partial<Tag>>(param: GetOneParam) {
-    return this.get<T>({ ...param, endpoint: this.tagsBase });
-  }
+type CreateClientParams = {
+  preview: boolean;
 };
 
-type ListResponse<T> = {
-  contents: T[];
-  totalCount: number;
-  offset: number;
-  limit: number;
+// クライアント作成後にヘッダを上書きする方法がわからなかったのでファクトリ化
+const createClient = ({ preview }: CreateClientParams) => {
+  type Context = {
+    headers: Record<string, unknown>;
+  };
+
+  const httpLink = new HttpLink({
+    uri: GRAPHCMS_PROJECT_API,
+  });
+
+  const authLink = setContext((_, { headers }: Context) => ({
+    headers: {
+      ...headers,
+      authorization: `Bearer ${preview ? GRAPHCMS_DEV_AUTH_TOKEN : GRAPHCMS_PROD_AUTH_TOKEN}`,
+    },
+  }));
+
+  const keyFields: (keyof Node)[] = ["id"];
+
+  const cache = new InMemoryCache({
+    typePolicies: {
+      Post: {
+        keyFields,
+      },
+      Tag: {
+        keyFields,
+      },
+    },
+  });
+
+  return new ApolloClient({
+    link: from([authLink, httpLink]),
+    cache,
+  });
 };
 
-type Draft<T> = {
-  id: string;
-  createdAt: string;
-  updatedAt: string;
-} & T;
-
-type Published<T> = T & {
-  publishedAt: string;
-  revisedAt: string;
-};
-
-export type DraftTag = Draft<{
-  name: string;
-  posts?: Post[];
-}>;
-
-export type DraftPost = Draft<{
-  title: string;
-  body: string;
-  tags?: Tag[];
-}>;
-
-export type Tag = Published<DraftTag>;
-export type Post = Published<DraftPost>;
-
-export const client = new ApiClient();
+// Node.js のモジュールキャッシュが効いて再利用される？
+export const client = createClient({ preview: false });
+export const previewClient = createClient({ preview: true });
