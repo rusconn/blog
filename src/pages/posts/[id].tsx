@@ -5,10 +5,12 @@ import Layout from "@/components/layout";
 import DateComponent from "@/components/date";
 import * as Api from "@/libs/api";
 import highlightCodes from "@/libs/html";
+import { pagesPath } from "@/libs/$path";
 
 import utilStyles from "@/styles/utils.module.css";
 import "github-markdown-css";
 import "highlight.js/styles/github.css";
+import Link from "next/link";
 
 // Infer できない: https://github.com/vercel/next.js/issues/15913
 type Props = {
@@ -20,6 +22,12 @@ type PropPost = {
   title: string;
   publishedAt: string;
   body: string;
+  tags: Tag[];
+};
+
+type Tag = {
+  id: string;
+  name: string;
 };
 
 const Post: NextPage<Props> = ({ post, preview }) => (
@@ -32,6 +40,15 @@ const Post: NextPage<Props> = ({ post, preview }) => (
       <div className={utilStyles.lightText}>
         <DateComponent dateString={post.publishedAt} />
       </div>
+      <ul className={utilStyles.tagsList}>
+        {post.tags.map(({ id, name }) => (
+          <li className={utilStyles.tagsListItem} key={id}>
+            <Link href={pagesPath.tags._id(id).$url()} prefetch={false}>
+              <a className={utilStyles.tagLink}>{name}</a>
+            </Link>
+          </li>
+        ))}
+      </ul>
       <div
         className={`markdown-body ${utilStyles.markdownMargin}`}
         // eslint-disable-next-line react/no-danger
@@ -60,7 +77,7 @@ export const getStaticProps: GetStaticProps<Props, PathParams> = async ({
     if (preview) {
       const { draftKey } = previewData as { draftKey?: string };
 
-      const apiDraftPostFields = ["title", "body"] as const;
+      const apiDraftPostFields = ["title", "body", "tags"] as const;
       type ApiDraftPostFields = typeof apiDraftPostFields[number];
       type ApipDraftPost = Pick<Api.DraftPost, ApiDraftPostFields>;
 
@@ -71,7 +88,7 @@ export const getStaticProps: GetStaticProps<Props, PathParams> = async ({
 
       return { ...draftPost, publishedAt: new Date().toISOString() };
     } else {
-      const apiPostFields = ["title", "body", "publishedAt"] as const;
+      const apiPostFields = ["title", "body", "tags", "publishedAt"] as const;
       type ApiPostFields = typeof apiPostFields[number];
       type ApiPost = Pick<Api.Post, ApiPostFields>;
 
@@ -87,7 +104,10 @@ export const getStaticProps: GetStaticProps<Props, PathParams> = async ({
 
     return {
       props: {
-        post,
+        post: {
+          ...post,
+          tags: post.tags ?? [],
+        },
         preview,
       },
       revalidate: 60,

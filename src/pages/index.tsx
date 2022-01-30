@@ -11,7 +11,7 @@ import utilStyles from "@/styles/utils.module.css";
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
-const Home: NextPage<Props> = ({ posts, preview }) => (
+const Home: NextPage<Props> = ({ tags, posts, preview }) => (
   <Layout home preview={preview}>
     <Head>
       <title>{siteTitle}</title>
@@ -22,6 +22,17 @@ const Home: NextPage<Props> = ({ posts, preview }) => (
         <br />
         TypeScript, React, Apollo, Lambda, DynamoDB, S3, ...
       </p>
+    </section>
+    <section className={utilStyles.headingMd}>
+      <ul className={utilStyles.tagsList}>
+        {tags.map(({ id, name }) => (
+          <li className={utilStyles.tagsListItem} key={id}>
+            <Link href={pagesPath.tags._id(id).$url()} prefetch={false}>
+              <a className={utilStyles.tagLink}>{name}</a>
+            </Link>
+          </li>
+        ))}
+      </ul>
     </section>
     <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
       <h2 className={utilStyles.headingLg}>Posts</h2>
@@ -43,17 +54,28 @@ const Home: NextPage<Props> = ({ posts, preview }) => (
 );
 
 export const getStaticProps = async ({ preview = false }: GetStaticPropsContext) => {
+  const apiTagFields = ["id", "name", "posts"] as const;
+  type ApiTagFields = typeof apiTagFields[number];
+  type ApiTag = Pick<Api.Tag, ApiTagFields>;
+
+  const { contents: tags } = await Api.client.getTags<ApiTag>({
+    queries: { orders: "-publishedAt", fields: apiTagFields.join() },
+  });
+
   const apiPostFields = ["id", "publishedAt", "title"] as const;
   type ApiPostFields = typeof apiPostFields[number];
   type ApiPost = Pick<Api.Post, ApiPostFields>;
 
-  const { contents } = await Api.client.getPosts<ApiPost>({
+  const { contents: posts } = await Api.client.getPosts<ApiPost>({
     queries: { orders: "-publishedAt", fields: apiPostFields.join() },
   });
 
+  const usedTags = tags.filter(tag => (tag.posts ?? []).length);
+
   return {
     props: {
-      posts: contents,
+      tags: usedTags,
+      posts,
       preview,
     },
     revalidate: 60,
