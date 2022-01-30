@@ -67,6 +67,7 @@ type Published<T> = T & {
 
 export type DraftTag = Draft<{
   name: string;
+  posts?: Post[];
 }>;
 
 export type DraftPost = Draft<{
