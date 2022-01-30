@@ -47,6 +47,27 @@
   color: #666;
 }
 
+.tagsList {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 1.4rem;
+  padding-left: 0;
+}
+
+.tagsListItem {
+  list-style-type: none;
+  margin-right: 0.4rem;
+  margin-bottom: 0.4rem;
+  font-size: 0.9rem;
+  border: 1.2px solid royalblue;
+  border-radius: 0.4rem;
+}
+
+.tagLink {
+  display: inline-block;
+  padding: 0.4rem;
+}
+
 .markdownMargin {
-  margin-top: 2rem;
+  margin-top: 3.2rem;
 }
