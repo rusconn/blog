@@ -2,12 +2,67 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { FaGithub, FaTwitter } from "react-icons/fa";
+import { css } from "@emotion/react";
 
 import routes from "@/libs/routes";
 import { pagesPath, staticPath } from "@/libs/$path";
 
-import styles from "@/components/layout.module.css";
-import utilStyles from "@/styles/utils.module.css";
+import * as utilStyles from "@/styles/utils";
+
+const container = css`
+  max-width: 42rem;
+  padding: 0 1rem;
+  margin: 3rem auto 6rem;
+`;
+
+const header = css`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const backToHome = css`
+  margin: 3rem 0 0;
+`;
+
+const snsLinks = css`
+  text-align: right;
+`;
+
+const snsLink = css`
+  opacity: 0.4;
+  color: black;
+
+  &:not(:first-of-type) {
+    margin-left: 0.6rem;
+  }
+
+  &:hover {
+    opacity: 0.7;
+  }
+`;
+
+const snsIcon = css`
+  width: 1.5rem;
+  height: 1.5rem;
+`;
+
+const previewHeader = css`
+  position: sticky;
+  top: 0;
+  padding: 1rem;
+  text-align: center;
+  background-color: lightyellow;
+  z-index: 1;
+`;
+
+const previewText = css`
+  margin: 0;
+`;
+
+const previewOff = css`
+  text-decoration: underline;
+`;
 
 type Props = {
   children: React.ReactNode;
@@ -21,16 +76,16 @@ export const siteTitle = `${name}'s blog`;
 const Layout = ({ children, home, preview }: Props) => (
   <>
     {preview && (
-      <div className={styles.previewHeader}>
-        <p className={styles.previewText}>
+      <div css={previewHeader}>
+        <p css={previewText}>
           現在プレビュー表示がONになっています。
-          <Link href={routes.exitPreview}>
-            <a className={styles.previewOff}>プレビュー表示をOFFにする</a>
+          <Link href={routes.exitPreview} passHref>
+            <a css={previewOff}>プレビュー表示をOFFにする</a>
           </Link>
         </p>
       </div>
     )}
-    <div className={styles.container}>
+    <div css={container}>
       <Head>
         <link rel="icon" href={staticPath.favicon_ico} />
         <meta name="description" content="web software engineer rusconn's personal blog" />
@@ -38,7 +93,7 @@ const Layout = ({ children, home, preview }: Props) => (
         <meta name="og:site_name" content={siteTitle} />
         <meta name="og:type" content="website" />
       </Head>
-      <header className={styles.header}>
+      <header css={header}>
         {home ? (
           <>
             <Image
@@ -48,7 +103,7 @@ const Layout = ({ children, home, preview }: Props) => (
               width={144}
               alt={name}
             />
-            <h1 className={utilStyles.heading2Xl}>{name}</h1>
+            <h1 css={utilStyles.heading2Xl}>{name}</h1>
           </>
         ) : (
           <>
@@ -63,9 +118,9 @@ const Layout = ({ children, home, preview }: Props) => (
                 />
               </a>
             </Link>
-            <h2 className={utilStyles.headingLg}>
-              <Link href={pagesPath.$url()}>
-                <a className={utilStyles.colorInherit}>{name}</a>
+            <h2 css={utilStyles.headingLg}>
+              <Link href={pagesPath.$url()} passHref>
+                <a css={utilStyles.colorInherit}>{name}</a>
               </Link>
             </h2>
           </>
@@ -73,31 +128,31 @@ const Layout = ({ children, home, preview }: Props) => (
       </header>
       <main>{children}</main>
       {!home && (
-        <div className={styles.backToHome}>
+        <div css={backToHome}>
           <Link href={pagesPath.$url()}>
             <a>← Back to home</a>
           </Link>
         </div>
       )}
       <footer>
-        <div className={styles.snsLinks}>
+        <div css={snsLinks}>
           <a
-            className={styles.snsLink}
+            css={snsLink}
             href="https://twitter.com/rusconn"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="rusconnのTwitterへ"
           >
-            <FaTwitter className={styles.snsIcon} />
+            <FaTwitter css={snsIcon} />
           </a>
           <a
-            className={styles.snsLink}
+            css={snsLink}
             href="https://github.com/rusconn"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="rusconnのGitHubへ"
           >
-            <FaGithub className={styles.snsIcon} />
+            <FaGithub css={snsIcon} />
           </a>
         </div>
       </footer>
