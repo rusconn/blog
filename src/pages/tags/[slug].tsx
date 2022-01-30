@@ -15,7 +15,7 @@ import DateComponent from "@/components/date";
 import { client, previewClient } from "@/libs/api";
 import { pagesPath } from "@/libs/$path";
 
-import utilStyles from "@/styles/utils.module.css";
+import * as utilStyles from "@/styles/utils";
 
 // Infer できない: https://github.com/vercel/next.js/issues/15913
 type Props = {
@@ -42,16 +42,16 @@ const Tag: NextPage<Props> = ({ tag, preview }) => (
     <Head>
       <title>{tag.name}</title>
     </Head>
-    <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-      <h2 className={utilStyles.headingLg}>{tag.name} Posts</h2>
-      <ul className={utilStyles.list}>
+    <section css={[utilStyles.headingMd, utilStyles.padding1px]}>
+      <h2 css={utilStyles.headingLg}>{tag.name} Posts</h2>
+      <ul css={utilStyles.list}>
         {tag.posts.map(({ id, slug, date, title }) => (
-          <li className={utilStyles.listItem} key={id}>
+          <li css={utilStyles.listItem} key={id}>
             <Link href={pagesPath.posts._slug(slug).$url()} prefetch={false}>
               <a>{title}</a>
             </Link>
             <br />
-            <small className={utilStyles.lightText}>
+            <small css={utilStyles.lightText}>
               <DateComponent dateString={date} />
             </small>
           </li>

@@ -8,8 +8,7 @@ import Layout, { siteTitle } from "@/components/layout";
 import Date from "@/components/date";
 import { client, previewClient } from "@/libs/api";
 import { pagesPath } from "@/libs/$path";
-
-import utilStyles from "@/styles/utils.module.css";
+import * as utilStyles from "@/styles/utils";
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
@@ -18,34 +17,34 @@ const Home: NextPage<Props> = ({ tags, posts, preview }) => (
     <Head>
       <title>{siteTitle}</title>
     </Head>
-    <section className={utilStyles.headingMd}>
+    <section css={utilStyles.headingMd}>
       <p>
         Software Engineer.
         <br />
         TypeScript, React, Apollo, Lambda, DynamoDB, S3, ...
       </p>
     </section>
-    <section className={utilStyles.headingMd}>
-      <ul className={utilStyles.tagsList}>
+    <section css={utilStyles.headingMd}>
+      <ul css={utilStyles.tagsList}>
         {tags.map(({ id, slug, name }) => (
-          <li className={utilStyles.tagsListItem} key={id}>
-            <Link href={pagesPath.tags._slug(slug).$url()} prefetch={false}>
-              <a className={utilStyles.tagLink}>{name}</a>
+          <li css={utilStyles.tagsListItem} key={id}>
+            <Link href={pagesPath.tags._slug(slug).$url()} passHref prefetch={false}>
+              <a css={utilStyles.tagLink}>{name}</a>
             </Link>
           </li>
         ))}
       </ul>
     </section>
-    <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-      <h2 className={utilStyles.headingLg}>Posts</h2>
-      <ul className={utilStyles.list}>
+    <section css={[utilStyles.headingMd, utilStyles.padding1px]}>
+      <h2 css={utilStyles.headingLg}>Posts</h2>
+      <ul css={utilStyles.list}>
         {posts.map(({ id, slug, date, title }) => (
-          <li className={utilStyles.listItem} key={id}>
+          <li css={utilStyles.listItem} key={id}>
             <Link href={pagesPath.posts._slug(slug).$url()} prefetch={false}>
               <a>{title}</a>
             </Link>
             <br />
-            <small className={utilStyles.lightText}>
+            <small css={utilStyles.lightText}>
               <Date dateString={date} />
             </small>
           </li>

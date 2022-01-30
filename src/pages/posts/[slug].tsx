@@ -17,7 +17,7 @@ import { client, previewClient } from "@/libs/api";
 import highlightCodes from "@/libs/html";
 import { pagesPath } from "@/libs/$path";
 
-import utilStyles from "@/styles/utils.module.css";
+import * as utilStyles from "@/styles/utils";
 import "github-markdown-css";
 import "highlight.js/styles/github.css";
 
@@ -49,21 +49,22 @@ const Post: NextPage<Props> = ({ post, preview }) => (
       <title>{post.title}</title>
     </Head>
     <article>
-      <h1 className={utilStyles.headingXl}>{post.title}</h1>
-      <div className={utilStyles.lightText}>
+      <h1 css={utilStyles.headingXl}>{post.title}</h1>
+      <div css={utilStyles.lightText}>
         <DateComponent dateString={post.date} />
       </div>
-      <ul className={utilStyles.tagsList}>
+      <ul css={utilStyles.tagsList}>
         {post.tags.map(({ id, slug, name }) => (
-          <li className={utilStyles.tagsListItem} key={id}>
-            <Link href={pagesPath.tags._slug(slug).$url()} prefetch={false}>
-              <a className={utilStyles.tagLink}>{name}</a>
+          <li css={utilStyles.tagsListItem} key={id}>
+            <Link href={pagesPath.tags._slug(slug).$url()} passHref prefetch={false}>
+              <a css={utilStyles.tagLink}>{name}</a>
             </Link>
           </li>
         ))}
       </ul>
       <div
-        className={`markdown-body ${utilStyles.markdownMargin}`}
+        css={utilStyles.markdownMargin}
+        className="markdown-body"
         // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: highlightCodes(post.body.html) }}
       />
