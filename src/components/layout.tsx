@@ -33,6 +33,10 @@ const snsLink = css`
   opacity: 0.4;
   color: black;
 
+  @media (prefers-color-scheme: dark) {
+    color: white;
+  }
+
   &:not(:first-of-type) {
     margin-left: 0.6rem;
   }
