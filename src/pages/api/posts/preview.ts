@@ -1,41 +1,53 @@
 /* eslint-disable no-console */
 
 import type { NextApiHandler } from "next";
+import { gql } from "@apollo/client";
 
-import * as Api from "@/libs/api";
-import { PREVIEW_MODE_MAX_AGE } from "@/libs/config";
+import { GRAPHCMS_PREVIEW_POST_SECRET, PREVIEW_MODE_MAX_AGE } from "@/libs/config";
 import routes from "@/libs/routes";
+import { previewClient } from "@/libs/api";
+import { PostExistenceQuery, PostExistenceQueryVariables } from "@/generated/graphql";
 
-type Message = {
+export type Message = {
   message: string;
 };
 
 type Params = {
   slug?: string;
-  draftKey?: string;
+  secret?: string;
 };
 
-const handler: NextApiHandler<Message> = async (req, res) => {
-  const { slug, draftKey } = req.query as Params;
+export const POST_EXISTENCE_QUERY = gql`
+  query PostExistence($slug: String!) {
+    post(where: { slug: $slug }, stage: DRAFT) {
+      id
+      slug
+    }
+  }
+`;
 
-  if (!slug) {
-    res.status(400).json({ message: "lacking slug" });
+const handler: NextApiHandler<Message> = async (req, res) => {
+  const { slug, secret } = req.query as Params;
+
+  if (!slug || secret !== GRAPHCMS_PREVIEW_POST_SECRET) {
+    res.status(400).json({ message: "Invalid request" });
     return;
   }
 
   try {
-    const apiPostIdField = ["id"] as const;
-    type ApiPostIdField = typeof apiPostIdField[number];
-    type ApiPostId = Pick<Api.Post, ApiPostIdField>;
-
-    const post = await Api.client.getPost<ApiPostId>({
-      contentId: slug,
-      queries: { fields: apiPostIdField.join(), draftKey },
+    const { data } = await previewClient.query<PostExistenceQuery, PostExistenceQueryVariables>({
+      query: POST_EXISTENCE_QUERY,
+      variables: { slug },
     });
 
-    res.setPreviewData({ draftKey }, { maxAge: PREVIEW_MODE_MAX_AGE });
+    if (!data.post) {
+      res.status(400).json({ message: "Invalid request" });
+      return;
+    }
 
-    res.redirect(routes.postsPost(post.id));
+    res.setPreviewData({}, { maxAge: PREVIEW_MODE_MAX_AGE });
+
+    res.redirect(routes.postsPost(data.post.slug));
   } catch (e) {
     console.error(e);
     res.status(400).json({ message: "Invalid request" });

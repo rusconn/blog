@@ -12,6 +12,8 @@ services:
     command: sh -c "yarn && yarn dev"
     ports:
       - ${NODE_PORT:-3000}:3000
+    env_file:
+      - .env.development.local
 
 volumes:
   next:

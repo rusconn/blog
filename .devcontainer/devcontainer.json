@@ -21,7 +21,8 @@
     "ms-azuretools.vscode-docker",
     "esbenp.prettier-vscode",
     "artdiniz.quitcontrol-vscode",
-    "humao.rest-client"
+    "humao.rest-client",
+    "graphql.vscode-graphql"
   ],
   "runServices": ["blog"],
   "shutdownAction": "stopCompose"

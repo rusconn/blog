@@ -1,0 +1,17 @@
+scalars: &scalars
+  Date: string
+  DateTime: string
+
+typescript: &typescript
+  scalars: *scalars
+  skipTypename: true
+
+schema: ${GRAPHCMS_PROJECT_API}
+documents: "src/pages/**/*.{ts,tsx}"
+generates:
+  src/generated/graphql.ts:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+    config:
+      <<: *typescript
