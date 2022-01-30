@@ -1,10 +1,12 @@
 import type { GetStaticPropsContext, InferGetStaticPropsType, NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
+import { gql } from "@apollo/client";
 
+import { HomeQuery, HomeQueryVariables } from "@/generated/graphql";
 import Layout, { siteTitle } from "@/components/layout";
 import Date from "@/components/date";
-import * as Api from "@/libs/api";
+import { client, previewClient } from "@/libs/api";
 import { pagesPath } from "@/libs/$path";
 
 import utilStyles from "@/styles/utils.module.css";
@@ -25,9 +27,9 @@ const Home: NextPage<Props> = ({ tags, posts, preview }) => (
     </section>
     <section className={utilStyles.headingMd}>
       <ul className={utilStyles.tagsList}>
-        {tags.map(({ id, name }) => (
+        {tags.map(({ id, slug, name }) => (
           <li className={utilStyles.tagsListItem} key={id}>
-            <Link href={pagesPath.tags._id(id).$url()} prefetch={false}>
+            <Link href={pagesPath.tags._slug(slug).$url()} prefetch={false}>
               <a className={utilStyles.tagLink}>{name}</a>
             </Link>
           </li>
@@ -37,14 +39,14 @@ const Home: NextPage<Props> = ({ tags, posts, preview }) => (
     <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
       <h2 className={utilStyles.headingLg}>Posts</h2>
       <ul className={utilStyles.list}>
-        {posts.map(({ id, publishedAt, title }) => (
+        {posts.map(({ id, slug, date, title }) => (
           <li className={utilStyles.listItem} key={id}>
-            <Link href={pagesPath.posts._id(id).$url()} prefetch={false}>
+            <Link href={pagesPath.posts._slug(slug).$url()} prefetch={false}>
               <a>{title}</a>
             </Link>
             <br />
             <small className={utilStyles.lightText}>
-              <Date dateString={publishedAt} />
+              <Date dateString={date} />
             </small>
           </li>
         ))}
@@ -53,29 +55,32 @@ const Home: NextPage<Props> = ({ tags, posts, preview }) => (
   </Layout>
 );
 
+export const HOME_QUERY = gql`
+  query Home {
+    tags {
+      id
+      slug
+      name
+    }
+    posts(orderBy: date_DESC) {
+      id
+      slug
+      title
+      date
+    }
+  }
+`;
+
 export const getStaticProps = async ({ preview = false }: GetStaticPropsContext) => {
-  const apiTagFields = ["id", "name", "posts"] as const;
-  type ApiTagFields = typeof apiTagFields[number];
-  type ApiTag = Pick<Api.Tag, ApiTagFields>;
+  const clientToUse = preview ? previewClient : client;
 
-  const { contents: tags } = await Api.client.getTags<ApiTag>({
-    queries: { orders: "-publishedAt", fields: apiTagFields.join() },
+  const { data } = await clientToUse.query<HomeQuery, HomeQueryVariables>({
+    query: HOME_QUERY,
   });
-
-  const apiPostFields = ["id", "publishedAt", "title"] as const;
-  type ApiPostFields = typeof apiPostFields[number];
-  type ApiPost = Pick<Api.Post, ApiPostFields>;
-
-  const { contents: posts } = await Api.client.getPosts<ApiPost>({
-    queries: { orders: "-publishedAt", fields: apiPostFields.join() },
-  });
-
-  const usedTags = tags.filter(tag => (tag.posts ?? []).length);
 
   return {
     props: {
-      tags: usedTags,
-      posts,
+      ...data,
       preview,
     },
     revalidate: 60,

@@ -1,0 +1,27 @@
+scalars: &scalars
+  Date: string
+  DateTime: string
+
+typescript: &typescript
+  scalars: *scalars
+  skipTypename: true
+
+typescript-react-apollo: &typescript-react-apollo
+  withHooks: false
+  apolloReactCommonImportFrom: "@apollo/client"
+  apolloReactComponentsImportFrom: "@apollo/client"
+  apolloReactHocImportFrom: "@apollo/client"
+  apolloReactHooksImportFrom: "@apollo/client"
+  gqlImport: "@apollo/client#gql"
+
+schema: ${GRAPHCMS_PROJECT_API}
+documents: "src/pages/**/*.{ts,tsx}"
+generates:
+  src/generated/graphql.ts:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-react-apollo"
+    config:
+      <<: *typescript
+      <<: *typescript-react-apollo
