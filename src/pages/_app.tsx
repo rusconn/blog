@@ -18,6 +18,13 @@ const globalStyles = css`
   * {
     box-sizing: border-box;
   }
+
+  @media (prefers-color-scheme: dark) {
+    body {
+      background-color: #0d1117;
+      color: #c9d1d9;
+    }
+  }
 `;
 
 const MyApp = ({ Component, pageProps }: AppProps) => (
