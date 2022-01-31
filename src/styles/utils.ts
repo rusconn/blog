@@ -5,7 +5,7 @@ export const heading2Xl = css`
   line-height: 1.2;
   font-weight: 800;
   letter-spacing: -0.05rem;
-  margin: 1rem 0;
+  margin: 0 0 1rem;
 `;
 
 export const headingXl = css`
@@ -19,7 +19,7 @@ export const headingXl = css`
 export const headingLg = css`
   font-size: 1.5rem;
   line-height: 1.4;
-  margin: 1rem 0;
+  margin: 0 0 1rem;
 `;
 
 export const headingMd = css`
