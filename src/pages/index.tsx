@@ -1,14 +1,19 @@
+import { css } from "@emotion/react";
 import type { GetStaticPropsContext, InferGetStaticPropsType, NextPage } from "next";
 import Head from "next/head";
-import Link from "next/link";
 import { gql } from "@apollo/client";
 
 import { HomeQuery, HomeQueryVariables } from "@/generated/graphql";
-import Layout, { siteTitle } from "@/components/layout";
-import Date from "@/components/date";
+import { Biography, Posts, Tags } from "@/components/home";
+import { Layout } from "@/components/layout";
+import { siteTitle } from "@/constants";
 import { client, previewClient } from "@/libs/api";
-import { pagesPath } from "@/libs/$path";
+
 import * as utilStyles from "@/styles/utils";
+
+const tagsMargin = css`
+  margin-top: 1.4rem;
+`;
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
@@ -17,40 +22,15 @@ const Home: NextPage<Props> = ({ tags, posts, preview }) => (
     <Head>
       <title>{siteTitle}</title>
     </Head>
-    <section css={utilStyles.headingMd}>
-      <p>
-        Software Engineer.
-        <br />
-        TypeScript, React, Apollo, Lambda, DynamoDB, S3, ...
-      </p>
-    </section>
-    <section css={utilStyles.headingMd}>
-      <ul css={utilStyles.tagsList}>
-        {tags.map(({ id, slug, name }) => (
-          <li css={utilStyles.tagsListItem} key={id}>
-            <Link href={pagesPath.tags._slug(slug).$url()} passHref prefetch={false}>
-              <a css={utilStyles.tagLink}>{name}</a>
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </section>
-    <section css={[utilStyles.headingMd, utilStyles.padding1px]}>
-      <h2 css={utilStyles.headingLg}>Posts</h2>
-      <ul css={utilStyles.list}>
-        {posts.map(({ id, slug, date, title }) => (
-          <li css={utilStyles.listItem} key={id}>
-            <Link href={pagesPath.posts._slug(slug).$url()} prefetch={false}>
-              <a>{title}</a>
-            </Link>
-            <br />
-            <small css={utilStyles.lightText}>
-              <Date dateString={date} />
-            </small>
-          </li>
-        ))}
-      </ul>
-    </section>
+    <div css={utilStyles.headingMd}>
+      <Biography />
+    </div>
+    <div css={[utilStyles.headingMd, tagsMargin]}>
+      <Tags tags={tags} />
+    </div>
+    <div css={[utilStyles.headingMd, utilStyles.padding1px]}>
+      <Posts posts={posts} />
+    </div>
   </Layout>
 );
 
