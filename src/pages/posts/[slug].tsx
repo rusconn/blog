@@ -1,7 +1,8 @@
-import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import type { GetStaticPaths, GetStaticPropsContext, NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { gql } from "@apollo/client";
+import InferNextPropsType from "infer-next-props-type"; // eslint-disable-line
 
 import {
   Stage,
@@ -21,27 +22,7 @@ import * as utilStyles from "@/styles/utils";
 import "github-markdown-css";
 import "highlight.js/styles/github.css";
 
-// Infer できない: https://github.com/vercel/next.js/issues/15913
-type Props = {
-  post: PropPost;
-  preview: boolean;
-};
-
-type PropPost = {
-  id: string;
-  title: string;
-  date: string;
-  body: {
-    html: string;
-  };
-  tags: Tag[];
-};
-
-type Tag = {
-  id: string;
-  slug: string;
-  name: string;
-};
+type Props = InferNextPropsType<typeof getStaticProps>;
 
 const Post: NextPage<Props> = ({ post, preview }) => (
   <Layout preview={preview}>
@@ -95,10 +76,10 @@ export const POST_QUERY = gql`
   }
 `;
 
-export const getStaticProps: GetStaticProps<Props, PathParams> = async ({
+export const getStaticProps = async ({
   params,
   preview = false,
-}) => {
+}: GetStaticPropsContext<PathParams>) => {
   const { slug } = params as { slug?: string };
 
   if (!slug) {
