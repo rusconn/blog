@@ -1,6 +1,5 @@
 import type { GetStaticPaths, GetStaticPropsContext, NextPage } from "next";
 import Head from "next/head";
-import Link from "next/link";
 import { gql } from "@apollo/client";
 import InferNextPropsType from "infer-next-props-type"; // eslint-disable-line
 
@@ -11,10 +10,9 @@ import {
   TagPathsQuery,
   TagPathsQueryVariables,
 } from "@/generated/graphql";
-import Layout from "@/components/layout";
-import DateComponent from "@/components/date";
+import { Layout } from "@/components/layout";
+import { Posts } from "@/components/tags";
 import { client, previewClient } from "@/libs/api";
-import { pagesPath } from "@/libs/$path";
 
 import * as utilStyles from "@/styles/utils";
 
@@ -25,22 +23,9 @@ const Tag: NextPage<Props> = ({ tag, preview }) => (
     <Head>
       <title>{tag.name}</title>
     </Head>
-    <section css={[utilStyles.headingMd, utilStyles.padding1px]}>
-      <h2 css={utilStyles.headingLg}>{tag.name} Posts</h2>
-      <ul css={utilStyles.list}>
-        {tag.posts.map(({ id, slug, date, title }) => (
-          <li css={utilStyles.listItem} key={id}>
-            <Link href={pagesPath.posts._slug(slug).$url()} prefetch={false}>
-              <a>{title}</a>
-            </Link>
-            <br />
-            <small css={utilStyles.lightText}>
-              <DateComponent dateString={date} />
-            </small>
-          </li>
-        ))}
-      </ul>
-    </section>
+    <div css={[utilStyles.headingMd, utilStyles.padding1px]}>
+      <Posts tag={tag} />
+    </div>
   </Layout>
 );
 

@@ -52,7 +52,6 @@ export const lightText = css`
 export const tagsList = css`
   display: flex;
   flex-wrap: wrap;
-  margin-top: 1.4rem;
   padding-left: 0;
 `;
 
@@ -63,13 +62,4 @@ export const tagsListItem = css`
   font-size: 0.9rem;
   border: 1.2px solid royalblue;
   border-radius: 0.4rem;
-`;
-
-export const tagLink = css`
-  display: inline-block;
-  padding: 0.4rem;
-`;
-
-export const markdownMargin = css`
-  margin-top: 3.2rem;
 `;
