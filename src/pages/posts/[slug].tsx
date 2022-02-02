@@ -51,9 +51,7 @@ export const getStaticProps = async ({
             id
             title
             date
-            body {
-              html
-            }
+            body
             tags {
               id
               slug
@@ -71,9 +69,17 @@ export const getStaticProps = async ({
       throw new Error("not found.");
     }
 
+    const response = await fetch("https://api.github.com/markdown", {
+      method: "POST",
+      headers: { accept: "application/vnd.github.v3+json" },
+      body: JSON.stringify({ text: post.body }),
+    });
+
+    const safeHtml = await response.text();
+
     return {
       props: {
-        post,
+        post: { ...post, safeHtml },
         preview,
       },
       revalidate: 60,

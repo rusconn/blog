@@ -3,7 +3,7 @@ import { css } from "@emotion/react";
 import type { PostQuery } from "@/generated/graphql";
 import { Date, TagList } from "@/components/common";
 import * as utilStyles from "@/styles/utils";
-import { ArticleBody } from "./ArticleBody";
+import { ArticleBody, Props as ArticleBodyProps } from "./ArticleBody";
 
 const headingXl = css`
   font-size: 2rem;
@@ -21,11 +21,11 @@ const markdownMargin = css`
   margin-top: 3.2rem;
 `;
 
-type Props = {
-  post: Exclude<PostQuery["post"], null | undefined>;
-};
+type Props = { post: PostButBody & ArticleBodyProps };
+type PostButBody = Omit<Post, "body">;
+type Post = Exclude<PostQuery["post"], null | undefined>;
 
-export const Article = ({ post: { title, date, tags, body } }: Props) => (
+export const Article = ({ post: { title, date, tags, safeHtml } }: Props) => (
   <article>
     <h1 css={headingXl}>{title}</h1>
     <div css={utilStyles.lightText}>
@@ -35,7 +35,7 @@ export const Article = ({ post: { title, date, tags, body } }: Props) => (
       <TagList tags={tags} />
     </div>
     <div css={markdownMargin}>
-      <ArticleBody html={body.html} />
+      <ArticleBody safeHtml={safeHtml} />
     </div>
   </article>
 );
