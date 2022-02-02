@@ -24,7 +24,7 @@ const container = css`
 `;
 
 const backToHome = css`
-  margin: 3rem 0 0;
+  margin: 4rem 0 0;
 `;
 
 type Props = {
