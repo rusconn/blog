@@ -1360,7 +1360,7 @@ export type PageInfo = {
 };
 
 export type Post = Node & {
-  body: RichText;
+  body: Scalars['String'];
   /** The time the document was created */
   createdAt: Scalars['DateTime'];
   /** User that created this document */
@@ -1457,7 +1457,7 @@ export type PostConnection = {
 };
 
 export type PostCreateInput = {
-  body: Scalars['RichTextAST'];
+  body: Scalars['String'];
   createdAt?: InputMaybe<Scalars['DateTime']>;
   date: Scalars['DateTime'];
   slug: Scalars['String'];
@@ -1498,6 +1498,25 @@ export type PostManyWhereInput = {
   OR?: InputMaybe<Array<PostWhereInput>>;
   /** Contains search across all appropriate fields. */
   _search?: InputMaybe<Scalars['String']>;
+  body?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  body_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  body_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  body_in?: InputMaybe<Array<Scalars['String']>>;
+  /** All values that are not equal to given value. */
+  body_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  body_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  body_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  body_not_in?: InputMaybe<Array<Scalars['String']>>;
+  /** All values not starting with the given string. */
+  body_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  body_starts_with?: InputMaybe<Scalars['String']>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   createdAt_gt?: InputMaybe<Scalars['DateTime']>;
@@ -1627,6 +1646,8 @@ export type PostManyWhereInput = {
 };
 
 export enum PostOrderByInput {
+  BodyAsc = 'body_ASC',
+  BodyDesc = 'body_DESC',
   CreatedAtAsc = 'createdAt_ASC',
   CreatedAtDesc = 'createdAt_DESC',
   DateAsc = 'date_ASC',
@@ -1644,7 +1665,7 @@ export enum PostOrderByInput {
 }
 
 export type PostUpdateInput = {
-  body?: InputMaybe<Scalars['RichTextAST']>;
+  body?: InputMaybe<Scalars['String']>;
   date?: InputMaybe<Scalars['DateTime']>;
   slug?: InputMaybe<Scalars['String']>;
   tags?: InputMaybe<TagUpdateManyInlineInput>;
@@ -1669,7 +1690,7 @@ export type PostUpdateManyInlineInput = {
 };
 
 export type PostUpdateManyInput = {
-  body?: InputMaybe<Scalars['RichTextAST']>;
+  body?: InputMaybe<Scalars['String']>;
   date?: InputMaybe<Scalars['DateTime']>;
   title?: InputMaybe<Scalars['String']>;
 };
@@ -1727,6 +1748,25 @@ export type PostWhereInput = {
   OR?: InputMaybe<Array<PostWhereInput>>;
   /** Contains search across all appropriate fields. */
   _search?: InputMaybe<Scalars['String']>;
+  body?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  body_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  body_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  body_in?: InputMaybe<Array<Scalars['String']>>;
+  /** All values that are not equal to given value. */
+  body_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  body_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  body_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  body_not_in?: InputMaybe<Array<Scalars['String']>>;
+  /** All values not starting with the given string. */
+  body_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  body_starts_with?: InputMaybe<Scalars['String']>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   createdAt_gt?: InputMaybe<Scalars['DateTime']>;
@@ -4100,7 +4140,7 @@ export type PostQueryVariables = Exact<{
 }>;
 
 
-export type PostQuery = { post?: { id: string, title: string, date: string, body: { html: string }, tags: Array<{ id: string, slug: string, name: string }> } | null | undefined };
+export type PostQuery = { post?: { id: string, title: string, date: string, body: string, tags: Array<{ id: string, slug: string, name: string }> } | null | undefined };
 
 export type PostPathsQueryVariables = Exact<{ [key: string]: never; }>;
 

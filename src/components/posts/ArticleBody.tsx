@@ -1,25 +1,24 @@
 import { css } from "@emotion/react";
 
-import type { PostQuery } from "@/generated/graphql";
-import highlightCodes from "@/libs/html";
-
 import "github-markdown-css";
-import "highlight.js/styles/github.css";
 
-const margin = css`
+const style = css`
   & > h2 {
     margin: 3rem 0 1rem;
   }
+
+  & pre {
+    padding: 1.2rem;
+  }
 `;
 
-type Props = Pick<QueriedPost["body"], "html">;
-type QueriedPost = Exclude<PostQuery["post"], null | undefined>;
+export type Props = { safeHtml: string };
 
-export const ArticleBody = ({ html }: Props) => (
+export const ArticleBody = ({ safeHtml }: Props) => (
   <div
-    css={margin}
+    css={style}
     className="markdown-body"
     // eslint-disable-next-line react/no-danger
-    dangerouslySetInnerHTML={{ __html: highlightCodes(html) }}
+    dangerouslySetInnerHTML={{ __html: safeHtml }}
   />
 );
