@@ -16,5 +16,5 @@ export const padding1px = css`
 `;
 
 export const lightText = css`
-  color: #666;
+  color: var(--light-color);
 `;
