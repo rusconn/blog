@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 
 const link = css`
-  opacity: 0.4;
+  opacity: 0.5;
   color: black;
 
   @media (prefers-color-scheme: dark) {
@@ -9,7 +9,7 @@ const link = css`
   }
 
   &:hover {
-    opacity: 0.7;
+    opacity: 0.8;
   }
 `;
 

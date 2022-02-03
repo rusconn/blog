@@ -7,7 +7,7 @@ import { pagesPath } from "@/libs/$path";
 const link = css`
   display: inline-block;
   padding: 0.4rem;
-  border: 1.2px solid royalblue;
+  border: 1.2px solid var(--link-color);
   border-radius: 0.4rem;
 `;
 
