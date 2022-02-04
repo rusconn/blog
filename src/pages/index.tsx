@@ -37,7 +37,7 @@ const Home: NextPage<Props> = ({ tags, posts, preview }) => (
 export const getStaticProps = async ({ preview = false }: GetStaticPropsContext) => {
   const clientToUse = preview ? previewClient : client;
 
-  const { data } = await clientToUse.query<HomeQuery, HomeQueryVariables>({
+  const { error, errors, data } = await clientToUse.query<HomeQuery, HomeQueryVariables>({
     query: gql`
       query Home {
         tags {
@@ -54,6 +54,15 @@ export const getStaticProps = async ({ preview = false }: GetStaticPropsContext)
       }
     `,
   });
+
+  if (error) {
+    throw error;
+  }
+
+  if (errors) {
+    errors.forEach(e => console.error(e));
+    throw new Error("some errors occurred");
+  }
 
   return {
     props: {

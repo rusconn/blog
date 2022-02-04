@@ -43,54 +43,63 @@ export const getStaticProps = async ({
   const stage = preview ? Stage.Draft : Stage.Published;
   const clientToUse = preview ? previewClient : client;
 
-  try {
-    const { data } = await clientToUse.query<PostQuery, PostQueryVariables>({
-      query: gql`
-        query Post($slug: String!, $stage: Stage!) {
-          post(where: { slug: $slug }, stage: $stage) {
+  const { error, errors, data } = await clientToUse.query<PostQuery, PostQueryVariables>({
+    query: gql`
+      query Post($slug: String!, $stage: Stage!) {
+        post(where: { slug: $slug }, stage: $stage) {
+          id
+          title
+          date
+          body
+          tags {
             id
-            title
-            date
-            body
-            tags {
-              id
-              slug
-              name
-            }
+            slug
+            name
           }
         }
-      `,
-      variables: { slug, stage },
-    });
+      }
+    `,
+    variables: { slug, stage },
+  });
 
-    const { post } = data;
+  if (error) {
+    throw error;
+  }
 
-    if (!post) {
-      throw new Error("not found.");
-    }
+  if (errors) {
+    errors.forEach(e => console.error(e));
+    throw new Error("some errors occurred");
+  }
 
-    const response = await fetch("https://api.github.com/markdown", {
-      method: "POST",
-      headers: { accept: "application/vnd.github.v3+json" },
-      body: JSON.stringify({ text: post.body }),
-    });
+  const { post } = data;
 
-    const safeHtml = await response.text();
-
-    return {
-      props: {
-        post: { ...post, safeHtml },
-        preview,
-      },
-      revalidate: 60,
-    };
-  } catch (e) {
+  if (!post) {
     return { notFound: true };
   }
+
+  const response = await fetch("https://api.github.com/markdown", {
+    method: "POST",
+    headers: { accept: "application/vnd.github.v3+json" },
+    body: JSON.stringify({ text: post.body }),
+  });
+
+  if (!response.ok) {
+    throw new Error(`${response.status} ${response.statusText}`);
+  }
+
+  const safeHtml = await response.text();
+
+  return {
+    props: {
+      post: { ...post, safeHtml },
+      preview,
+    },
+    revalidate: 60,
+  };
 };
 
 export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
-  const { data } = await client.query<PostPathsQuery, PostPathsQueryVariables>({
+  const { error, errors, data } = await client.query<PostPathsQuery, PostPathsQueryVariables>({
     query: gql`
       query PostPaths {
         posts {
@@ -100,6 +109,15 @@ export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
       }
     `,
   });
+
+  if (error) {
+    throw error;
+  }
+
+  if (errors) {
+    errors.forEach(e => console.error(e));
+    throw new Error("some errors occurred");
+  }
 
   const paths = data.posts.map(({ slug }) => ({ params: { slug } }));
 
