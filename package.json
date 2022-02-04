@@ -22,7 +22,7 @@
     "path": "pathpida -o ./src/libs --ignorePath .gitignore --enableStatic",
     "generate": "graphql-codegen",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint src",
+    "lint": "eslint src --cache",
     "format": "prettier --write './**/*.{js,jsx,ts,tsx,json,css}'",
     "prepare": "husky install"
   },
