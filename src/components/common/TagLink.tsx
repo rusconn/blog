@@ -9,6 +9,10 @@ const link = css`
   padding: 0.4rem;
   border: 1.2px solid var(--link-color);
   border-radius: 0.4rem;
+
+  &:hover {
+    text-decoration: none;
+  }
 `;
 
 type Props = Pick<Tag, "slug" | "name">;

@@ -20,8 +20,12 @@ const heading2Xl = css`
   margin: 0 0 1rem;
 `;
 
-const colorInherit = css`
+const authorNameStyle = css`
   color: inherit;
+
+  &:hover {
+    text-decoration: none;
+  }
 `;
 
 type Props = {
@@ -44,7 +48,7 @@ export const Header = ({ home }: Props) => (
         </Link>
         <h2 css={utilStyles.headingLg}>
           <Link href={pagesPath.$url()} passHref>
-            <a css={colorInherit}>{authorName}</a>
+            <a css={authorNameStyle}>{authorName}</a>
           </Link>
         </h2>
       </>
