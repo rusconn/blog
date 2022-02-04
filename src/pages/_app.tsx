@@ -33,6 +33,10 @@ const globalStyles = css`
     text-decoration: none;
   }
 
+  a:hover {
+    text-decoration: underline;
+  }
+
   * {
     box-sizing: border-box;
   }
