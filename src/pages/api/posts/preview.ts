@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-
 import type { NextApiHandler } from "next";
 import { gql } from "@apollo/client";
 

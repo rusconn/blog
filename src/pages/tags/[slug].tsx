@@ -46,45 +46,50 @@ export const getStaticProps = async ({
   const stage = preview ? Stage.Draft : Stage.Published;
   const clientToUse = preview ? previewClient : client;
 
-  try {
-    const { data } = await clientToUse.query<TagQuery, TagQueryVariables>({
-      query: gql`
-        query Tag($where: TagWhereUniqueInput!, $stage: Stage!) {
-          tag(where: $where, stage: $stage) {
+  const { error, errors, data } = await clientToUse.query<TagQuery, TagQueryVariables>({
+    query: gql`
+      query Tag($where: TagWhereUniqueInput!, $stage: Stage!) {
+        tag(where: $where, stage: $stage) {
+          id
+          name
+          posts {
             id
-            name
-            posts {
-              id
-              slug
-              title
-              date
-            }
+            slug
+            title
+            date
           }
         }
-      `,
-      variables: { where: { slug }, stage },
-    });
+      }
+    `,
+    variables: { where: { slug }, stage },
+  });
 
-    const { tag } = data;
-
-    if (!tag) {
-      throw new Error("not found.");
-    }
-
-    return {
-      props: {
-        tag,
-        preview,
-      },
-      revalidate: 60,
-    };
-  } catch (e) {
-    return { notFound: true } as const;
+  if (error) {
+    throw error;
   }
+
+  if (errors) {
+    errors.forEach(e => console.error(e));
+    throw new Error("some errors occurred");
+  }
+
+  const { tag } = data;
+
+  if (!tag) {
+    return { notFound: true };
+  }
+
+  return {
+    props: {
+      tag,
+      preview,
+    },
+    revalidate: 60,
+  };
 };
 
 export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
-  const { data } = await client.query<TagPathsQuery, TagPathsQueryVariables>({
+  const { error, errors, data } = await client.query<TagPathsQuery, TagPathsQueryVariables>({
     query: gql`
       query TagPaths {
         tags {
@@ -97,6 +102,15 @@ export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
       }
     `,
   });
+
+  if (error) {
+    throw error;
+  }
+
+  if (errors) {
+    errors.forEach(e => console.error(e));
+    throw new Error("some errors occurred");
+  }
 
   const paths = data.tags
     .filter(({ posts }) => posts.length)
