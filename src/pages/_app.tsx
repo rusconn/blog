@@ -5,6 +5,7 @@ const globalStyles = css`
   :root {
     --background-color: white;
     --link-color: #0969da;
+    --link-color-rgb: 09, 105, 218;
     --color: black;
     --light-color: #666;
   }
