@@ -7,11 +7,23 @@ import { pagesPath } from "@/libs/$path";
 const link = css`
   display: inline-block;
   padding: 0.4rem;
-  border: 1.2px solid var(--link-color);
-  border-radius: 0.4rem;
+  border: 1.2px solid transparent;
+  border-radius: 0.5rem;
+  color: var(--link-color);
+  background-color: rgba(var(--link-color-rgb), 0.1);
 
   &:hover {
     text-decoration: none;
+    background-color: rgba(var(--link-color-rgb), 0.9);
+    color: #f0f6fc;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    background-color: rgba(var(--link-color-rgb), 0.2);
+
+    &:hover {
+      background-color: rgba(var(--link-color-rgb), 0.7);
+    }
   }
 `;
 
