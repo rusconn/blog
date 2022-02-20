@@ -4122,6 +4122,22 @@ export enum _SystemDateTimeFieldVariation {
   Localization = 'localization'
 }
 
+export type PostListFieldsFragment = { id: string, slug: string, date: string, title: string };
+
+export type TagLinkFieldsFragment = { slug: string, name: string };
+
+export type TagListFieldsFragment = { id: string, slug: string, name: string };
+
+export type HomePostsFieldsFragment = { id: string, slug: string, date: string, title: string };
+
+export type HomeTagsFieldsFragment = { id: string, slug: string, name: string };
+
+export type PostsArticleFieldsFragment = { title: string, date: string, body: string, tags: Array<{ id: string, slug: string, name: string }> };
+
+export type ArticleBodyFieldsFragment = { body: string };
+
+export type TagsPostsFieldsFragment = { name: string, posts: Array<{ id: string, slug: string, date: string, title: string }> };
+
 export type PostExistenceQueryVariables = Exact<{
   slug: Scalars['String'];
 }>;
@@ -4132,7 +4148,7 @@ export type PostExistenceQuery = { post?: { id: string, slug: string } | null | 
 export type HomeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type HomeQuery = { tags: Array<{ id: string, slug: string, name: string }>, posts: Array<{ id: string, slug: string, title: string, date: string }> };
+export type HomeQuery = { tags: Array<{ id: string, slug: string, name: string }>, posts: Array<{ id: string, slug: string, date: string, title: string }> };
 
 export type PostQueryVariables = Exact<{
   slug: Scalars['String'];
@@ -4153,7 +4169,7 @@ export type TagQueryVariables = Exact<{
 }>;
 
 
-export type TagQuery = { tag?: { id: string, name: string, posts: Array<{ id: string, slug: string, title: string, date: string }> } | null | undefined };
+export type TagQuery = { tag?: { id: string, name: string, posts: Array<{ id: string, slug: string, date: string, title: string }> } | null | undefined };
 
 export type TagPathsQueryVariables = Exact<{ [key: string]: never; }>;
 

@@ -4,7 +4,7 @@ import Head from "next/head";
 import { gql } from "@apollo/client";
 
 import { HomeQuery, HomeQueryVariables } from "@/generated/graphql";
-import { Biography, Posts, Tags } from "@/components/home";
+import { Biography, Posts, Tags, HOME_TAGS_FRAGMENT, HOME_POSTS_FRAGMENT } from "@/components/home";
 import { Layout } from "@/components/layout";
 import { siteTitle } from "@/constants";
 import { client, previewClient } from "@/libs/api";
@@ -26,10 +26,10 @@ const Home: NextPage<Props> = ({ tags, posts, preview }) => (
       <Biography />
     </div>
     <div css={[utilStyles.headingMd, tagsMargin]}>
-      <Tags tags={tags} />
+      <Tags fragments={tags} />
     </div>
     <div css={[utilStyles.headingMd, utilStyles.padding1px]}>
-      <Posts posts={posts} />
+      <Posts fragments={posts} />
     </div>
   </Layout>
 );
@@ -42,16 +42,15 @@ export const getStaticProps = async ({ preview = false }: GetStaticPropsContext)
       query Home {
         tags {
           id
-          slug
-          name
+          ...HomeTagsFields
         }
         posts(orderBy: date_DESC) {
           id
-          slug
-          title
-          date
+          ...HomePostsFields
         }
       }
+      ${HOME_TAGS_FRAGMENT}
+      ${HOME_POSTS_FRAGMENT}
     `,
   });
 

@@ -1,15 +1,28 @@
-import type { TagQuery } from "@/generated/graphql";
-import { PostList } from "@/components/common";
+import { gql } from "@apollo/client";
+
+import type { TagsPostsFieldsFragment } from "@/generated/graphql";
+import { PostList, POST_LIST_FRAGMENT } from "@/components/common";
 
 import * as utilStyles from "@/styles/utils";
 
+export const TAGS_POSTS_FRAGMENT = gql`
+  fragment TagsPostsFields on Tag {
+    name
+    posts {
+      id
+      ...PostListFields
+    }
+  }
+  ${POST_LIST_FRAGMENT}
+`;
+
 type Props = {
-  tag: Exclude<TagQuery["tag"], null | undefined>;
+  fragment: TagsPostsFieldsFragment;
 };
 
-export const Posts = ({ tag: { name, posts } }: Props) => (
+export const Posts = ({ fragment: { name, posts } }: Props) => (
   <section>
     <h2 css={utilStyles.headingLg}>{name} Posts</h2>
-    <PostList posts={posts} />
+    <PostList fragments={posts} />
   </section>
 );

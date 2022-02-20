@@ -11,7 +11,7 @@ import {
   TagPathsQueryVariables,
 } from "@/generated/graphql";
 import { Layout } from "@/components/layout";
-import { Posts } from "@/components/tags";
+import { Posts, TAGS_POSTS_FRAGMENT } from "@/components/tags";
 import { client, previewClient } from "@/libs/api";
 
 import * as utilStyles from "@/styles/utils";
@@ -24,7 +24,7 @@ const Tag: NextPage<Props> = ({ tag, preview }) => (
       <title>{tag.name}</title>
     </Head>
     <div css={[utilStyles.headingMd, utilStyles.padding1px]}>
-      <Posts tag={tag} />
+      <Posts fragment={tag} />
     </div>
   </Layout>
 );
@@ -51,15 +51,10 @@ export const getStaticProps = async ({
       query Tag($where: TagWhereUniqueInput!, $stage: Stage!) {
         tag(where: $where, stage: $stage) {
           id
-          name
-          posts {
-            id
-            slug
-            title
-            date
-          }
+          ...TagsPostsFields
         }
       }
+      ${TAGS_POSTS_FRAGMENT}
     `,
     variables: { where: { slug }, stage },
   });

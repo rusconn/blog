@@ -12,17 +12,17 @@ import {
   PostPathsQueryVariables,
 } from "@/generated/graphql";
 import { Layout } from "@/components/layout";
-import { Article } from "@/components/posts";
+import { Article, renderMarkdown, POSTS_ARTICLE_FRAGMENT } from "@/components/posts";
 import { client, previewClient } from "@/libs/api";
 
 type Props = InferNextPropsType<typeof getStaticProps>;
 
-const Post: NextPage<Props> = ({ post, preview }) => (
+const Post: NextPage<Props> = ({ post: { body, ...rest }, preview }) => (
   <Layout preview={preview}>
     <Head>
-      <title>{post.title}</title>
+      <title>{rest.title}</title>
     </Head>
-    <Article post={post} />
+    <Article fragment={rest} body={body} />
   </Layout>
 );
 
@@ -48,16 +48,10 @@ export const getStaticProps = async ({
       query Post($slug: String!, $stage: Stage!) {
         post(where: { slug: $slug }, stage: $stage) {
           id
-          title
-          date
-          body
-          tags {
-            id
-            slug
-            name
-          }
+          ...PostsArticleFields
         }
       }
+      ${POSTS_ARTICLE_FRAGMENT}
     `,
     variables: { slug, stage },
   });
@@ -77,21 +71,11 @@ export const getStaticProps = async ({
     return { notFound: true };
   }
 
-  const response = await fetch("https://api.github.com/markdown", {
-    method: "POST",
-    headers: { accept: "application/vnd.github.v3+json" },
-    body: JSON.stringify({ text: post.body }),
-  });
-
-  if (!response.ok) {
-    throw new Error(`${response.status} ${response.statusText}`);
-  }
-
-  const safeHtml = await response.text();
+  const { body } = await renderMarkdown(post);
 
   return {
     props: {
-      post: { ...post, safeHtml },
+      post: { ...post, body },
       preview,
     },
     revalidate: 60,

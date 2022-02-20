@@ -1,7 +1,8 @@
+import { gql } from "@apollo/client";
 import { css } from "@emotion/react";
 import Link from "next/link";
 
-import type { Tag } from "@/generated/graphql";
+import type { TagLinkFieldsFragment } from "@/generated/graphql";
 import { pagesPath } from "@/libs/$path";
 
 const link = css`
@@ -27,9 +28,18 @@ const link = css`
   }
 `;
 
-type Props = Pick<Tag, "slug" | "name">;
+export const TAG_LINK_FRAGMENT = gql`
+  fragment TagLinkFields on Tag {
+    slug
+    name
+  }
+`;
 
-export const TagLink = ({ slug, name }: Props) => (
+type Props = {
+  fragment: TagLinkFieldsFragment;
+};
+
+export const TagLink = ({ fragment: { slug, name } }: Props) => (
   <Link href={pagesPath.tags._slug(slug).$url()} passHref prefetch={false}>
     <a css={link}>{name}</a>
   </Link>

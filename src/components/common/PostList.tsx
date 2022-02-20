@@ -1,7 +1,8 @@
+import { gql } from "@apollo/client";
 import { css } from "@emotion/react";
 import Link from "next/link";
 
-import type { Post } from "@/generated/graphql";
+import type { PostListFieldsFragment } from "@/generated/graphql";
 import { pagesPath } from "@/libs/$path";
 import * as utilStyles from "@/styles/utils";
 import { Date } from "./Date";
@@ -16,13 +17,22 @@ const listItem = css`
   margin: 0 0 1.25rem;
 `;
 
+export const POST_LIST_FRAGMENT = gql`
+  fragment PostListFields on Post {
+    id
+    slug
+    date
+    title
+  }
+`;
+
 type Props = {
-  posts: Pick<Post, "id" | "slug" | "date" | "title">[];
+  fragments: PostListFieldsFragment[];
 };
 
-export const PostList = ({ posts }: Props) => (
+export const PostList = ({ fragments }: Props) => (
   <ul css={list}>
-    {posts.map(({ id, slug, date, title }) => (
+    {fragments.map(({ id, slug, date, title }) => (
       <li css={listItem} key={id}>
         <Link href={pagesPath.posts._slug(slug).$url()} prefetch={false}>
           <a>{title}</a>
