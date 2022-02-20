@@ -1,10 +1,21 @@
-import type { HomeQuery } from "@/generated/graphql";
-import { TagList } from "@/components/common";
+import { gql } from "@apollo/client";
 
-type Props = Pick<HomeQuery, "tags">;
+import type { HomeTagsFieldsFragment } from "@/generated/graphql";
+import { TagList, TAG_LIST_FRAGMENT } from "@/components/common";
 
-export const Tags = ({ tags }: Props) => (
+export const HOME_TAGS_FRAGMENT = gql`
+  fragment HomeTagsFields on Tag {
+    ...TagListFields
+  }
+  ${TAG_LIST_FRAGMENT}
+`;
+
+type Props = {
+  fragments: HomeTagsFieldsFragment[];
+};
+
+export const Tags = ({ fragments }: Props) => (
   <section>
-    <TagList tags={tags} />
+    <TagList fragments={fragments} />
   </section>
 );

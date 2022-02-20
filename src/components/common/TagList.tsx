@@ -1,7 +1,8 @@
+import { gql } from "@apollo/client";
 import { css } from "@emotion/react";
 
-import type { Tag } from "@/generated/graphql";
-import { TagLink } from "./TagLink";
+import type { TagListFieldsFragment } from "@/generated/graphql";
+import { TagLink, TAG_LINK_FRAGMENT } from "./TagLink";
 
 const list = css`
   display: flex;
@@ -16,15 +17,23 @@ const listItem = css`
   font-size: 0.9rem;
 `;
 
+export const TAG_LIST_FRAGMENT = gql`
+  fragment TagListFields on Tag {
+    id
+    ...TagLinkFields
+  }
+  ${TAG_LINK_FRAGMENT}
+`;
+
 type Props = {
-  tags: Pick<Tag, "id" | "slug" | "name">[];
+  fragments: TagListFieldsFragment[];
 };
 
-export const TagList = ({ tags }: Props) => (
+export const TagList = ({ fragments }: Props) => (
   <ul css={list}>
-    {tags.map(({ id, slug, name }) => (
+    {fragments.map(({ id, ...rest }) => (
       <li key={id} css={listItem}>
-        <TagLink slug={slug} name={name} />
+        <TagLink fragment={rest} />
       </li>
     ))}
   </ul>

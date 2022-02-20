@@ -1,13 +1,24 @@
-import type { HomeQuery } from "@/generated/graphql";
-import { PostList } from "@/components/common";
+import { gql } from "@apollo/client";
+
+import type { HomePostsFieldsFragment } from "@/generated/graphql";
+import { PostList, POST_LIST_FRAGMENT } from "@/components/common";
 
 import * as utilStyles from "@/styles/utils";
 
-type Props = Pick<HomeQuery, "posts">;
+export const HOME_POSTS_FRAGMENT = gql`
+  fragment HomePostsFields on Post {
+    ...PostListFields
+  }
+  ${POST_LIST_FRAGMENT}
+`;
 
-export const Posts = ({ posts }: Props) => (
+type Props = {
+  fragments: HomePostsFieldsFragment[];
+};
+
+export const Posts = ({ fragments }: Props) => (
   <section>
     <h2 css={utilStyles.headingLg}>Posts</h2>
-    <PostList posts={posts} />
+    <PostList fragments={fragments} />
   </section>
 );
