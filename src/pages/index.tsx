@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import type { GetStaticPropsContext, InferGetStaticPropsType, NextPage } from "next";
 import Head from "next/head";
-import { gql } from "@apollo/client";
+import { gql } from "graphql-request";
 
 import { HomeQuery, HomeQueryVariables } from "@/generated/graphql";
 import { Biography, Posts, Tags, HOME_TAGS_FRAGMENT, HOME_POSTS_FRAGMENT } from "@/components/home";
@@ -37,31 +37,20 @@ const Home: NextPage<Props> = ({ tags, posts, preview }) => (
 export const getStaticProps = async ({ preview = false }: GetStaticPropsContext) => {
   const clientToUse = preview ? previewClient : client;
 
-  const { error, errors, data } = await clientToUse.query<HomeQuery, HomeQueryVariables>({
-    query: gql`
-      query Home {
-        tags {
-          id
-          ...HomeTagsFields
-        }
-        posts(orderBy: date_DESC) {
-          id
-          ...HomePostsFields
-        }
+  const data = await clientToUse.request<HomeQuery, HomeQueryVariables>(gql`
+    query Home {
+      tags {
+        id
+        ...HomeTagsFields
       }
-      ${HOME_TAGS_FRAGMENT}
-      ${HOME_POSTS_FRAGMENT}
-    `,
-  });
-
-  if (error) {
-    throw error;
-  }
-
-  if (errors) {
-    errors.forEach(e => console.error(e));
-    throw new Error("some errors occurred");
-  }
+      posts(orderBy: date_DESC) {
+        id
+        ...HomePostsFields
+      }
+    }
+    ${HOME_TAGS_FRAGMENT}
+    ${HOME_POSTS_FRAGMENT}
+  `);
 
   return {
     props: {

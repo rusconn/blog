@@ -1,5 +1,5 @@
 import type { NextApiHandler } from "next";
-import { gql } from "@apollo/client";
+import { gql } from "graphql-request";
 
 import { GRAPHCMS_PREVIEW_POST_SECRET, PREVIEW_MODE_MAX_AGE } from "@/libs/config";
 import routes from "@/libs/routes";
@@ -18,7 +18,6 @@ type Params = {
 export const POST_EXISTENCE_QUERY = gql`
   query PostExistence($slug: String!) {
     post(where: { slug: $slug }, stage: DRAFT) {
-      id
       slug
     }
   }
@@ -33,10 +32,10 @@ const handler: NextApiHandler<Message> = async (req, res) => {
   }
 
   try {
-    const { data } = await previewClient.query<PostExistenceQuery, PostExistenceQueryVariables>({
-      query: POST_EXISTENCE_QUERY,
-      variables: { slug },
-    });
+    const data = await previewClient.request<PostExistenceQuery, PostExistenceQueryVariables>(
+      POST_EXISTENCE_QUERY,
+      { slug }
+    );
 
     if (!data.post) {
       res.status(400).json({ message: "Invalid request" });

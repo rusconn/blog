@@ -4145,7 +4145,7 @@ export type PostExistenceQueryVariables = Exact<{
 }>;
 
 
-export type PostExistenceQuery = { post?: { id: string, slug: string } | null | undefined };
+export type PostExistenceQuery = { post?: { slug: string } | null | undefined };
 
 export type HomeQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -4158,12 +4158,12 @@ export type PostQueryVariables = Exact<{
 }>;
 
 
-export type PostQuery = { post?: { id: string, title: string, date: string, body: string, tags: Array<{ id: string, slug: string, name: string }> } | null | undefined };
+export type PostQuery = { post?: { title: string, date: string, body: string, tags: Array<{ id: string, slug: string, name: string }> } | null | undefined };
 
 export type PostPathsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type PostPathsQuery = { posts: Array<{ id: string, slug: string }> };
+export type PostPathsQuery = { posts: Array<{ slug: string }> };
 
 export type TagQueryVariables = Exact<{
   where: TagWhereUniqueInput;
@@ -4171,9 +4171,9 @@ export type TagQueryVariables = Exact<{
 }>;
 
 
-export type TagQuery = { tag?: { id: string, name: string, posts: Array<{ id: string, slug: string, date: string, title: string }> } | null | undefined };
+export type TagQuery = { tag?: { name: string, posts: Array<{ id: string, slug: string, date: string, title: string }> } | null | undefined };
 
 export type TagPathsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type TagPathsQuery = { tags: Array<{ id: string, slug: string, posts: Array<{ id: string }> }> };
+export type TagPathsQuery = { tags: Array<{ slug: string, posts: Array<{ id: string }> }> };
