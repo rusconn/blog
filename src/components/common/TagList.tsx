@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql } from "graphql-request";
 import { css } from "@emotion/react";
 
 import type { TagListFieldsFragment } from "@/generated/graphql";

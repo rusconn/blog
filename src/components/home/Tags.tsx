@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql } from "graphql-request";
 
 import type { HomeTagsFieldsFragment } from "@/generated/graphql";
 import { TagList, TAG_LIST_FRAGMENT } from "@/components/common";

@@ -1,6 +1,6 @@
 import type { GetStaticPaths, GetStaticPropsContext, NextPage } from "next";
 import Head from "next/head";
-import { gql } from "@apollo/client";
+import { gql } from "graphql-request";
 import InferNextPropsType from "infer-next-props-type"; // eslint-disable-line
 
 import {
@@ -43,27 +43,17 @@ export const getStaticProps = async ({
   const stage = preview ? Stage.Draft : Stage.Published;
   const clientToUse = preview ? previewClient : client;
 
-  const { error, errors, data } = await clientToUse.query<PostQuery, PostQueryVariables>({
-    query: gql`
+  const data = await clientToUse.request<PostQuery, PostQueryVariables>(
+    gql`
       query Post($slug: String!, $stage: Stage!) {
         post(where: { slug: $slug }, stage: $stage) {
-          id
           ...PostsArticleFields
         }
       }
       ${POSTS_ARTICLE_FRAGMENT}
     `,
-    variables: { slug, stage },
-  });
-
-  if (error) {
-    throw error;
-  }
-
-  if (errors) {
-    errors.forEach(e => console.error(e));
-    throw new Error("some errors occurred");
-  }
+    { slug, stage }
+  );
 
   const { post } = data;
 
@@ -83,25 +73,13 @@ export const getStaticProps = async ({
 };
 
 export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
-  const { error, errors, data } = await client.query<PostPathsQuery, PostPathsQueryVariables>({
-    query: gql`
-      query PostPaths {
-        posts {
-          id
-          slug
-        }
+  const data = await client.request<PostPathsQuery, PostPathsQueryVariables>(gql`
+    query PostPaths {
+      posts {
+        slug
       }
-    `,
-  });
-
-  if (error) {
-    throw error;
-  }
-
-  if (errors) {
-    errors.forEach(e => console.error(e));
-    throw new Error("some errors occurred");
-  }
+    }
+  `);
 
   const paths = data.posts.map(({ slug }) => ({ params: { slug } }));
 
