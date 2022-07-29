@@ -2,7 +2,9 @@ version: "3.8"
 
 services:
   blog:
-    image: node:17.3.0-bullseye-slim
+    image: blog-dev:1.0.0
+    build:
+      context: dockerfiles
     working_dir: /blog
     volumes:
       - ./:/blog:cached
