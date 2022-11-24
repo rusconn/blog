@@ -34,10 +34,6 @@
     @apply text-stone-500 dark:text-gray-400;
   }
 
-  .snsIcon {
-    @apply inline-block w-6 h-6;
-  }
-
   .tagLink {
     @apply inline-block border rounded-lg border-solid border-transparent p-2
          hover:text-github-tag-text-hover hover:no-underline
