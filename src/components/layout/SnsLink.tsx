@@ -1,18 +1,3 @@
-import { css } from "@emotion/react";
-
-const link = css`
-  opacity: 0.5;
-  color: black;
-
-  @media (prefers-color-scheme: dark) {
-    color: white;
-  }
-
-  &:hover {
-    opacity: 0.8;
-  }
-`;
-
 type Props = {
   children: React.ReactNode;
   href: string;
@@ -20,7 +5,13 @@ type Props = {
 };
 
 export const SnsLink = ({ children, href, ariaLabel }: Props) => (
-  <a css={link} href={href} target="_blank" rel="noopener noreferrer" aria-label={ariaLabel}>
+  <a
+    className="text-black opacity-50 hover:opacity-80 dark:text-white"
+    href={href}
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label={ariaLabel}
+  >
     {children}
   </a>
 );

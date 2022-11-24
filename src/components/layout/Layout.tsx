@@ -1,4 +1,3 @@
-import { css } from "@emotion/react";
 import Head from "next/head";
 
 import { siteTitle } from "@/constants";
@@ -7,25 +6,6 @@ import { BackToHome } from "./BackToHome";
 import { Footer } from "./Footer";
 import { Header } from "./Header";
 import { PreviewInfo } from "./PreviewInfo";
-
-const previewInfo = css`
-  position: sticky;
-  top: 0;
-  padding: 1rem;
-  text-align: center;
-  background-color: lightyellow;
-  z-index: 1;
-`;
-
-const container = css`
-  max-width: 42rem;
-  padding: 0 1rem;
-  margin: 3rem auto 6rem;
-`;
-
-const backToHome = css`
-  margin: 4rem 0 0;
-`;
 
 type Props = {
   children: React.ReactNode;
@@ -43,15 +23,15 @@ export const Layout = ({ children, home, preview }: Props) => (
       <meta name="og:type" content="website" />
     </Head>
     {preview && (
-      <div css={previewInfo}>
+      <div className="sticky top-0 z-[1] bg-[#ffffe0] p-4 text-center">
         <PreviewInfo />
       </div>
     )}
-    <div css={container}>
+    <div className="mx-auto mt-12 mb-24 max-w-2xl px-4">
       <Header home={home} />
       <main>{children}</main>
       {!home && (
-        <div css={backToHome}>
+        <div className="mt-16">
           <BackToHome />
         </div>
       )}

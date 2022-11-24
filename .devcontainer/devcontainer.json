@@ -23,7 +23,7 @@
     "artdiniz.quitcontrol-vscode",
     "humao.rest-client",
     "graphql.vscode-graphql",
-    "styled-components.vscode-styled-components"
+    "bradlc.vscode-tailwindcss"
   ],
   "runServices": ["blog"],
   "shutdownAction": "stopCompose"
