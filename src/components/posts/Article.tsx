@@ -35,10 +35,10 @@ export const Article = ({ fragment: { title, date, tags }, body }: Props) => (
     <div className="lightText">
       <Date dateString={date} />
     </div>
-    <div className="mt-[1.4rem]">
+    <div className="mt-6">
       <TagList fragments={tags} />
     </div>
-    <div className="mt-[3.2rem]">
+    <div className="mt-10">
       <ArticleBody body={body} />
     </div>
   </article>

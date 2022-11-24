@@ -4,7 +4,7 @@ import { SnsLink } from "./SnsLink";
 
 export const Footer = () => (
   <footer>
-    <div className="flex justify-end space-x-[0.6rem] text-left">
+    <div className="flex justify-end space-x-2 text-left">
       <span>
         <SnsLink href="https://twitter.com/rusconn" ariaLabel="rusconnのTwitterへ">
           <FaTwitter className="snsIcon" />
