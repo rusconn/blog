@@ -14,8 +14,6 @@ import { Layout } from "@/components/layout";
 import { Posts, TAGS_POSTS_FRAGMENT } from "@/components/tags";
 import { client, previewClient } from "@/libs/api";
 
-import * as utilStyles from "@/styles/utils";
-
 type Props = InferNextPropsType<typeof getStaticProps>;
 
 const Tag: NextPage<Props> = ({ tag, preview }) => (
@@ -23,7 +21,7 @@ const Tag: NextPage<Props> = ({ tag, preview }) => (
     <Head>
       <title>{tag.name}</title>
     </Head>
-    <div css={[utilStyles.headingMd, utilStyles.padding1px]}>
+    <div className="headingMd padding1px">
       <Posts fragment={tag} />
     </div>
   </Layout>

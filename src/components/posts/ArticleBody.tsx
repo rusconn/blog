@@ -1,19 +1,8 @@
 import { gql } from "graphql-request";
-import { css } from "@emotion/react";
 
 import type { ArticleBodyFieldsFragment } from "@/generated/graphql";
 
 import "github-markdown-css";
-
-const style = css`
-  & > h2 {
-    margin: 3rem 0 1rem;
-  }
-
-  & pre {
-    padding: 1.2rem;
-  }
-`;
 
 export const ARTICLE_BODY_FRAGMENT = gql`
   fragment ArticleBodyFields on Post {
@@ -43,8 +32,8 @@ export type Props = Awaited<ReturnType<typeof renderMarkdown>>;
 
 export const ArticleBody = ({ body }: Props) => (
   <div
-    css={style}
-    className="markdown-body"
+    // eslint-disable-next-line tailwindcss/no-custom-classname
+    className="markdown-body [&_h2]:!mt-12 [&_h2]:!mb-4 [&_pre]:!p-[1.2rem]"
     // eslint-disable-next-line react/no-danger
     dangerouslySetInnerHTML={{ __html: body }}
   />
