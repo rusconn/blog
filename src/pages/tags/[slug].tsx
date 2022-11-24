@@ -21,7 +21,7 @@ const Tag: NextPage<Props> = ({ tag, preview }) => (
     <Head>
       <title>{tag.name}</title>
     </Head>
-    <div className="headingMd padding1px">
+    <div className="headingMd">
       <Posts fragment={tag} />
     </div>
   </Layout>

@@ -23,7 +23,7 @@ export const Layout = ({ children, home, preview }: Props) => (
       <meta name="og:type" content="website" />
     </Head>
     {preview && (
-      <div className="sticky top-0 z-[1] bg-[#ffffe0] p-4 text-center">
+      <div className="sticky top-0 z-10 bg-yellow-50 p-4 text-center">
         <PreviewInfo />
       </div>
     )}

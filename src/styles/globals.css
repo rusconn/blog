@@ -9,42 +9,38 @@
 
   html,
   body {
-    @apply bg-white text-black dark:bg-[#0d1117] dark:text-[#c9d1d9];
+    @apply bg-github-bg text-github-text dark:bg-github-bg-dark dark:text-github-text-dark;
   }
 
   a {
-    @apply text-[#0969da] dark:text-[#58a6ff] no-underline hover:underline;
+    @apply text-github-link dark:text-github-link-dark no-underline hover:underline;
   }
 }
 
 @layer components {
   .headingXl {
-    @apply text-[2rem] leading-[1.3] font-bold tracking-tighter my-4;
+    @apply text-3xl font-bold my-4;
   }
 
   .headingLg {
-    @apply text-[1.5rem] leading-[1.4] font-bold mb-4;
+    @apply text-2xl font-bold mb-4;
   }
 
   .headingMd {
-    @apply text-[1.2rem] leading-[1.5];
-  }
-
-  .padding1px {
-    @apply pt-[1px];
+    @apply text-lg;
   }
 
   .lightText {
-    @apply text-[#666] dark:text-[#8b949e];
+    @apply text-stone-500 dark:text-gray-400;
   }
 
   .snsIcon {
-    @apply w-6 h-6;
+    @apply inline-block w-6 h-6;
   }
 
   .tagLink {
-    @apply inline-block border-[1.2px] rounded-lg border-solid border-transparent p-[0.4rem]
-         hover:text-[#f0f6fc] hover:no-underline
+    @apply inline-block border rounded-lg border-solid border-transparent p-2
+         hover:text-github-tag-text-hover hover:no-underline
            bg-tag-link hover:bg-tag-link-hover dark:bg-tag-link-dark dark:hover:bg-tag-link-dark-hover;
   }
 }
