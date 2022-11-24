@@ -1,7 +1,3 @@
-import Head from "next/head";
-
-import { siteTitle } from "@/constants";
-import { staticPath } from "@/libs/$path";
 import { BackToHome } from "./BackToHome";
 import { Footer } from "./Footer";
 import { Header } from "./Header";
@@ -15,13 +11,6 @@ type Props = {
 
 export const Layout = ({ children, home, preview }: Props) => (
   <>
-    <Head>
-      <link rel="icon" href={staticPath.favicon_ico} />
-      <meta name="description" content="web software engineer rusconn's personal blog" />
-      <meta name="og:title" content={siteTitle} />
-      <meta name="og:site_name" content={siteTitle} />
-      <meta name="og:type" content="website" />
-    </Head>
     {preview && (
       <div className="sticky top-0 z-10 bg-yellow-50 p-4 text-center">
         <PreviewInfo />
