@@ -1,5 +1,6 @@
 import { FaGithub, FaTwitter } from "react-icons/fa";
 
+import { SnsIcon } from "./SnsIcon";
 import { SnsLink } from "./SnsLink";
 
 export const Footer = () => (
@@ -7,12 +8,12 @@ export const Footer = () => (
     <div className="flex justify-end space-x-2 text-left">
       <span>
         <SnsLink href="https://twitter.com/rusconn" ariaLabel="rusconnのTwitterへ">
-          <FaTwitter className="snsIcon" />
+          <SnsIcon Icon={FaTwitter} />
         </SnsLink>
       </span>
       <span>
         <SnsLink href="https://github.com/rusconn" ariaLabel="rusconnのGitHubへ">
-          <FaGithub className="snsIcon" />
+          <SnsIcon Icon={FaGithub} />
         </SnsLink>
       </span>
     </div>
