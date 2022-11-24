@@ -18,10 +18,10 @@ const Home: NextPage<Props> = ({ tags, posts, preview }) => (
     <div className="headingMd my-4">
       <Biography />
     </div>
-    <div className="headingMd mt-[1.4rem] mb-4">
+    <div className="headingMd mt-6 mb-4">
       <Tags fragments={tags} />
     </div>
-    <div className="headingMd padding1px">
+    <div className="headingMd">
       <Posts fragments={posts} />
     </div>
   </Layout>

@@ -13,9 +13,7 @@ export const Header = ({ home }: Props) => (
     {home ? (
       <>
         <ProfileImage height={144} width={144} />
-        <h1 className="mb-4 text-[2.5rem] font-extrabold leading-[1.2] tracking-tighter">
-          {authorName}
-        </h1>
+        <h1 className="mb-4 text-4xl font-extrabold">{authorName}</h1>
       </>
     ) : (
       <>
