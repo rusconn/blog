@@ -1,32 +1,18 @@
 import { FaGithub, FaTwitter } from "react-icons/fa";
-import { css } from "@emotion/react";
 
 import { SnsLink } from "./SnsLink";
 
-const snsLinks = css`
-  text-align: right;
-
-  & > span:not(:first-of-type) {
-    margin-left: 0.6rem;
-  }
-`;
-
-const snsIcon = css`
-  width: 1.5rem;
-  height: 1.5rem;
-`;
-
 export const Footer = () => (
   <footer>
-    <div css={snsLinks}>
+    <div className="flex justify-end space-x-[0.6rem] text-left">
       <span>
         <SnsLink href="https://twitter.com/rusconn" ariaLabel="rusconnのTwitterへ">
-          <FaTwitter css={snsIcon} />
+          <FaTwitter className="snsIcon" />
         </SnsLink>
       </span>
       <span>
         <SnsLink href="https://github.com/rusconn" ariaLabel="rusconnのGitHubへ">
-          <FaGithub css={snsIcon} />
+          <FaGithub className="snsIcon" />
         </SnsLink>
       </span>
     </div>
