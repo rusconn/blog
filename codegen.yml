@@ -6,7 +6,7 @@ typescript: &typescript
   scalars: *scalars
   skipTypename: true
 
-schema: ${GRAPHCMS_PROJECT_API}
+schema: ${API_URL}
 documents:
   - "src/pages/**/*.{ts,tsx}"
   - "src/components/**/*.{ts,tsx}"

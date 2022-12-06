@@ -1,7 +1,7 @@
 import type { NextApiHandler } from "next";
 import { gql } from "graphql-request";
 
-import { GRAPHCMS_PREVIEW_POST_SECRET, PREVIEW_MODE_MAX_AGE } from "@/libs/config";
+import { parseEnvs } from "@/libs/env";
 import routes from "@/libs/routes";
 import { previewClient } from "@/libs/api";
 import { PostExistenceQuery, PostExistenceQueryVariables } from "@/generated/graphql";
@@ -24,9 +24,11 @@ export const POST_EXISTENCE_QUERY = gql`
 `;
 
 const handler: NextApiHandler<Message> = async (req, res) => {
+  const { previewSecret, previewMaxSeconds } = parseEnvs(process.env);
+
   const { slug, secret } = req.query as Params;
 
-  if (!slug || secret !== GRAPHCMS_PREVIEW_POST_SECRET) {
+  if (!slug || secret !== previewSecret) {
     res.status(400).json({ message: "Invalid request" });
     return;
   }
@@ -42,7 +44,7 @@ const handler: NextApiHandler<Message> = async (req, res) => {
       return;
     }
 
-    res.setPreviewData({}, { maxAge: PREVIEW_MODE_MAX_AGE });
+    res.setPreviewData({}, { maxAge: previewMaxSeconds });
 
     res.redirect(routes.postsPost(data.post.slug));
   } catch (e) {
