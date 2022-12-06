@@ -1,21 +1,20 @@
 import { GraphQLClient } from "graphql-request";
 
-import {
-  GRAPHCMS_PROD_AUTH_TOKEN,
-  GRAPHCMS_DEV_AUTH_TOKEN,
-  GRAPHCMS_PROJECT_API,
-} from "@/libs/config";
+import { parseEnvs } from "@/libs/env";
 
 type CreateClientParams = {
   preview: boolean;
 };
 
-const createClient = ({ preview }: CreateClientParams) =>
-  new GraphQLClient(GRAPHCMS_PROJECT_API, {
+const createClient = ({ preview }: CreateClientParams) => {
+  const { apiUrl, draftToken, publishedToken } = parseEnvs(process.env);
+
+  return new GraphQLClient(apiUrl, {
     headers: {
-      authorization: `Bearer ${preview ? GRAPHCMS_DEV_AUTH_TOKEN : GRAPHCMS_PROD_AUTH_TOKEN}`,
+      authorization: `Bearer ${preview ? draftToken : publishedToken}`,
     },
   });
+};
 
 // Node.js のモジュールキャッシュが効いて再利用される？
 export const client = createClient({ preview: false });
