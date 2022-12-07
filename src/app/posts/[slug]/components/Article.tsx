@@ -1,7 +1,7 @@
 import { gql } from "graphql-request";
 
+import { Date, TagList, TAG_LIST_FRAGMENT } from "@/app/common/components";
 import type { PostsArticleFieldsFragment } from "@/generated/graphql";
-import { Date, TagList, TAG_LIST_FRAGMENT } from "@/components/common";
 import {
   ArticleBody,
   ARTICLE_BODY_FRAGMENT,

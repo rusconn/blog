@@ -4238,23 +4238,22 @@ export type HomePostsFieldsFragment = { id: string, slug: string, date: string, 
 
 export type HomeTagsFieldsFragment = { id: string, slug: string, name: string };
 
-export type PostsArticleFieldsFragment = { title: string, date: string, body: string, tags: Array<{ id: string, slug: string, name: string }> };
-
-export type ArticleBodyFieldsFragment = { body: string };
-
-export type TagsPostsFieldsFragment = { name: string, posts: Array<{ id: string, slug: string, date: string, title: string }> };
-
-export type PostExistenceQueryVariables = Exact<{
-  slug: Scalars['String'];
-}>;
-
-
-export type PostExistenceQuery = { post?: { slug: string } | null | undefined };
-
 export type HomeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type HomeQuery = { tags: Array<{ id: string, slug: string, name: string }>, posts: Array<{ id: string, slug: string, date: string, title: string }> };
+
+export type PostsArticleFieldsFragment = { title: string, date: string, body: string, tags: Array<{ id: string, slug: string, name: string }> };
+
+export type ArticleBodyFieldsFragment = { body: string };
+
+export type PostTitleQueryVariables = Exact<{
+  slug: Scalars['String'];
+  stage: Stage;
+}>;
+
+
+export type PostTitleQuery = { post?: { title: string } | null | undefined };
 
 export type PostQueryVariables = Exact<{
   slug: Scalars['String'];
@@ -4269,6 +4268,16 @@ export type PostPathsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type PostPathsQuery = { posts: Array<{ slug: string }> };
 
+export type TagsPostsFieldsFragment = { name: string, posts: Array<{ id: string, slug: string, date: string, title: string }> };
+
+export type TagNameQueryVariables = Exact<{
+  where: TagWhereUniqueInput;
+  stage: Stage;
+}>;
+
+
+export type TagNameQuery = { tag?: { name: string } | null | undefined };
+
 export type TagQueryVariables = Exact<{
   where: TagWhereUniqueInput;
   stage: Stage;
@@ -4281,3 +4290,10 @@ export type TagPathsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type TagPathsQuery = { tags: Array<{ slug: string, posts: Array<{ id: string }> }> };
+
+export type PostExistenceQueryVariables = Exact<{
+  slug: Scalars['String'];
+}>;
+
+
+export type PostExistenceQuery = { post?: { slug: string } | null | undefined };
