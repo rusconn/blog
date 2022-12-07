@@ -2,7 +2,7 @@ import { gql } from "graphql-request";
 
 import type { ArticleBodyFieldsFragment } from "@/generated/graphql";
 
-import "github-markdown-css";
+import "./github-markdown.css";
 
 export const ARTICLE_BODY_FRAGMENT = gql`
   fragment ArticleBodyFields on Post {
