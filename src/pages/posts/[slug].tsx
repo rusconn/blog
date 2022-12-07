@@ -1,7 +1,11 @@
-import type { GetStaticPaths, GetStaticPropsContext, NextPage } from "next";
+import type {
+  GetStaticPaths,
+  GetStaticPropsContext,
+  InferGetStaticPropsType,
+  NextPage,
+} from "next";
 import Head from "next/head";
 import { gql } from "graphql-request";
-import InferNextPropsType from "infer-next-props-type"; // eslint-disable-line
 
 import {
   Stage,
@@ -15,7 +19,7 @@ import { Layout } from "@/components/layout";
 import { Article, renderMarkdown, POSTS_ARTICLE_FRAGMENT } from "@/components/posts";
 import { client, previewClient } from "@/libs/api";
 
-type Props = InferNextPropsType<typeof getStaticProps>;
+type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
 const Post: NextPage<Props> = ({ post: { body, ...rest }, preview }) => (
   <Layout preview={preview}>
