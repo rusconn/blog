@@ -2,7 +2,6 @@ import { gql } from "graphql-request";
 import Link from "next/link";
 
 import type { TagLinkFieldsFragment } from "@/generated/graphql";
-import { pagesPath } from "@/libs/$path";
 
 export const TAG_LINK_FRAGMENT = gql`
   fragment TagLinkFields on Tag {
@@ -16,7 +15,9 @@ type Props = {
 };
 
 export const TagLink = ({ fragment: { slug, name } }: Props) => (
-  <Link href={pagesPath.tags._slug(slug).$url()} className="tagLink">
+  // TODO: Next.js が対応したら pathpida のコードへ変更する
+  // https://nextjs.org/docs/messages/app-dir-dynamic-href
+  <Link href={`/tags/${slug}`} className="tagLink">
     {name}
   </Link>
 );

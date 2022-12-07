@@ -1,7 +1,7 @@
 import { gql } from "graphql-request";
 
+import { PostList, POST_LIST_FRAGMENT } from "@/app/common/components";
 import type { TagsPostsFieldsFragment } from "@/generated/graphql";
-import { PostList, POST_LIST_FRAGMENT } from "@/components/common";
 
 export const TAGS_POSTS_FRAGMENT = gql`
   fragment TagsPostsFields on Tag {
