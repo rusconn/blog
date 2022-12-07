@@ -18,13 +18,11 @@ export const Header = ({ home }: Props) => (
     ) : (
       <>
         <Link href={pagesPath.$url()}>
-          <a>
-            <ProfileImage height={96} width={96} />
-          </a>
+          <ProfileImage height={96} width={96} />
         </Link>
         <h2 className="headingLg">
-          <Link href={pagesPath.$url()} passHref>
-            <a className="text-inherit hover:no-underline">{authorName}</a>
+          <Link href={pagesPath.$url()} className="text-inherit hover:no-underline">
+            {authorName}
           </Link>
         </h2>
       </>
