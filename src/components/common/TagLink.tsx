@@ -16,7 +16,7 @@ type Props = {
 };
 
 export const TagLink = ({ fragment: { slug, name } }: Props) => (
-  <Link href={pagesPath.tags._slug(slug).$url()} passHref>
-    <a className="tagLink">{name}</a>
+  <Link href={pagesPath.tags._slug(slug).$url()} className="tagLink">
+    {name}
   </Link>
 );

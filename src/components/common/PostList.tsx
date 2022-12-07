@@ -22,9 +22,7 @@ export const PostList = ({ fragments }: Props) => (
   <ul className="m-0 list-none p-0">
     {fragments.map(({ id, slug, date, title }) => (
       <li className="mb-5" key={id}>
-        <Link href={pagesPath.posts._slug(slug).$url()}>
-          <a>{title}</a>
-        </Link>
+        <Link href={pagesPath.posts._slug(slug).$url()}>{title}</Link>
         <br />
         <small className="lightText">
           <Date dateString={date} />
