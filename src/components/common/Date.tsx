@@ -6,5 +6,10 @@ type Props = {
 
 export const Date = ({ dateString }: Props) => {
   const date = parseISO(dateString);
-  return <time dateTime={dateString}>{format(date, "yyyy-MM-dd")}</time>;
+
+  return (
+    <time dateTime={dateString} suppressHydrationWarning>
+      {format(date, "yyyy-MM-dd")}
+    </time>
+  );
 };
