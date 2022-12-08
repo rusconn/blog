@@ -10,7 +10,7 @@ import {
 } from "@/generated/graphql";
 import { client, previewClient } from "@/libs/api";
 import { isPreview } from "@/libs/preview";
-import { Article, POSTS_ARTICLE_FRAGMENT } from "./components";
+import { Article, POST_ARTICLE_FRAGMENT } from "./components";
 
 type Params = {
   params: {
@@ -26,9 +26,7 @@ const Post = async ({ params }: Params) => {
     notFound();
   }
 
-  const { body, ...rest } = post;
-
-  return <Article fragment={rest} body={body} />;
+  return <Article fragment={post} />;
 };
 
 const getData = async (preview: boolean, slug: string) => {
@@ -37,14 +35,14 @@ const getData = async (preview: boolean, slug: string) => {
 
   return clientToUse.request<PostQuery, PostQueryVariables>(
     gql`
-      query Post($slug: String!, $stage: Stage!) {
-        post(where: { slug: $slug }, stage: $stage) {
-          ...PostsArticleFields
+      query Post($where: PostWhereUniqueInput!, $stage: Stage!) {
+        post(where: $where, stage: $stage) {
+          ...PostArticle
         }
       }
-      ${POSTS_ARTICLE_FRAGMENT}
+      ${POST_ARTICLE_FRAGMENT}
     `,
-    { slug, stage }
+    { where: { slug }, stage }
   );
 };
 

@@ -10,7 +10,7 @@ import {
 } from "@/generated/graphql";
 import { client, previewClient } from "@/libs/api";
 import { isPreview } from "@/libs/preview";
-import { Posts, TAGS_POSTS_FRAGMENT } from "./components";
+import { Posts, TAG_POSTS_FRAGMENT } from "./components";
 
 type Params = {
   params: {
@@ -41,10 +41,10 @@ const getData = async (preview: boolean, slug: string) => {
     gql`
       query Tag($where: TagWhereUniqueInput!, $stage: Stage!) {
         tag(where: $where, stage: $stage) {
-          ...TagsPostsFields
+          ...TagPosts
         }
       }
-      ${TAGS_POSTS_FRAGMENT}
+      ${TAG_POSTS_FRAGMENT}
     `,
     { where: { slug }, stage }
   );

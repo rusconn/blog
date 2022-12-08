@@ -1,12 +1,12 @@
 import { gql } from "graphql-request";
 import { use } from "react";
 
-import type { ArticleBodyFieldsFragment } from "@/generated/graphql";
+import type { PostArticleBodyFragment } from "@/generated/graphql";
 
 import "./github-markdown.css";
 
-export const ARTICLE_BODY_FRAGMENT = gql`
-  fragment ArticleBodyFields on Post {
+export const POST_ARTICLE_BODY_FRAGMENT = gql`
+  fragment PostArticleBody on Post {
     body
   }
 `;
@@ -27,9 +27,11 @@ const renderMarkdown = async (markdown: string) => {
   return text;
 };
 
-export type Props = ArticleBodyFieldsFragment;
+type Props = {
+  fragment: PostArticleBodyFragment;
+};
 
-export const ArticleBody = ({ body }: Props) => {
+export const ArticleBody = ({ fragment: { body } }: Props) => {
   const renderedBody = use(renderMarkdown(body));
 
   return (

@@ -81,6 +81,7 @@ export type AssetCreatedAtArgs = {
 
 /** Asset system model */
 export type AssetCreatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -116,6 +117,7 @@ export type AssetPublishedAtArgs = {
 
 /** Asset system model */
 export type AssetPublishedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -125,6 +127,7 @@ export type AssetScheduledInArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<Array<Locale>>;
   skip?: InputMaybe<Scalars['Int']>;
@@ -140,6 +143,7 @@ export type AssetUpdatedAtArgs = {
 
 /** Asset system model */
 export type AssetUpdatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -1416,6 +1420,7 @@ export type Post = Node & {
 
 
 export type PostCreatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -1435,6 +1440,7 @@ export type PostHistoryArgs = {
 
 
 export type PostPublishedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -1443,6 +1449,7 @@ export type PostScheduledInArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<Array<Locale>>;
   skip?: InputMaybe<Scalars['Int']>;
@@ -1454,6 +1461,7 @@ export type PostTagsArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<Array<Locale>>;
   orderBy?: InputMaybe<TagOrderByInput>;
@@ -1463,6 +1471,7 @@ export type PostTagsArgs = {
 
 
 export type PostUpdatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -2294,6 +2303,7 @@ export type ScheduledOperationAffectedDocumentsArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<Array<Locale>>;
   skip?: InputMaybe<Scalars['Int']>;
@@ -2302,6 +2312,7 @@ export type ScheduledOperationAffectedDocumentsArgs = {
 
 /** Scheduled Operation system model */
 export type ScheduledOperationCreatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -2316,18 +2327,21 @@ export type ScheduledOperationDocumentInStagesArgs = {
 
 /** Scheduled Operation system model */
 export type ScheduledOperationPublishedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
 
 /** Scheduled Operation system model */
 export type ScheduledOperationReleaseArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
 
 /** Scheduled Operation system model */
 export type ScheduledOperationUpdatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -2705,6 +2719,7 @@ export type ScheduledRelease = Node & {
 
 /** Scheduled Release system model */
 export type ScheduledReleaseCreatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -2722,6 +2737,7 @@ export type ScheduledReleaseOperationsArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<Array<Locale>>;
   orderBy?: InputMaybe<ScheduledOperationOrderByInput>;
@@ -2732,12 +2748,14 @@ export type ScheduledReleaseOperationsArgs = {
 
 /** Scheduled Release system model */
 export type ScheduledReleasePublishedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
 
 /** Scheduled Release system model */
 export type ScheduledReleaseUpdatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -3280,6 +3298,7 @@ export type Tag = Node & {
 
 
 export type TagCreatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -3302,6 +3321,7 @@ export type TagPostsArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<Array<Locale>>;
   orderBy?: InputMaybe<PostOrderByInput>;
@@ -3311,6 +3331,7 @@ export type TagPostsArgs = {
 
 
 export type TagPublishedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -3319,6 +3340,7 @@ export type TagScheduledInArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<Array<Locale>>;
   skip?: InputMaybe<Scalars['Int']>;
@@ -3327,6 +3349,7 @@ export type TagScheduledInArgs = {
 
 
 export type TagUpdatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -4228,35 +4251,37 @@ export enum _SystemDateTimeFieldVariation {
   Localization = 'localization'
 }
 
-export type PostListFieldsFragment = { id: string, slug: string, date: string, title: string };
+export type PostListItemFragment = { id: string, slug: string, date: string, title: string };
 
-export type TagLinkFieldsFragment = { slug: string, name: string };
+export type TagLinkFragment = { slug: string, name: string };
 
-export type TagListFieldsFragment = { id: string, slug: string, name: string };
+export type TagListItemFragment = { id: string, slug: string, name: string };
 
-export type HomePostsFieldsFragment = { id: string, slug: string, date: string, title: string };
+export type HomePostFragment = { id: string, slug: string, date: string, title: string };
 
-export type HomeTagsFieldsFragment = { id: string, slug: string, name: string };
+export type HomeTagFragment = { id: string, slug: string, name: string };
 
-export type HomeQueryVariables = Exact<{ [key: string]: never; }>;
+export type HomeQueryVariables = Exact<{
+  orderBy: PostOrderByInput;
+}>;
 
 
 export type HomeQuery = { tags: Array<{ id: string, slug: string, name: string }>, posts: Array<{ id: string, slug: string, date: string, title: string }> };
 
-export type PostsArticleFieldsFragment = { title: string, date: string, body: string, tags: Array<{ id: string, slug: string, name: string }> };
+export type PostArticleFragment = { title: string, date: string, body: string, tags: Array<{ id: string, slug: string, name: string }> };
 
-export type ArticleBodyFieldsFragment = { body: string };
+export type PostArticleBodyFragment = { body: string };
 
-export type PostTitleQueryVariables = Exact<{
-  slug: Scalars['String'];
+export type PostHeadQueryVariables = Exact<{
+  where: PostWhereUniqueInput;
   stage: Stage;
 }>;
 
 
-export type PostTitleQuery = { post?: { title: string } | null | undefined };
+export type PostHeadQuery = { post?: { title: string } | null | undefined };
 
 export type PostQueryVariables = Exact<{
-  slug: Scalars['String'];
+  where: PostWhereUniqueInput;
   stage: Stage;
 }>;
 
@@ -4268,15 +4293,15 @@ export type PostPathsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type PostPathsQuery = { posts: Array<{ slug: string }> };
 
-export type TagsPostsFieldsFragment = { name: string, posts: Array<{ id: string, slug: string, date: string, title: string }> };
+export type TagPostsFragment = { name: string, posts: Array<{ id: string, slug: string, date: string, title: string }> };
 
-export type TagNameQueryVariables = Exact<{
+export type TagHeadQueryVariables = Exact<{
   where: TagWhereUniqueInput;
   stage: Stage;
 }>;
 
 
-export type TagNameQuery = { tag?: { name: string } | null | undefined };
+export type TagHeadQuery = { tag?: { name: string } | null | undefined };
 
 export type TagQueryVariables = Exact<{
   where: TagWhereUniqueInput;
@@ -4292,7 +4317,8 @@ export type TagPathsQueryVariables = Exact<{ [key: string]: never; }>;
 export type TagPathsQuery = { tags: Array<{ slug: string, posts: Array<{ id: string }> }> };
 
 export type PostExistenceQueryVariables = Exact<{
-  slug: Scalars['String'];
+  where: PostWhereUniqueInput;
+  stage: Stage;
 }>;
 
 

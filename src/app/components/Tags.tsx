@@ -1,17 +1,17 @@
 import { gql } from "graphql-request";
 
-import { TagList, TAG_LIST_FRAGMENT } from "@/app/common/components";
-import type { HomeTagsFieldsFragment } from "@/generated/graphql";
+import { TagList, TAG_LIST_ITEM_FRAGMENT } from "@/app/common/components";
+import type { HomeTagFragment } from "@/generated/graphql";
 
-export const HOME_TAGS_FRAGMENT = gql`
-  fragment HomeTagsFields on Tag {
-    ...TagListFields
+export const HOME_TAG_FRAGMENT = gql`
+  fragment HomeTag on Tag {
+    ...TagListItem
   }
-  ${TAG_LIST_FRAGMENT}
+  ${TAG_LIST_ITEM_FRAGMENT}
 `;
 
 type Props = {
-  fragments: HomeTagsFieldsFragment[];
+  fragments: HomeTagFragment[];
 };
 
 export const Tags = ({ fragments }: Props) => (

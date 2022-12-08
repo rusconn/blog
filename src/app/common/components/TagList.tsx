@@ -1,25 +1,25 @@
 import { gql } from "graphql-request";
 
-import type { TagListFieldsFragment } from "@/generated/graphql";
+import type { TagListItemFragment } from "@/generated/graphql";
 import { TagLink, TAG_LINK_FRAGMENT } from "./TagLink";
 
-export const TAG_LIST_FRAGMENT = gql`
-  fragment TagListFields on Tag {
+export const TAG_LIST_ITEM_FRAGMENT = gql`
+  fragment TagListItem on Tag {
     id
-    ...TagLinkFields
+    ...TagLink
   }
   ${TAG_LINK_FRAGMENT}
 `;
 
 type Props = {
-  fragments: TagListFieldsFragment[];
+  fragments: TagListItemFragment[];
 };
 
 export const TagList = ({ fragments }: Props) => (
   <ul className="flex flex-wrap pl-0">
-    {fragments.map(({ id, ...rest }) => (
+    {fragments.map(({ id, ...tagLink }) => (
       <li className="mr-2 mb-2 list-none text-sm" key={id}>
-        <TagLink fragment={rest} />
+        <TagLink fragment={tagLink} />
       </li>
     ))}
   </ul>

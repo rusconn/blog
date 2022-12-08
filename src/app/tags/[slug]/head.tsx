@@ -1,6 +1,6 @@
 import { gql } from "graphql-request";
 
-import { Stage, TagNameQuery, TagNameQueryVariables } from "@/generated/graphql";
+import { Stage, TagHeadQuery, TagHeadQueryVariables } from "@/generated/graphql";
 import { previewClient, client } from "@/libs/api";
 import { isPreview } from "@/libs/preview";
 
@@ -25,9 +25,9 @@ const getData = async (preview: boolean, slug: string) => {
   const stage = preview ? Stage.Draft : Stage.Published;
   const clientToUse = preview ? previewClient : client;
 
-  return clientToUse.request<TagNameQuery, TagNameQueryVariables>(
+  return clientToUse.request<TagHeadQuery, TagHeadQueryVariables>(
     gql`
-      query TagName($where: TagWhereUniqueInput!, $stage: Stage!) {
+      query TagHead($where: TagWhereUniqueInput!, $stage: Stage!) {
         tag(where: $where, stage: $stage) {
           name
         }
