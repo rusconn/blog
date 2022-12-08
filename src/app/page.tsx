@@ -1,10 +1,10 @@
 import { gql } from "graphql-request";
 
 import { Layout } from "@/app/common/layout";
-import { HomeQuery, HomeQueryVariables } from "@/generated/graphql";
+import { HomeQuery, HomeQueryVariables, PostOrderByInput } from "@/generated/graphql";
 import { client, previewClient } from "@/libs/api";
 import { isPreview } from "@/libs/preview";
-import { Biography, Posts, Tags, HOME_TAGS_FRAGMENT, HOME_POSTS_FRAGMENT } from "./components";
+import { Biography, Posts, Tags, HOME_TAG_FRAGMENT, HOME_POST_FRAGMENT } from "./components";
 
 const Home = async () => {
   const preview = isPreview();
@@ -28,20 +28,21 @@ const Home = async () => {
 const getData = async (preview: boolean) => {
   const clientToUse = preview ? previewClient : client;
 
-  return clientToUse.request<HomeQuery, HomeQueryVariables>(gql`
-    query Home {
-      tags {
-        id
-        ...HomeTagsFields
+  return clientToUse.request<HomeQuery, HomeQueryVariables>(
+    gql`
+      query Home($orderBy: PostOrderByInput!) {
+        tags {
+          ...HomeTag
+        }
+        posts(orderBy: $orderBy) {
+          ...HomePost
+        }
       }
-      posts(orderBy: date_DESC) {
-        id
-        ...HomePostsFields
-      }
-    }
-    ${HOME_TAGS_FRAGMENT}
-    ${HOME_POSTS_FRAGMENT}
-  `);
+      ${HOME_TAG_FRAGMENT}
+      ${HOME_POST_FRAGMENT}
+    `,
+    { orderBy: PostOrderByInput.DateDesc }
+  );
 };
 
 export const revalidate = 60;

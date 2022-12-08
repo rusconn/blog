@@ -1,17 +1,17 @@
 import { gql } from "graphql-request";
 import Link from "next/link";
 
-import type { TagLinkFieldsFragment } from "@/generated/graphql";
+import type { TagLinkFragment } from "@/generated/graphql";
 
 export const TAG_LINK_FRAGMENT = gql`
-  fragment TagLinkFields on Tag {
+  fragment TagLink on Tag {
     slug
     name
   }
 `;
 
 type Props = {
-  fragment: TagLinkFieldsFragment;
+  fragment: TagLinkFragment;
 };
 
 export const TagLink = ({ fragment: { slug, name } }: Props) => (

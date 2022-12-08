@@ -1,11 +1,11 @@
 import { gql } from "graphql-request";
 import Link from "next/link";
 
-import type { PostListFieldsFragment } from "@/generated/graphql";
+import type { PostListItemFragment } from "@/generated/graphql";
 import { Date } from "./Date";
 
-export const POST_LIST_FRAGMENT = gql`
-  fragment PostListFields on Post {
+export const POST_LIST_ITEM_FRAGMENT = gql`
+  fragment PostListItem on Post {
     id
     slug
     date
@@ -14,7 +14,7 @@ export const POST_LIST_FRAGMENT = gql`
 `;
 
 type Props = {
-  fragments: PostListFieldsFragment[];
+  fragments: PostListItemFragment[];
 };
 
 export const PostList = ({ fragments }: Props) => (

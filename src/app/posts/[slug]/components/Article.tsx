@@ -1,28 +1,27 @@
 import { gql } from "graphql-request";
 
-import { Date, TagList, TAG_LIST_FRAGMENT } from "@/app/common/components";
-import type { PostsArticleFieldsFragment } from "@/generated/graphql";
-import { ArticleBody, ARTICLE_BODY_FRAGMENT, Props as ArticleBodyProps } from "./ArticleBody";
+import { Date, TagList, TAG_LIST_ITEM_FRAGMENT } from "@/app/common/components";
+import type { PostArticleFragment } from "@/generated/graphql";
+import { ArticleBody, POST_ARTICLE_BODY_FRAGMENT } from "./ArticleBody";
 
-export const POSTS_ARTICLE_FRAGMENT = gql`
-  fragment PostsArticleFields on Post {
+export const POST_ARTICLE_FRAGMENT = gql`
+  fragment PostArticle on Post {
     title
     date
-    ...ArticleBodyFields
+    ...PostArticleBody
     tags {
-      id
-      ...TagListFields
+      ...TagListItem
     }
   }
-  ${ARTICLE_BODY_FRAGMENT}
-  ${TAG_LIST_FRAGMENT}
+  ${POST_ARTICLE_BODY_FRAGMENT}
+  ${TAG_LIST_ITEM_FRAGMENT}
 `;
 
-type Props = ArticleBodyProps & {
-  fragment: Omit<PostsArticleFieldsFragment, keyof ArticleBodyProps>;
+type Props = {
+  fragment: PostArticleFragment;
 };
 
-export const Article = ({ fragment: { title, date, tags }, body }: Props) => (
+export const Article = ({ fragment: { title, date, tags, ...articleBody } }: Props) => (
   <article>
     <h1 className="headingXl">{title}</h1>
     <div className="lightText">
@@ -32,7 +31,7 @@ export const Article = ({ fragment: { title, date, tags }, body }: Props) => (
       <TagList fragments={tags} />
     </div>
     <div className="mt-10">
-      <ArticleBody body={body} />
+      <ArticleBody fragment={articleBody} />
     </div>
   </article>
 );

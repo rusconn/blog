@@ -4,7 +4,7 @@ import { gql } from "graphql-request";
 import { parseEnvs } from "@/libs/env";
 import routes from "@/libs/routes";
 import { previewClient } from "@/libs/api";
-import { PostExistenceQuery, PostExistenceQueryVariables } from "@/generated/graphql";
+import { PostExistenceQuery, PostExistenceQueryVariables, Stage } from "@/generated/graphql";
 
 export type Message = {
   message: string;
@@ -16,8 +16,8 @@ type Params = {
 };
 
 export const POST_EXISTENCE_QUERY = gql`
-  query PostExistence($slug: String!) {
-    post(where: { slug: $slug }, stage: DRAFT) {
+  query PostExistence($where: PostWhereUniqueInput!, $stage: Stage!) {
+    post(where: $where, stage: $stage) {
       slug
     }
   }
@@ -36,7 +36,7 @@ const handler: NextApiHandler<Message> = async (req, res) => {
   try {
     const data = await previewClient.request<PostExistenceQuery, PostExistenceQueryVariables>(
       POST_EXISTENCE_QUERY,
-      { slug }
+      { where: { slug }, stage: Stage.Draft }
     );
 
     if (!data.post) {

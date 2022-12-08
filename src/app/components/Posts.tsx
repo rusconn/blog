@@ -1,17 +1,17 @@
 import { gql } from "graphql-request";
 
-import { PostList, POST_LIST_FRAGMENT } from "@/app/common/components";
-import type { HomePostsFieldsFragment } from "@/generated/graphql";
+import { PostList, POST_LIST_ITEM_FRAGMENT } from "@/app/common/components";
+import type { HomePostFragment } from "@/generated/graphql";
 
-export const HOME_POSTS_FRAGMENT = gql`
-  fragment HomePostsFields on Post {
-    ...PostListFields
+export const HOME_POST_FRAGMENT = gql`
+  fragment HomePost on Post {
+    ...PostListItem
   }
-  ${POST_LIST_FRAGMENT}
+  ${POST_LIST_ITEM_FRAGMENT}
 `;
 
 type Props = {
-  fragments: HomePostsFieldsFragment[];
+  fragments: HomePostFragment[];
 };
 
 export const Posts = ({ fragments }: Props) => (
