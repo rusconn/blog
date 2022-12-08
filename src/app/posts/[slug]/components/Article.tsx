@@ -2,12 +2,7 @@ import { gql } from "graphql-request";
 
 import { Date, TagList, TAG_LIST_FRAGMENT } from "@/app/common/components";
 import type { PostsArticleFieldsFragment } from "@/generated/graphql";
-import {
-  ArticleBody,
-  ARTICLE_BODY_FRAGMENT,
-  renderMarkdown,
-  Props as ArticleBodyProps,
-} from "./ArticleBody";
+import { ArticleBody, ARTICLE_BODY_FRAGMENT, Props as ArticleBodyProps } from "./ArticleBody";
 
 export const POSTS_ARTICLE_FRAGMENT = gql`
   fragment PostsArticleFields on Post {
@@ -22,8 +17,6 @@ export const POSTS_ARTICLE_FRAGMENT = gql`
   ${ARTICLE_BODY_FRAGMENT}
   ${TAG_LIST_FRAGMENT}
 `;
-
-export { renderMarkdown };
 
 type Props = ArticleBodyProps & {
   fragment: Omit<PostsArticleFieldsFragment, keyof ArticleBodyProps>;
