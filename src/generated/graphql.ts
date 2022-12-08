@@ -4274,7 +4274,6 @@ export type PostArticleBodyFragment = { body: string };
 
 export type PostHeadQueryVariables = Exact<{
   where: PostWhereUniqueInput;
-  stage: Stage;
 }>;
 
 
@@ -4282,7 +4281,6 @@ export type PostHeadQuery = { post?: { title: string } | null | undefined };
 
 export type PostQueryVariables = Exact<{
   where: PostWhereUniqueInput;
-  stage: Stage;
 }>;
 
 
@@ -4297,7 +4295,6 @@ export type TagPostsFragment = { name: string, posts: Array<{ id: string, slug: 
 
 export type TagHeadQueryVariables = Exact<{
   where: TagWhereUniqueInput;
-  stage: Stage;
 }>;
 
 
@@ -4305,7 +4302,6 @@ export type TagHeadQuery = { tag?: { name: string } | null | undefined };
 
 export type TagQueryVariables = Exact<{
   where: TagWhereUniqueInput;
-  stage: Stage;
 }>;
 
 
