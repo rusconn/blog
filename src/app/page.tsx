@@ -2,16 +2,14 @@ import { gql } from "graphql-request";
 
 import { Layout } from "@/app/common/layout";
 import { HomeQuery, HomeQueryVariables, PostOrderByInput } from "@/generated/graphql";
-import { client, previewClient } from "@/libs/api";
-import { isPreview } from "@/libs/preview";
+import { getClient } from "@/libs/api";
 import { Biography, Posts, Tags, HOME_TAG_FRAGMENT, HOME_POST_FRAGMENT } from "./components";
 
 const Home = async () => {
-  const preview = isPreview();
-  const { tags, posts } = await getData(preview);
+  const { tags, posts } = await getData();
 
   return (
-    <Layout home preview={preview}>
+    <Layout home>
       <div className="headingMd my-4">
         <Biography />
       </div>
@@ -25,10 +23,8 @@ const Home = async () => {
   );
 };
 
-const getData = async (preview: boolean) => {
-  const clientToUse = preview ? previewClient : client;
-
-  return clientToUse.request<HomeQuery, HomeQueryVariables>(
+const getData = async () =>
+  getClient().request<HomeQuery, HomeQueryVariables>(
     gql`
       query Home($orderBy: PostOrderByInput!) {
         tags {
@@ -43,7 +39,6 @@ const getData = async (preview: boolean) => {
     `,
     { orderBy: PostOrderByInput.DateDesc }
   );
-};
 
 export const revalidate = 60;
 

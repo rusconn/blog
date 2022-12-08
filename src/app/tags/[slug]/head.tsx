@@ -1,8 +1,7 @@
 import { gql } from "graphql-request";
 
 import { TagHeadQuery, TagHeadQueryVariables } from "@/generated/graphql";
-import { previewClient, client } from "@/libs/api";
-import { isPreview } from "@/libs/preview";
+import { getClient } from "@/libs/api";
 
 type Params = {
   params: {
@@ -11,8 +10,7 @@ type Params = {
 };
 
 const Head = async ({ params }: Params) => {
-  const preview = isPreview();
-  const { tag } = await getData(preview, params.slug);
+  const { tag } = await getData(params.slug);
 
   return (
     <>
@@ -21,10 +19,8 @@ const Head = async ({ params }: Params) => {
   );
 };
 
-const getData = async (preview: boolean, slug: string) => {
-  const clientToUse = preview ? previewClient : client;
-
-  return clientToUse.request<TagHeadQuery, TagHeadQueryVariables>(
+const getData = async (slug: string) =>
+  getClient().request<TagHeadQuery, TagHeadQueryVariables>(
     gql`
       query TagHead($where: TagWhereUniqueInput!) {
         tag(where: $where) {
@@ -34,6 +30,5 @@ const getData = async (preview: boolean, slug: string) => {
     `,
     { where: { slug } }
   );
-};
 
 export default Head;

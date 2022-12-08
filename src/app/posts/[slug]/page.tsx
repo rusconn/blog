@@ -7,8 +7,7 @@ import {
   PostPathsQuery,
   PostPathsQueryVariables,
 } from "@/generated/graphql";
-import { client, previewClient } from "@/libs/api";
-import { isPreview } from "@/libs/preview";
+import { client, getClient } from "@/libs/api";
 import { Article, POST_ARTICLE_FRAGMENT } from "./components";
 
 type Params = {
@@ -18,8 +17,7 @@ type Params = {
 };
 
 const Post = async ({ params }: Params) => {
-  const preview = isPreview();
-  const { post } = await getData(preview, params.slug);
+  const { post } = await getData(params.slug);
 
   if (!post) {
     notFound();
@@ -28,10 +26,8 @@ const Post = async ({ params }: Params) => {
   return <Article fragment={post} />;
 };
 
-const getData = async (preview: boolean, slug: string) => {
-  const clientToUse = preview ? previewClient : client;
-
-  return clientToUse.request<PostQuery, PostQueryVariables>(
+const getData = async (slug: string) =>
+  getClient().request<PostQuery, PostQueryVariables>(
     gql`
       query Post($where: PostWhereUniqueInput!) {
         post(where: $where) {
@@ -42,7 +38,6 @@ const getData = async (preview: boolean, slug: string) => {
     `,
     { where: { slug } }
   );
-};
 
 export const generateStaticParams = async () => {
   const data = await client.request<PostPathsQuery, PostPathsQueryVariables>(gql`
