@@ -2,7 +2,6 @@ import { gql } from "graphql-request";
 import { notFound } from "next/navigation";
 
 import {
-  Stage,
   PostQuery,
   PostQueryVariables,
   PostPathsQuery,
@@ -30,19 +29,18 @@ const Post = async ({ params }: Params) => {
 };
 
 const getData = async (preview: boolean, slug: string) => {
-  const stage = preview ? Stage.Draft : Stage.Published;
   const clientToUse = preview ? previewClient : client;
 
   return clientToUse.request<PostQuery, PostQueryVariables>(
     gql`
-      query Post($where: PostWhereUniqueInput!, $stage: Stage!) {
-        post(where: $where, stage: $stage) {
+      query Post($where: PostWhereUniqueInput!) {
+        post(where: $where) {
           ...PostArticle
         }
       }
       ${POST_ARTICLE_FRAGMENT}
     `,
-    { where: { slug }, stage }
+    { where: { slug } }
   );
 };
 

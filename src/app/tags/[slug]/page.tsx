@@ -2,7 +2,6 @@ import { gql } from "graphql-request";
 import { notFound } from "next/navigation";
 
 import {
-  Stage,
   TagQuery,
   TagQueryVariables,
   TagPathsQuery,
@@ -34,19 +33,18 @@ const Tag = async ({ params }: Params) => {
 };
 
 const getData = async (preview: boolean, slug: string) => {
-  const stage = preview ? Stage.Draft : Stage.Published;
   const clientToUse = preview ? previewClient : client;
 
   return clientToUse.request<TagQuery, TagQueryVariables>(
     gql`
-      query Tag($where: TagWhereUniqueInput!, $stage: Stage!) {
-        tag(where: $where, stage: $stage) {
+      query Tag($where: TagWhereUniqueInput!) {
+        tag(where: $where) {
           ...TagPosts
         }
       }
       ${TAG_POSTS_FRAGMENT}
     `,
-    { where: { slug }, stage }
+    { where: { slug } }
   );
 };
 

@@ -1,6 +1,6 @@
 import { gql } from "graphql-request";
 
-import { PostHeadQuery, PostHeadQueryVariables, Stage } from "@/generated/graphql";
+import { PostHeadQuery, PostHeadQueryVariables } from "@/generated/graphql";
 import { previewClient, client } from "@/libs/api";
 import { isPreview } from "@/libs/preview";
 
@@ -22,18 +22,17 @@ const Head = async ({ params }: Params) => {
 };
 
 const getData = async (preview: boolean, slug: string) => {
-  const stage = preview ? Stage.Draft : Stage.Published;
   const clientToUse = preview ? previewClient : client;
 
   return clientToUse.request<PostHeadQuery, PostHeadQueryVariables>(
     gql`
-      query PostHead($where: PostWhereUniqueInput!, $stage: Stage!) {
-        post(where: $where, stage: $stage) {
+      query PostHead($where: PostWhereUniqueInput!) {
+        post(where: $where) {
           title
         }
       }
     `,
-    { where: { slug }, stage }
+    { where: { slug } }
   );
 };
 
