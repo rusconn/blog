@@ -7,8 +7,7 @@ import {
   TagPathsQuery,
   TagPathsQueryVariables,
 } from "@/generated/graphql";
-import { client, previewClient } from "@/libs/api";
-import { isPreview } from "@/libs/preview";
+import { client, getClient } from "@/libs/api";
 import { Posts, TAG_POSTS_FRAGMENT } from "./components";
 
 type Params = {
@@ -18,8 +17,7 @@ type Params = {
 };
 
 const Tag = async ({ params }: Params) => {
-  const preview = isPreview();
-  const { tag } = await getData(preview, params.slug);
+  const { tag } = await getData(params.slug);
 
   if (!tag) {
     notFound();
@@ -32,10 +30,8 @@ const Tag = async ({ params }: Params) => {
   );
 };
 
-const getData = async (preview: boolean, slug: string) => {
-  const clientToUse = preview ? previewClient : client;
-
-  return clientToUse.request<TagQuery, TagQueryVariables>(
+const getData = async (slug: string) =>
+  getClient().request<TagQuery, TagQueryVariables>(
     gql`
       query Tag($where: TagWhereUniqueInput!) {
         tag(where: $where) {
@@ -46,7 +42,6 @@ const getData = async (preview: boolean, slug: string) => {
     `,
     { where: { slug } }
   );
-};
 
 export const generateStaticParams = async () => {
   const data = await client.request<TagPathsQuery, TagPathsQueryVariables>(gql`

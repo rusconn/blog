@@ -1,8 +1,7 @@
 import { gql } from "graphql-request";
 
 import { PostHeadQuery, PostHeadQueryVariables } from "@/generated/graphql";
-import { previewClient, client } from "@/libs/api";
-import { isPreview } from "@/libs/preview";
+import { getClient } from "@/libs/api";
 
 type Params = {
   params: {
@@ -11,8 +10,7 @@ type Params = {
 };
 
 const Head = async ({ params }: Params) => {
-  const preview = isPreview();
-  const { post } = await getData(preview, params.slug);
+  const { post } = await getData(params.slug);
 
   return (
     <>
@@ -21,10 +19,8 @@ const Head = async ({ params }: Params) => {
   );
 };
 
-const getData = async (preview: boolean, slug: string) => {
-  const clientToUse = preview ? previewClient : client;
-
-  return clientToUse.request<PostHeadQuery, PostHeadQueryVariables>(
+const getData = async (slug: string) =>
+  getClient().request<PostHeadQuery, PostHeadQueryVariables>(
     gql`
       query PostHead($where: PostWhereUniqueInput!) {
         post(where: $where) {
@@ -34,6 +30,5 @@ const getData = async (preview: boolean, slug: string) => {
     `,
     { where: { slug } }
   );
-};
 
 export default Head;
