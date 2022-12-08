@@ -4315,11 +4315,3 @@ export type TagPathsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type TagPathsQuery = { tags: Array<{ slug: string, posts: Array<{ id: string }> }> };
-
-export type PostExistenceQueryVariables = Exact<{
-  where: PostWhereUniqueInput;
-  stage: Stage;
-}>;
-
-
-export type PostExistenceQuery = { post?: { slug: string } | null | undefined };
