@@ -10,7 +10,7 @@ import {
 } from "@/generated/graphql";
 import { client, previewClient } from "@/libs/api";
 import { isPreview } from "@/libs/preview";
-import { Article, renderMarkdown, POSTS_ARTICLE_FRAGMENT } from "./components";
+import { Article, POSTS_ARTICLE_FRAGMENT } from "./components";
 
 type Params = {
   params: {
@@ -48,11 +48,7 @@ const getData = async (preview: boolean, slug: string) => {
     notFound();
   }
 
-  const { body } = await renderMarkdown(post);
-
-  return {
-    post: { ...post, body },
-  };
+  return { post };
 };
 
 export const generateStaticParams = async () => {
