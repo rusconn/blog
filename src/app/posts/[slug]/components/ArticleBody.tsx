@@ -18,11 +18,13 @@ const renderMarkdown = async (markdown: string) => {
     body: JSON.stringify({ text: markdown }),
   });
 
+  const text = await response.text();
+
   if (!response.ok) {
-    throw new Error(`${response.status} ${response.statusText}`);
+    throw new Error(text);
   }
 
-  return response.text();
+  return text;
 };
 
 export type Props = ArticleBodyFieldsFragment;
