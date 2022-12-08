@@ -20,7 +20,11 @@ type Params = {
 
 const Tag = async ({ params }: Params) => {
   const preview = isPreview();
-  const tag = await getData(preview, params.slug);
+  const { tag } = await getData(preview, params.slug);
+
+  if (!tag) {
+    notFound();
+  }
 
   return (
     <div className="headingMd">
@@ -33,7 +37,7 @@ const getData = async (preview: boolean, slug: string) => {
   const stage = preview ? Stage.Draft : Stage.Published;
   const clientToUse = preview ? previewClient : client;
 
-  const data = await clientToUse.request<TagQuery, TagQueryVariables>(
+  return clientToUse.request<TagQuery, TagQueryVariables>(
     gql`
       query Tag($where: TagWhereUniqueInput!, $stage: Stage!) {
         tag(where: $where, stage: $stage) {
@@ -44,14 +48,6 @@ const getData = async (preview: boolean, slug: string) => {
     `,
     { where: { slug }, stage }
   );
-
-  const { tag } = data;
-
-  if (!tag) {
-    notFound();
-  }
-
-  return tag;
 };
 
 export const generateStaticParams = async () => {
