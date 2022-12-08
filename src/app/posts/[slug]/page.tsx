@@ -21,6 +21,11 @@ type Params = {
 const Post = async ({ params }: Params) => {
   const preview = isPreview();
   const { post } = await getData(preview, params.slug);
+
+  if (!post) {
+    notFound();
+  }
+
   const { body, ...rest } = post;
 
   return <Article fragment={rest} body={body} />;
@@ -30,7 +35,7 @@ const getData = async (preview: boolean, slug: string) => {
   const stage = preview ? Stage.Draft : Stage.Published;
   const clientToUse = preview ? previewClient : client;
 
-  const data = await clientToUse.request<PostQuery, PostQueryVariables>(
+  return clientToUse.request<PostQuery, PostQueryVariables>(
     gql`
       query Post($slug: String!, $stage: Stage!) {
         post(where: { slug: $slug }, stage: $stage) {
@@ -41,14 +46,6 @@ const getData = async (preview: boolean, slug: string) => {
     `,
     { slug, stage }
   );
-
-  const { post } = data;
-
-  if (!post) {
-    notFound();
-  }
-
-  return { post };
 };
 
 export const generateStaticParams = async () => {
