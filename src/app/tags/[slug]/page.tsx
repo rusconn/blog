@@ -7,13 +7,13 @@ import {
   TagPathsQuery,
   TagPathsQueryVariables,
 } from "@/generated/graphql";
-import { client, getClient } from "@/libs/api";
+import { client, buildClient } from "@/libs/api";
 import { Posts, TAG_POSTS_FRAGMENT } from "./components";
 
 export const revalidate = 60;
 
 export const generateStaticParams = async () => {
-  const data = await client.request<TagPathsQuery, TagPathsQueryVariables>(gql`
+  const data = await buildClient.request<TagPathsQuery, TagPathsQueryVariables>(gql`
     query TagPaths {
       tags {
         slug
@@ -46,7 +46,7 @@ export default async function Tag({ params }: Params) {
 }
 
 const getData = async (slug: string) =>
-  getClient().request<TagQuery, TagQueryVariables>(
+  client.request<TagQuery, TagQueryVariables>(
     gql`
       query Tag($where: TagWhereUniqueInput!) {
         tag(where: $where) {

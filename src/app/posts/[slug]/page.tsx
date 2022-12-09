@@ -7,13 +7,13 @@ import {
   PostPathsQuery,
   PostPathsQueryVariables,
 } from "@/generated/graphql";
-import { client, getClient } from "@/libs/api";
+import { client, buildClient } from "@/libs/api";
 import { Article, POST_ARTICLE_FRAGMENT } from "./components";
 
 export const revalidate = 60;
 
 export const generateStaticParams = async () => {
-  const data = await client.request<PostPathsQuery, PostPathsQueryVariables>(gql`
+  const data = await buildClient.request<PostPathsQuery, PostPathsQueryVariables>(gql`
     query PostPaths {
       posts {
         slug
@@ -39,7 +39,7 @@ export default async function Post({ params }: Params) {
 }
 
 const getData = async (slug: string) =>
-  getClient().request<PostQuery, PostQueryVariables>(
+  client.request<PostQuery, PostQueryVariables>(
     gql`
       query Post($where: PostWhereUniqueInput!) {
         post(where: $where) {

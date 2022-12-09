@@ -1,7 +1,7 @@
 import { gql } from "graphql-request";
 
 import { PostHeadQuery, PostHeadQueryVariables } from "@/generated/graphql";
-import { getClient } from "@/libs/api";
+import { client } from "@/libs/api";
 
 type Params = {
   params: {
@@ -16,7 +16,7 @@ export default async function Head({ params }: Params) {
 }
 
 const getData = async (slug: string) =>
-  getClient().request<PostHeadQuery, PostHeadQueryVariables>(
+  client.request<PostHeadQuery, PostHeadQueryVariables>(
     gql`
       query PostHead($where: PostWhereUniqueInput!) {
         post(where: $where) {

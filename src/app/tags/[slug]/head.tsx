@@ -1,7 +1,7 @@
 import { gql } from "graphql-request";
 
 import { TagHeadQuery, TagHeadQueryVariables } from "@/generated/graphql";
-import { getClient } from "@/libs/api";
+import { client } from "@/libs/api";
 
 type Params = {
   params: {
@@ -16,7 +16,7 @@ export default async function Head({ params }: Params) {
 }
 
 const getData = async (slug: string) =>
-  getClient().request<TagHeadQuery, TagHeadQueryVariables>(
+  client.request<TagHeadQuery, TagHeadQueryVariables>(
     gql`
       query TagHead($where: TagWhereUniqueInput!) {
         tag(where: $where) {

@@ -2,7 +2,7 @@ import { gql } from "graphql-request";
 
 import { Layout } from "@/app/common/layout";
 import { HomeQuery, HomeQueryVariables, PostOrderByInput } from "@/generated/graphql";
-import { getClient } from "@/libs/api";
+import { client } from "@/libs/api";
 import { Biography, Posts, Tags, HOME_TAG_FRAGMENT, HOME_POST_FRAGMENT } from "./components";
 
 export const revalidate = 60;
@@ -26,7 +26,7 @@ export default async function Home() {
 }
 
 const getData = async () =>
-  getClient().request<HomeQuery, HomeQueryVariables>(
+  client.request<HomeQuery, HomeQueryVariables>(
     gql`
       query Home($orderBy: PostOrderByInput!) {
         tags {
