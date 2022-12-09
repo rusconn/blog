@@ -1,4 +1,4 @@
-FROM blog-dev:1.0.0
+FROM blog-dev:2.0.0
 
 RUN apt-get update \
   && apt-get install --no-install-recommends -y git ca-certificates fish \
