@@ -12,6 +12,18 @@ import { Article, POST_ARTICLE_FRAGMENT } from "./components";
 
 export const revalidate = 60;
 
+export const generateStaticParams = async () => {
+  const data = await client.request<PostPathsQuery, PostPathsQueryVariables>(gql`
+    query PostPaths {
+      posts {
+        slug
+      }
+    }
+  `);
+
+  return data.posts.map(({ slug }) => ({ slug }));
+};
+
 type Params = {
   params: {
     slug: string;
@@ -40,15 +52,3 @@ const getData = async (slug: string) =>
     `,
     { where: { slug } }
   );
-
-export const generateStaticParams = async () => {
-  const data = await client.request<PostPathsQuery, PostPathsQueryVariables>(gql`
-    query PostPaths {
-      posts {
-        slug
-      }
-    }
-  `);
-
-  return data.posts.map(({ slug }) => ({ slug }));
-};

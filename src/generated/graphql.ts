@@ -4274,17 +4274,17 @@ export type PostHeadQueryVariables = Exact<{
 
 export type PostHeadQuery = { post?: { title: string } | null };
 
+export type PostPathsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type PostPathsQuery = { posts: Array<{ slug: string }> };
+
 export type PostQueryVariables = Exact<{
   where: PostWhereUniqueInput;
 }>;
 
 
 export type PostQuery = { post?: { title: string, date: string, body: string, tags: Array<{ id: string, slug: string, name: string }> } | null };
-
-export type PostPathsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type PostPathsQuery = { posts: Array<{ slug: string }> };
 
 export type TagPostsFragment = { name: string, posts: Array<{ id: string, slug: string, date: string, title: string }> };
 
@@ -4295,14 +4295,14 @@ export type TagHeadQueryVariables = Exact<{
 
 export type TagHeadQuery = { tag?: { name: string } | null };
 
+export type TagPathsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type TagPathsQuery = { tags: Array<{ slug: string, posts: Array<{ id: string }> }> };
+
 export type TagQueryVariables = Exact<{
   where: TagWhereUniqueInput;
 }>;
 
 
 export type TagQuery = { tag?: { name: string, posts: Array<{ id: string, slug: string, date: string, title: string }> } | null };
-
-export type TagPathsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type TagPathsQuery = { tags: Array<{ slug: string, posts: Array<{ id: string }> }> };

@@ -12,6 +12,21 @@ import { Posts, TAG_POSTS_FRAGMENT } from "./components";
 
 export const revalidate = 60;
 
+export const generateStaticParams = async () => {
+  const data = await client.request<TagPathsQuery, TagPathsQueryVariables>(gql`
+    query TagPaths {
+      tags {
+        slug
+        posts {
+          id
+        }
+      }
+    }
+  `);
+
+  return data.tags.filter(({ posts }) => posts.length).map(({ slug }) => ({ slug }));
+};
+
 type Params = {
   params: {
     slug: string;
@@ -44,18 +59,3 @@ const getData = async (slug: string) =>
     `,
     { where: { slug } }
   );
-
-export const generateStaticParams = async () => {
-  const data = await client.request<TagPathsQuery, TagPathsQueryVariables>(gql`
-    query TagPaths {
-      tags {
-        slug
-        posts {
-          id
-        }
-      }
-    }
-  `);
-
-  return data.tags.filter(({ posts }) => posts.length).map(({ slug }) => ({ slug }));
-};
