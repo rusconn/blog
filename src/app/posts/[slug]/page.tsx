@@ -10,6 +10,8 @@ import {
 import { client, getClient } from "@/libs/api";
 import { Article, POST_ARTICLE_FRAGMENT } from "./components";
 
+export const revalidate = 60;
+
 type Params = {
   params: {
     slug: string;
@@ -50,5 +52,3 @@ export const generateStaticParams = async () => {
 
   return data.posts.map(({ slug }) => ({ slug }));
 };
-
-export const revalidate = 60;

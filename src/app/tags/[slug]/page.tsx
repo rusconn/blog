@@ -10,6 +10,8 @@ import {
 import { client, getClient } from "@/libs/api";
 import { Posts, TAG_POSTS_FRAGMENT } from "./components";
 
+export const revalidate = 60;
+
 type Params = {
   params: {
     slug: string;
@@ -57,5 +59,3 @@ export const generateStaticParams = async () => {
 
   return data.tags.filter(({ posts }) => posts.length).map(({ slug }) => ({ slug }));
 };
-
-export const revalidate = 60;
