@@ -28,9 +28,7 @@ export const generateStaticParams = async () => {
 };
 
 type Params = {
-  params: {
-    slug: string;
-  };
+  params: Awaited<ReturnType<typeof generateStaticParams>>[number];
 };
 
 export default async function Tag({ params }: Params) {
