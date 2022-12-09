@@ -16,7 +16,7 @@ type Params = {
   };
 };
 
-const Post = async ({ params }: Params) => {
+export default async function Post({ params }: Params) {
   const { post } = await getData(params.slug);
 
   if (!post) {
@@ -24,7 +24,7 @@ const Post = async ({ params }: Params) => {
   }
 
   return <Article fragment={post} />;
-};
+}
 
 const getData = async (slug: string) =>
   getClient().request<PostQuery, PostQueryVariables>(
@@ -52,5 +52,3 @@ export const generateStaticParams = async () => {
 };
 
 export const revalidate = 60;
-
-export default Post;

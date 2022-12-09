@@ -5,7 +5,7 @@ import { staticPath } from "@/libs/$path";
 
 import "@/styles/globals.css";
 
-function RootLayout({ children }: { children: ReactNode }) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="ja">
       <head>
@@ -21,5 +21,3 @@ function RootLayout({ children }: { children: ReactNode }) {
     </html>
   );
 }
-
-export default RootLayout;
