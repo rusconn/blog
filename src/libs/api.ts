@@ -1,19 +1,24 @@
 import { GraphQLClient } from "graphql-request";
+import { RequestInit } from "graphql-request/dist/types.dom";
 
 import { parseEnvs } from "@/libs/env";
 import { isPreview } from "./preview";
 
 const { apiUrl, draftToken, publishedToken } = parseEnvs(process.env);
 
-const createClient = (token: string) =>
-  new GraphQLClient(apiUrl, {
+export const client = new GraphQLClient(apiUrl, {
+  requestMiddleware: (request: RequestInit) => ({
+    ...request,
     headers: {
-      authorization: `Bearer ${token}`,
+      ...request.headers,
+      authorization: `Bearer ${isPreview() ? draftToken : publishedToken}`,
     },
-  });
+  }),
+});
 
-// Node.js のモジュールキャッシュが効いて再利用される？
-export const client = createClient(publishedToken);
-export const previewClient = createClient(draftToken);
-
-export const getClient = () => (isPreview() ? previewClient : client);
+// ビルド時はプレビュー関連 API を使えないようなので用意した
+export const buildClient = new GraphQLClient(apiUrl, {
+  headers: {
+    authorization: `Bearer ${publishedToken}`,
+  },
+});
