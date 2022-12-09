@@ -14,9 +14,11 @@ type Props = {
   fragments: HomePostFragment[];
 };
 
-export const Posts = ({ fragments }: Props) => (
-  <section>
-    <h2 className="headingLg">Posts</h2>
-    <PostList fragments={fragments} />
-  </section>
-);
+export function Posts({ fragments }: Props) {
+  return (
+    <section>
+      <h2 className="headingLg">Posts</h2>
+      <PostList fragments={fragments} />
+    </section>
+  );
+}

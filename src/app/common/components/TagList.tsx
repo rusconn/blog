@@ -15,12 +15,14 @@ type Props = {
   fragments: TagListItemFragment[];
 };
 
-export const TagList = ({ fragments }: Props) => (
-  <ul className="flex flex-wrap pl-0">
-    {fragments.map(({ id, ...tagLink }) => (
-      <li className="mr-2 mb-2 list-none text-sm" key={id}>
-        <TagLink fragment={tagLink} />
-      </li>
-    ))}
-  </ul>
-);
+export function TagList({ fragments }: Props) {
+  return (
+    <ul className="flex flex-wrap pl-0">
+      {fragments.map(({ id, ...tagLink }) => (
+        <li className="mr-2 mb-2 list-none text-sm" key={id}>
+          <TagLink fragment={tagLink} />
+        </li>
+      ))}
+    </ul>
+  );
+}

@@ -21,17 +21,19 @@ type Props = {
   fragment: PostArticleFragment;
 };
 
-export const Article = ({ fragment: { title, date, tags, ...articleBody } }: Props) => (
-  <article>
-    <h1 className="headingXl">{title}</h1>
-    <div className="lightText">
-      <Date dateString={date} />
-    </div>
-    <div className="mt-6">
-      <TagList fragments={tags} />
-    </div>
-    <div className="mt-10">
-      <ArticleBody fragment={articleBody} />
-    </div>
-  </article>
-);
+export function Article({ fragment: { title, date, tags, ...articleBody } }: Props) {
+  return (
+    <article>
+      <h1 className="headingXl">{title}</h1>
+      <div className="lightText">
+        <Date dateString={date} />
+      </div>
+      <div className="mt-6">
+        <TagList fragments={tags} />
+      </div>
+      <div className="mt-10">
+        <ArticleBody fragment={articleBody} />
+      </div>
+    </article>
+  );
+}

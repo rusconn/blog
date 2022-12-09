@@ -4,7 +4,7 @@ type Props = {
   dateString: string;
 };
 
-export const Date = ({ dateString }: Props) => {
+export function Date({ dateString }: Props) {
   const date = parseISO(dateString);
 
   return (
@@ -12,4 +12,4 @@ export const Date = ({ dateString }: Props) => {
       {format(date, "yyyy-MM-dd")}
     </time>
   );
-};
+}

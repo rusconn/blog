@@ -31,7 +31,7 @@ type Props = {
   fragment: PostArticleBodyFragment;
 };
 
-export const ArticleBody = ({ fragment: { body } }: Props) => {
+export function ArticleBody({ fragment: { body } }: Props) {
   const renderedBody = use(renderMarkdown(body));
 
   return (
@@ -42,4 +42,4 @@ export const ArticleBody = ({ fragment: { body } }: Props) => {
       dangerouslySetInnerHTML={{ __html: renderedBody }}
     />
   );
-};
+}

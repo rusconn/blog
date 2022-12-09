@@ -17,9 +17,11 @@ type Props = {
   fragment: TagPostsFragment;
 };
 
-export const Posts = ({ fragment: { name, posts } }: Props) => (
-  <section>
-    <h2 className="headingLg">{name} Posts</h2>
-    <PostList fragments={posts} />
-  </section>
-);
+export function Posts({ fragment: { name, posts } }: Props) {
+  return (
+    <section>
+      <h2 className="headingLg">{name} Posts</h2>
+      <PostList fragments={posts} />
+    </section>
+  );
+}

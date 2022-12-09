@@ -14,10 +14,10 @@ type Props = {
   fragment: TagLinkFragment;
 };
 
-export const TagLink = ({ fragment: { slug, name } }: Props) => (
-  // TODO: Next.js が対応したら pathpida のコードへ変更する
-  // https://nextjs.org/docs/messages/app-dir-dynamic-href
-  <Link href={`/tags/${slug}`} className="tagLink">
-    {name}
-  </Link>
-);
+export function TagLink({ fragment: { slug, name } }: Props) {
+  return (
+    <Link href={`/tags/${slug}`} className="tagLink">
+      {name}
+    </Link>
+  );
+}
