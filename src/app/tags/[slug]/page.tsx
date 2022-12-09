@@ -16,7 +16,7 @@ type Params = {
   };
 };
 
-const Tag = async ({ params }: Params) => {
+export default async function Tag({ params }: Params) {
   const { tag } = await getData(params.slug);
 
   if (!tag) {
@@ -28,7 +28,7 @@ const Tag = async ({ params }: Params) => {
       <Posts fragment={tag} />
     </div>
   );
-};
+}
 
 const getData = async (slug: string) =>
   getClient().request<TagQuery, TagQueryVariables>(
@@ -59,5 +59,3 @@ export const generateStaticParams = async () => {
 };
 
 export const revalidate = 60;
-
-export default Tag;

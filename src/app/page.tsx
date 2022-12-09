@@ -5,7 +5,7 @@ import { HomeQuery, HomeQueryVariables, PostOrderByInput } from "@/generated/gra
 import { getClient } from "@/libs/api";
 import { Biography, Posts, Tags, HOME_TAG_FRAGMENT, HOME_POST_FRAGMENT } from "./components";
 
-const Home = async () => {
+export default async function Home() {
   const { tags, posts } = await getData();
 
   return (
@@ -21,7 +21,7 @@ const Home = async () => {
       </div>
     </Layout>
   );
-};
+}
 
 const getData = async () =>
   getClient().request<HomeQuery, HomeQueryVariables>(
@@ -41,5 +41,3 @@ const getData = async () =>
   );
 
 export const revalidate = 60;
-
-export default Home;

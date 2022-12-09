@@ -9,11 +9,11 @@ type Params = {
   };
 };
 
-const Head = async ({ params }: Params) => {
+export default async function Head({ params }: Params) {
   const { post } = await getData(params.slug);
 
   return <title>{post?.title}</title>;
-};
+}
 
 const getData = async (slug: string) =>
   getClient().request<PostHeadQuery, PostHeadQueryVariables>(
@@ -26,5 +26,3 @@ const getData = async (slug: string) =>
     `,
     { where: { slug } }
   );
-
-export default Head;
