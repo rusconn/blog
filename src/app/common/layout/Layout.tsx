@@ -9,7 +9,7 @@ type Props = {
   home?: boolean;
 };
 
-export const Layout = ({ children, home }: Props) => {
+export function Layout({ children, home }: Props) {
   const preview = isPreview();
 
   return (
@@ -31,4 +31,4 @@ export const Layout = ({ children, home }: Props) => {
       </div>
     </>
   );
-};
+}

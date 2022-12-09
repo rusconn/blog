@@ -4,4 +4,6 @@ type Props = {
   Icon: IconType;
 };
 
-export const SnsIcon = ({ Icon }: Props) => <Icon size="1.5rem" />;
+export function SnsIcon({ Icon }: Props) {
+  return <Icon size="1.5rem" />;
+}

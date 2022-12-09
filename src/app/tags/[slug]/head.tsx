@@ -12,11 +12,7 @@ type Params = {
 const Head = async ({ params }: Params) => {
   const { tag } = await getData(params.slug);
 
-  return (
-    <>
-      <title>{tag?.name}</title>
-    </>
-  );
+  return <title>{tag?.name}</title>;
 };
 
 const getData = async (slug: string) =>

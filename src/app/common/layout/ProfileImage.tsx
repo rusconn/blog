@@ -8,12 +8,14 @@ type Props = {
   width: number;
 };
 
-export const ProfileImage = ({ height, width }: Props) => (
-  <Image
-    priority
-    src={staticPath.images.profile_png}
-    height={height}
-    width={width}
-    alt={authorName}
-  />
-);
+export function ProfileImage({ height, width }: Props) {
+  return (
+    <Image
+      priority
+      src={staticPath.images.profile_png}
+      height={height}
+      width={width}
+      alt={authorName}
+    />
+  );
+}

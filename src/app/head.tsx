@@ -1,9 +1,7 @@
 import { siteTitle } from "@/constants";
 
-const Head = () => (
-  <>
-    <title>{siteTitle}</title>
-  </>
-);
+function Head() {
+  return <title>{siteTitle}</title>;
+}
 
 export default Head;

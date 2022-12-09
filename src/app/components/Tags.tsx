@@ -14,8 +14,10 @@ type Props = {
   fragments: HomeTagFragment[];
 };
 
-export const Tags = ({ fragments }: Props) => (
-  <section>
-    <TagList fragments={fragments} />
-  </section>
-);
+export function Tags({ fragments }: Props) {
+  return (
+    <section>
+      <TagList fragments={fragments} />
+    </section>
+  );
+}
