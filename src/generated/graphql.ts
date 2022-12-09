@@ -10,18 +10,13 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  /** A date string, such as 2007-12-03 (YYYY-MM-DD), compliant with ISO 8601 standard for representation of dates using the Gregorian calendar. */
   Date: string;
-  /** A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the date-timeformat outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representationof dates and times using the Gregorian calendar. */
   DateTime: string;
   Hex: any;
-  /** Raw JSON value */
   Json: any;
-  /** The Long scalar type represents non-fractional signed whole numeric values. Long can represent values between -(2^63) and 2^63 - 1. */
   Long: any;
   RGBAHue: any;
   RGBATransparency: any;
-  /** Slate-compatible RichText AST */
   RichTextAST: any;
 };
 
@@ -4277,14 +4272,14 @@ export type PostHeadQueryVariables = Exact<{
 }>;
 
 
-export type PostHeadQuery = { post?: { title: string } | null | undefined };
+export type PostHeadQuery = { post?: { title: string } | null };
 
 export type PostQueryVariables = Exact<{
   where: PostWhereUniqueInput;
 }>;
 
 
-export type PostQuery = { post?: { title: string, date: string, body: string, tags: Array<{ id: string, slug: string, name: string }> } | null | undefined };
+export type PostQuery = { post?: { title: string, date: string, body: string, tags: Array<{ id: string, slug: string, name: string }> } | null };
 
 export type PostPathsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -4298,14 +4293,14 @@ export type TagHeadQueryVariables = Exact<{
 }>;
 
 
-export type TagHeadQuery = { tag?: { name: string } | null | undefined };
+export type TagHeadQuery = { tag?: { name: string } | null };
 
 export type TagQueryVariables = Exact<{
   where: TagWhereUniqueInput;
 }>;
 
 
-export type TagQuery = { tag?: { name: string, posts: Array<{ id: string, slug: string, date: string, title: string }> } | null | undefined };
+export type TagQuery = { tag?: { name: string, posts: Array<{ id: string, slug: string, date: string, title: string }> } | null };
 
 export type TagPathsQueryVariables = Exact<{ [key: string]: never; }>;
 
