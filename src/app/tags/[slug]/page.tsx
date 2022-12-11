@@ -1,14 +1,15 @@
 import { gql } from "graphql-request";
 import { notFound } from "next/navigation";
 
+import { PostsNav, POSTS_NAV_FRAGMENT } from "@/app/common/components";
 import {
   TagQuery,
   TagQueryVariables,
   TagPathsQuery,
   TagPathsQueryVariables,
+  PostOrderByInput,
 } from "@/generated/graphql";
 import { client, buildClient } from "@/libs/api";
-import { Posts, TAG_POSTS_FRAGMENT } from "./components";
 
 export const revalidate = 60;
 
@@ -38,22 +39,21 @@ export default async function Tag({ params }: Params) {
     notFound();
   }
 
-  return (
-    <div className="headingMd">
-      <Posts fragment={tag} />
-    </div>
-  );
+  return <PostsNav heading={`${tag.name}の記事`} fragments={tag.posts} />;
 }
 
 const getData = async (slug: string) =>
   client.request<TagQuery, TagQueryVariables>(
     gql`
-      query Tag($where: TagWhereUniqueInput!) {
+      query Tag($where: TagWhereUniqueInput!, $orderBy: PostOrderByInput!) {
         tag(where: $where) {
-          ...TagPosts
+          name
+          posts(orderBy: $orderBy) {
+            ...PostsNav
+          }
         }
       }
-      ${TAG_POSTS_FRAGMENT}
+      ${POSTS_NAV_FRAGMENT}
     `,
-    { where: { slug } }
+    { where: { slug }, orderBy: PostOrderByInput.DateDesc }
   );

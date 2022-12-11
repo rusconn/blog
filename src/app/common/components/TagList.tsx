@@ -17,9 +17,9 @@ type Props = {
 
 export function TagList({ fragments }: Props) {
   return (
-    <ul className="flex flex-wrap pl-0">
+    <ul className="m-0 flex list-none flex-wrap gap-1">
       {fragments.map(({ id, ...tagLink }) => (
-        <li className="mr-2 mb-2 list-none text-sm" key={id}>
+        <li className="text-xs font-medium" key={id}>
           <TagLink fragment={tagLink} />
         </li>
       ))}

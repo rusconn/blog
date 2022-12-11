@@ -39,3 +39,4 @@ tsconfig.tsbuildinfo
 # additional ignores
 src/generated/*
 src/libs/$path.ts
+src/app/posts/\[slug\]/components/prism.css

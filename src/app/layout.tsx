@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 
+import { Layout } from "@/app/common/layout";
 import { siteTitle } from "@/constants";
 import { staticPath } from "@/libs/$path";
 
@@ -17,7 +18,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <meta property="og:site_name" content={siteTitle} />
         <meta property="og:type" content="website" />
       </head>
-      <body>{children}</body>
+      <body>
+        <Layout>{children}</Layout>
+      </body>
     </html>
   );
 }

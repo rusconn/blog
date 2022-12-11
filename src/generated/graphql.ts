@@ -4246,22 +4246,29 @@ export enum _SystemDateTimeFieldVariation {
   Localization = 'localization'
 }
 
+export type PostLinkFragment = { slug: string, date: string, title: string };
+
 export type PostListItemFragment = { id: string, slug: string, date: string, title: string };
+
+export type PostsNavFragment = { id: string, slug: string, date: string, title: string };
 
 export type TagLinkFragment = { slug: string, name: string };
 
 export type TagListItemFragment = { id: string, slug: string, name: string };
 
-export type HomePostFragment = { id: string, slug: string, date: string, title: string };
+export type TagsNavFragment = { id: string, slug: string, name: string };
 
-export type HomeTagFragment = { id: string, slug: string, name: string };
+export type FooterQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type FooterQuery = { tags: Array<{ id: string, slug: string, name: string }> };
 
 export type HomeQueryVariables = Exact<{
   orderBy: PostOrderByInput;
 }>;
 
 
-export type HomeQuery = { tags: Array<{ id: string, slug: string, name: string }>, posts: Array<{ id: string, slug: string, date: string, title: string }> };
+export type HomeQuery = { posts: Array<{ id: string, slug: string, date: string, title: string }> };
 
 export type PostArticleFragment = { title: string, date: string, body: string, tags: Array<{ id: string, slug: string, name: string }> };
 
@@ -4286,8 +4293,6 @@ export type PostQueryVariables = Exact<{
 
 export type PostQuery = { post?: { title: string, date: string, body: string, tags: Array<{ id: string, slug: string, name: string }> } | null };
 
-export type TagPostsFragment = { name: string, posts: Array<{ id: string, slug: string, date: string, title: string }> };
-
 export type TagHeadQueryVariables = Exact<{
   where: TagWhereUniqueInput;
 }>;
@@ -4302,6 +4307,7 @@ export type TagPathsQuery = { tags: Array<{ slug: string, posts: Array<{ id: str
 
 export type TagQueryVariables = Exact<{
   where: TagWhereUniqueInput;
+  orderBy: PostOrderByInput;
 }>;
 
 

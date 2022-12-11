@@ -1,9 +1,13 @@
 import { gql } from "graphql-request";
-import { use } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import ReactMarkdown from "react-markdown";
+import rehypeRaw from "rehype-raw";
+import rehypePrism from "@mapbox/rehype-prism";
 
 import type { PostArticleBodyFragment } from "@/generated/graphql";
 
-import "./github-markdown.css";
+import "./prism.css";
 
 export const POST_ARTICLE_BODY_FRAGMENT = gql`
   fragment PostArticleBody on Post {
@@ -11,35 +15,48 @@ export const POST_ARTICLE_BODY_FRAGMENT = gql`
   }
 `;
 
-const renderMarkdown = async (markdown: string) => {
-  const response = await fetch("https://api.github.com/markdown", {
-    method: "POST",
-    headers: { accept: "application/vnd.github.v3+json" },
-    body: JSON.stringify({ text: markdown }),
-  });
-
-  const text = await response.text();
-
-  if (!response.ok) {
-    throw new Error(text);
-  }
-
-  return text;
-};
-
 type Props = {
   fragment: PostArticleBodyFragment;
 };
 
 export function ArticleBody({ fragment: { body } }: Props) {
-  const renderedBody = use(renderMarkdown(body));
-
   return (
-    <div
-      // eslint-disable-next-line tailwindcss/no-custom-classname
-      className="markdown-body [&_h2]:!mt-12 [&_h2]:!mb-4 [&_pre]:!p-[1.2rem]"
-      // eslint-disable-next-line react/no-danger
-      dangerouslySetInnerHTML={{ __html: renderedBody }}
-    />
+    <ReactMarkdown
+      // Markdown に HTML 要素を直書きすることがあるので、エスケープしない
+      rehypePlugins={[rehypeRaw, rehypePrism]}
+      /* eslint-disable react/no-unstable-nested-components */
+      components={{
+        a: ({ children, href }) =>
+          href?.startsWith("/") || href === "" ? (
+            <Link {...{ href }}>{children}</Link>
+          ) : (
+            <a target="_blank" rel="noreferrer" {...{ href }}>
+              {children}
+            </a>
+          ),
+        code: ({ children, inline }) =>
+          inline ? (
+            <code className="rounded-md bg-slate-800 py-1 px-1.5">{children}</code>
+          ) : (
+            <code>{children}</code>
+          ),
+        h1: ({ children }) => <h3 className="text-xl">{children}</h3>,
+        h2: ({ children }) => <h4 className="text-lg">{children}</h4>,
+        h3: "h5",
+        img: ({ src, alt, width: w, height: h }) => {
+          const width = Number(w);
+          const height = Number(h);
+
+          if (!src || !alt || Number.isNaN(width) || Number.isNaN(height)) {
+            throw new Error(`invalid img: ${JSON.stringify({ src, alt, width, height })}`);
+          }
+
+          return <Image {...{ src, alt, width, height }} />;
+        },
+      }}
+      /* eslint-enable react/no-unstable-nested-components */
+    >
+      {body}
+    </ReactMarkdown>
   );
 }

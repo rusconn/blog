@@ -4,11 +4,13 @@ import routes from "@/libs/routes";
 
 export function PreviewInfo() {
   return (
-    <p className="m-0">
-      現在プレビュー表示がONになっています。
-      <Link href={routes.exitPreview} className="underline">
-        プレビュー表示をOFFにする
-      </Link>
-    </p>
+    <div className="bg-yellow-50 p-4 text-center">
+      <p className="m-0 text-slate-900">
+        現在プレビュー表示がONになっています。
+        <Link href={routes.exitPreview} className="text-blue-600">
+          プレビュー表示をOFFにする
+        </Link>
+      </p>
+    </div>
   );
 }

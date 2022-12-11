@@ -3,40 +3,97 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
-    --link-color-rgb: 09, 105, 218;
-  }
-
   html,
   body {
-    @apply bg-github-bg text-github-text dark:bg-github-bg-dark dark:text-github-text-dark;
+    @apply h-full bg-slate-900 leading-relaxed text-gray-50;
+  }
+
+  blockquote,
+  dl,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  hr,
+  figure,
+  p,
+  pre {
+    @apply my-6;
+  }
+
+  h1 {
+    @apply mt-16 text-2xl font-bold;
+  }
+
+  h2 {
+    @apply mt-14 text-xl font-semibold;
+  }
+
+  h3 {
+    @apply mt-12 text-lg font-semibold;
+  }
+
+  h4 {
+    @apply mt-10 font-semibold;
+  }
+
+  h5 {
+    @apply mt-8 font-semibold;
+  }
+
+  h6 {
+    @apply font-semibold;
+  }
+
+  ul,
+  ol {
+    @apply ml-8;
+  }
+
+  ul {
+    @apply list-disc;
+  }
+
+  ul ul {
+    @apply list-circle;
+  }
+
+  ul ul ul {
+    @apply list-square;
+  }
+
+  ol {
+    @apply list-decimal;
+  }
+
+  dt {
+    @apply font-bold;
   }
 
   a {
-    @apply text-github-link dark:text-github-link-dark no-underline hover:underline;
-  }
-}
-
-@layer components {
-  .headingXl {
-    @apply text-3xl font-bold my-4;
+    @apply text-sky-400 hover:underline;
   }
 
-  .headingLg {
-    @apply text-2xl font-bold mb-4;
+  blockquote {
+    @apply relative px-4 text-gray-400 before:absolute before:h-full before:w-1 before:left-0 before:bg-gray-500;
   }
 
-  .headingMd {
-    @apply text-lg;
+  /* 内容は画像一枚とキャプションのみの想定、それ以外を入れる場合はスタイルの見直しが必要 */
+  figure {
+    @apply flex flex-col items-center gap-2;
   }
 
-  .lightText {
-    @apply text-stone-500 dark:text-gray-400;
+  figcaption {
+    @apply text-gray-400;
   }
 
-  .tagLink {
-    @apply inline-block border rounded-lg border-solid border-transparent p-2
-         hover:text-github-tag-text-hover hover:no-underline
-           bg-tag-link hover:bg-tag-link-hover dark:bg-tag-link-dark dark:hover:bg-tag-link-dark-hover;
+  pre {
+    @apply overflow-x-scroll;
+  }
+
+  code {
+    @apply text-sm;
   }
 }

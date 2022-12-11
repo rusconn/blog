@@ -1,34 +1,21 @@
+import { ReactNode } from "react";
+
 import { isPreview } from "@/libs/preview";
-import { BackToHome } from "./BackToHome";
 import { Footer } from "./Footer";
 import { Header } from "./Header";
 import { PreviewInfo } from "./PreviewInfo";
 
-type Props = {
-  children: React.ReactNode;
-  home?: boolean;
-};
-
-export function Layout({ children, home }: Props) {
+export function Layout({ children }: { children: ReactNode }) {
   const preview = isPreview();
 
   return (
-    <>
-      {preview && (
-        <div className="sticky top-0 z-10 bg-yellow-50 p-4 text-center">
-          <PreviewInfo />
-        </div>
-      )}
-      <div className="mx-auto mt-12 mb-24 max-w-2xl px-4">
-        <Header home={home} />
-        <main>{children}</main>
-        {!home && (
-          <div className="mt-16">
-            <BackToHome />
-          </div>
-        )}
-        <Footer />
-      </div>
-    </>
+    <div className="flex min-h-full flex-col gap-y-12">
+      {preview ? <PreviewInfo /> : <div className="invisible" />}
+      <Header />
+      <main className="flex grow justify-center">
+        <div className="w-full max-w-3xl px-6">{children}</div>
+      </main>
+      <Footer />
+    </div>
   );
 }
