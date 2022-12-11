@@ -17,7 +17,7 @@ type Props = {
 export function Posts({ fragments }: Props) {
   return (
     <section>
-      <h2 className="headingLg">Posts</h2>
+      <h2 className="hidden">All</h2>
       <PostList fragments={fragments} />
     </section>
   );

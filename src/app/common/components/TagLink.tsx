@@ -16,7 +16,10 @@ type Props = {
 
 export function TagLink({ fragment: { slug, name } }: Props) {
   return (
-    <Link href={`/tags/${slug}`} className="tagLink">
+    <Link
+      href={`/tags/${slug}`}
+      className="inline-block rounded-md border border-slate-600 bg-slate-900 py-1.5 px-2 text-gray-300 hover:border-indigo-300 hover:text-indigo-300"
+    >
       {name}
     </Link>
   );

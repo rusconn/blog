@@ -38,11 +38,7 @@ export default async function Tag({ params }: Params) {
     notFound();
   }
 
-  return (
-    <div className="headingMd">
-      <Posts fragment={tag} />
-    </div>
-  );
+  return <Posts fragment={tag} />;
 }
 
 const getData = async (slug: string) =>

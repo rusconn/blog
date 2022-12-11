@@ -24,16 +24,16 @@ type Props = {
 export function Article({ fragment: { title, date, tags, ...articleBody } }: Props) {
   return (
     <article>
-      <h1 className="headingXl">{title}</h1>
-      <div className="lightText">
-        <Date dateString={date} />
+      <div className="space-y-2">
+        <div className="font-medium text-gray-300">
+          <Date dateString={date} />
+        </div>
+        <h2 className="text-2xl font-semibold">{title}</h2>
+        <div className="text-gray-300">
+          <TagList fragments={tags} />
+        </div>
       </div>
-      <div className="mt-6">
-        <TagList fragments={tags} />
-      </div>
-      <div className="mt-10">
-        <ArticleBody fragment={articleBody} />
-      </div>
+      <ArticleBody fragment={articleBody} />
     </article>
   );
 }

@@ -19,16 +19,20 @@ type Props = {
 
 export function PostList({ fragments }: Props) {
   return (
-    <ul className="m-0 list-none p-0">
+    <ul className="m-0 list-none space-y-2 p-0">
       {fragments.map(({ id, slug, date, title }) => (
-        <li className="mb-5" key={id}>
-          {/* TODO: Next.js が対応したら pathpida のコードへ変更する */}
-          {/* https://nextjs.org/docs/messages/app-dir-dynamic-href */}
-          <Link href={`/posts/${slug}`}>{title}</Link>
-          <br />
-          <small className="lightText">
-            <Date dateString={date} />
-          </small>
+        <li key={id}>
+          <Link
+            className="-ml-2 block rounded-lg p-2 hover:bg-slate-800"
+            // TODO: Next.js が対応したら pathpida のコードへ変更する
+            // https://nextjs.org/docs/messages/app-dir-dynamic-href
+            href={`/posts/${slug}`}
+          >
+            <div className="text-sm font-medium text-gray-300">
+              <Date dateString={date} />
+            </div>
+            <h3 className="text-lg font-semibold">{title}</h3>
+          </Link>
         </li>
       ))}
     </ul>

@@ -7,7 +7,7 @@ type Props = {
 export function SnsLink({ children, href, ariaLabel }: Props) {
   return (
     <a
-      className="text-black opacity-50 hover:opacity-80 dark:text-white"
+      className="inline-block rounded-full p-2 align-middle hover:bg-slate-800"
       href={href}
       target="_blank"
       rel="noopener noreferrer"

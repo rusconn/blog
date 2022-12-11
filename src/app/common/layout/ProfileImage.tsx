@@ -11,6 +11,7 @@ type Props = {
 export function ProfileImage({ height, width }: Props) {
   return (
     <Image
+      className="rounded-full bg-gray-100 p-1"
       priority
       src={staticPath.images.profile_png}
       height={height}

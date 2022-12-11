@@ -4252,16 +4252,19 @@ export type TagLinkFragment = { slug: string, name: string };
 
 export type TagListItemFragment = { id: string, slug: string, name: string };
 
-export type HomePostFragment = { id: string, slug: string, date: string, title: string };
+export type FooterQueryVariables = Exact<{ [key: string]: never; }>;
 
-export type HomeTagFragment = { id: string, slug: string, name: string };
+
+export type FooterQuery = { tags: Array<{ id: string, slug: string, name: string }> };
+
+export type HomePostFragment = { id: string, slug: string, date: string, title: string };
 
 export type HomeQueryVariables = Exact<{
   orderBy: PostOrderByInput;
 }>;
 
 
-export type HomeQuery = { tags: Array<{ id: string, slug: string, name: string }>, posts: Array<{ id: string, slug: string, date: string, title: string }> };
+export type HomeQuery = { posts: Array<{ id: string, slug: string, date: string, title: string }> };
 
 export type PostArticleFragment = { title: string, date: string, body: string, tags: Array<{ id: string, slug: string, name: string }> };
 

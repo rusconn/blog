@@ -20,7 +20,7 @@ type Props = {
 export function Posts({ fragment: { name, posts } }: Props) {
   return (
     <section>
-      <h2 className="headingLg">{name} Posts</h2>
+      <h2 className="mb-4 text-xl font-semibold">{name}</h2>
       <PostList fragments={posts} />
     </section>
   );

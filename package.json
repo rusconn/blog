@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "run-p dev:*",
     "dev:path": "yarn path --watch",
-    "dev:generate": "yarn generate --watch",
+    "dev:generate": "yarn generate",
     "dev:next": "next dev",
     "build": "next build",
     "start": "next start",
@@ -32,6 +32,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.7.1",
+    "react-markdown": "^8.0.4",
     "sharp": "^0.31.2"
   },
   "devDependencies": {
