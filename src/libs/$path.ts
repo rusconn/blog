@@ -17,6 +17,7 @@ export type PagesPath = typeof pagesPath
 export const staticPath = {
   favicon_ico: '/favicon.ico',
   images: {
+    og_jpg: '/images/og.jpg',
     profile_png: '/images/profile.png'
   },
   robots_txt: '/robots.txt'

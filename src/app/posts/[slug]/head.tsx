@@ -1,4 +1,5 @@
 import { gql } from "graphql-request";
+import { notFound } from "next/navigation";
 
 import { PostHeadQuery, PostHeadQueryVariables } from "@/generated/graphql";
 import { client } from "@/libs/api";
@@ -12,7 +13,29 @@ type Params = {
 export default async function Head({ params }: Params) {
   const { post } = await getData(params.slug);
 
-  return <title>{post?.title}</title>;
+  if (!post) {
+    notFound();
+  }
+
+  // TODO: マークダウンのパース
+  const description = post.body.split("\n").at(0)?.slice(0, 100);
+
+  return (
+    <>
+      <title>{post.title}</title>
+      <meta property="og:title" content={post.title} key="og-title" />
+      <meta
+        property="og:url"
+        content={`https://blog-rusconn.vercel.app/posts/${params.slug}`}
+        key="og-url"
+      />
+      <meta
+        property="og:description"
+        content={description ?? "Blog posts by @rusconn"}
+        key="og-description"
+      />
+    </>
+  );
 }
 
 const getData = async (slug: string) =>
@@ -21,6 +44,7 @@ const getData = async (slug: string) =>
       query PostHead($where: PostWhereUniqueInput!) {
         post(where: $where) {
           title
+          body
         }
       }
     `,

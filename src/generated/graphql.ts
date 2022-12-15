@@ -4279,7 +4279,7 @@ export type PostHeadQueryVariables = Exact<{
 }>;
 
 
-export type PostHeadQuery = { post?: { title: string } | null };
+export type PostHeadQuery = { post?: { title: string, body: string } | null };
 
 export type PostPathsQueryVariables = Exact<{ [key: string]: never; }>;
 
