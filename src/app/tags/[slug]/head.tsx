@@ -1,6 +1,7 @@
 import { gql } from "graphql-request";
 import { notFound } from "next/navigation";
 
+import { siteTitle } from "@/constants";
 import { TagHeadQuery, TagHeadQueryVariables } from "@/generated/graphql";
 import { client } from "@/libs/api";
 
@@ -19,7 +20,8 @@ export default async function Head({ params }: Params) {
 
   return (
     <>
-      <title>{tag.name}</title>
+      <title>{`${tag.name}の記事 - ${siteTitle}`}</title>
+      <meta name="description" content={`${tag.name}の記事`} key="description" />
       <meta property="og:title" content={`${tag.name}の記事`} key="og-title" />
       <meta
         property="og:url"

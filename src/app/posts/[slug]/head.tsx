@@ -1,6 +1,7 @@
 import { gql } from "graphql-request";
 import { notFound } from "next/navigation";
 
+import { siteTitle } from "@/constants";
 import { PostHeadQuery, PostHeadQueryVariables } from "@/generated/graphql";
 import { client } from "@/libs/api";
 
@@ -22,7 +23,12 @@ export default async function Head({ params }: Params) {
 
   return (
     <>
-      <title>{post.title}</title>
+      <title>{`${post.title} - ${siteTitle}`}</title>
+      <meta
+        name="description"
+        content={description ?? "Blog posts by @rusconn"}
+        key="description"
+      />
       <meta property="og:title" content={post.title} key="og-title" />
       <meta
         property="og:url"

@@ -13,7 +13,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <link rel="icon" href={staticPath.favicon_ico} />
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width" />
-        <meta name="description" content="web software engineer rusconn's personal blog" />
         <meta property="og:site_name" content={siteTitle} />
         <meta property="og:type" content="website" />
         <meta property="og:image" content="https://blog-rusconn.vercel.app/images/og.jpg" />
