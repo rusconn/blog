@@ -19,8 +19,7 @@ export const staticPath = {
   images: {
     og_jpg: '/images/og.jpg',
     profile_png: '/images/profile.png'
-  },
-  robots_txt: '/robots.txt'
+  }
 } as const
 
 export type StaticPath = typeof staticPath
