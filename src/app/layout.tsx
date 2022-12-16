@@ -19,6 +19,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <meta property="og:image" content="https://blog-rusconn.vercel.app/images/og.jpg" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@rusconn" />
+        <meta
+          name="google-site-verification"
+          content="0b9N1cTT59cjjEj4U0o7G4m5gFQ481qKGuljtSb_uhE"
+        />
       </head>
       <body>
         <Layout>{children}</Layout>
