@@ -39,6 +39,9 @@ tsconfig.tsbuildinfo
 # eslint
 .eslintcache
 
+# docker compose
+docker-compose.override.yml
+
 # sitemap and robots.txt
 public/sitemap*
 public/robots.txt
