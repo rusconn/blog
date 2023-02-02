@@ -8,17 +8,14 @@ services:
     working_dir: /blog
     volumes:
       - ./:/blog:cached
-      - next:/blog/.next
+      - dist:/blog/dist
       - node_modules:/blog/node_modules
       - yarn-cache:/usr/local/share/.cache/yarn/v6
     command: sh -c "yarn && yarn dev"
-    env_file:
-      - .env
-    # please set exposed ports by using docker-compose.override.yml or other solutions
-    # ports:
-      # - 3000:3000
+    ports:
+      - 3000:3000
 
 volumes:
-  next:
+  dist:
   node_modules:
   yarn-cache:

@@ -21,8 +21,8 @@
     "ms-azuretools.vscode-docker",
     "esbenp.prettier-vscode",
     "artdiniz.quitcontrol-vscode",
-    "graphql.vscode-graphql",
-    "bradlc.vscode-tailwindcss"
+    "bradlc.vscode-tailwindcss",
+    "astro-build.astro-vscode"
   ],
   "runServices": ["blog"],
   "shutdownAction": "stopCompose"

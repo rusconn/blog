@@ -1,0 +1,41 @@
+---
+import type { ComponentProps } from "react";
+
+import { PostsNav } from "@/components";
+import { TAGS } from "@/constants";
+import Layout from "@/layout/Layout.astro";
+import type { PostFrontmatter } from "@/types";
+
+type ParamsProps = {
+  params: { slug: string };
+  props: Props;
+}[];
+
+type Props = {
+  name: string;
+  posts: ComponentProps<typeof PostsNav>["posts"];
+};
+
+export async function getStaticPaths(): Promise<ParamsProps> {
+  const allPosts = await Astro.glob<PostFrontmatter>("/posts/*.md");
+
+  return TAGS.map(({ slug, name }) => ({
+    params: { slug },
+    props: {
+      name,
+      posts: allPosts
+        .filter(({ frontmatter }) => frontmatter.tags.includes(slug))
+        .map(({ frontmatter }) => frontmatter),
+    },
+  }));
+}
+
+const { name, posts } = Astro.props;
+
+const title = `${name}の記事`;
+const description = `${name}の記事`;
+---
+
+<Layout {...{ title, description }}>
+  <PostsNav heading={`${name}の記事`} {...{ posts }} />
+</Layout>

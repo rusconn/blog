@@ -8,12 +8,8 @@
 # testing
 /coverage
 
-# next.js
-/.next/
-/out/
-
 # production
-/build
+/dist
 
 # misc
 .DS_Store
@@ -37,6 +33,4 @@ yarn-error.log*
 tsconfig.tsbuildinfo
 
 # additional ignores
-src/generated/*
-src/libs/$path.ts
-src/app/posts/\[slug\]/components/prism.css
+src/components/posts/prism.css

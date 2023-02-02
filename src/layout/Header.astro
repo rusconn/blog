@@ -1,0 +1,34 @@
+---
+import { FaTwitter, FaGithub } from "react-icons/fa/index.js";
+
+import { AUTHOR_NAME, SITE_TITLE } from "@/constants";
+import ProfileImage from "./ProfileImage.astro";
+import SnsIcon from "./SnsIcon.astro";
+import SnsLink from "./SnsLink.astro";
+---
+
+<header class="flex justify-center">
+  <div class="flex w-full max-w-3xl items-center justify-between px-6">
+    <a
+      class="-ml-2 flex items-center gap-2 rounded-lg p-2 text-gray-50 hover:bg-slate-800 hover:no-underline"
+      href="/"
+    >
+      <ProfileImage height={36} width={36} />
+      <h1 class="m-0 h-9 text-2xl font-bold">{SITE_TITLE}</h1>
+    </a>
+    <nav aria-label={`${AUTHOR_NAME}のSNS`}>
+      <ul class="m-0 flex list-none items-center justify-end">
+        <li>
+          <SnsLink href="https://twitter.com/rusconn" ariaLabel="rusconnのTwitterへ">
+            <SnsIcon Icon={FaTwitter} />
+          </SnsLink>
+        </li>
+        <li>
+          <SnsLink href="https://github.com/rusconn" ariaLabel="rusconnのGitHubへ">
+            <SnsIcon Icon={FaGithub} />
+          </SnsLink>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
