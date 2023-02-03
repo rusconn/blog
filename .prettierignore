@@ -23,8 +23,5 @@ yarn-error.log*
 # typescript
 tsconfig.tsbuildinfo
 
-# additional ignores
-src/components/posts/prism.css
-
 # firebase
 .firebase

@@ -3,10 +3,10 @@ import { PostsNav } from "@/components";
 import Layout from "@/layout/Layout.astro";
 import type { PostFrontmatter } from "@/types";
 
-const allPosts = await Astro.glob<PostFrontmatter>("/posts/*.md");
+const allPosts = await Astro.glob<PostFrontmatter>("/src/pages/posts/*.md");
 
 const posts = allPosts
-  .map(({ frontmatter }) => frontmatter)
+  .map(({ frontmatter, url }) => ({ ...frontmatter, href: url }))
   .sort((x, y) => Date.parse(y.date) - Date.parse(x.date));
 ---
 

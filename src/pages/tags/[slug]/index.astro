@@ -17,7 +17,7 @@ type Props = {
 };
 
 export async function getStaticPaths(): Promise<ParamsProps> {
-  const allPosts = await Astro.glob<PostFrontmatter>("/posts/*.md");
+  const allPosts = await Astro.glob<PostFrontmatter>("/src/pages/posts/*.md");
 
   return TAGS.map(({ slug, name }) => ({
     params: { slug },
@@ -25,7 +25,7 @@ export async function getStaticPaths(): Promise<ParamsProps> {
       name,
       posts: allPosts
         .filter(({ frontmatter }) => frontmatter.tags.includes(slug))
-        .map(({ frontmatter }) => frontmatter),
+        .map(({ frontmatter, url }) => ({ ...frontmatter, href: url })),
     },
   }));
 }

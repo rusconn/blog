@@ -1,6 +1,7 @@
 ---
+layout: "@/layout/PostLayout.astro"
 title: ブログを始めた
-slug: start-blog
+description: Hello, Next.js
 date: 2021-09-14T20:40:00.000Z
 tags: ["others"]
 ---

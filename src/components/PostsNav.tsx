@@ -10,7 +10,7 @@ type Props = {
 export function PostsNav({ heading, posts }: Props) {
   return (
     <nav aria-labelledby="post-list-navigation">
-      <h2 id="post-list-navigation" className="mt-0">
+      <h2 id="post-list-navigation" className="mt-0 mb-6 text-xl font-semibold">
         {heading}
       </h2>
       <PostList {...{ posts }} />

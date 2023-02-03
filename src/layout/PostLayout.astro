@@ -1,0 +1,109 @@
+---
+import type { MarkdownLayoutProps } from "astro";
+
+import { Date, TagsNav } from "@/components";
+import { TAGS } from "@/constants";
+import Layout from "./Layout.astro";
+import type { PostFrontmatter } from "@/types";
+
+type Props = MarkdownLayoutProps<PostFrontmatter>;
+
+const { frontmatter } = Astro.props;
+const { title, description, date, tags: tagSlugs } = frontmatter;
+
+const tags = TAGS.filter(tag => tagSlugs.includes(tag.slug));
+---
+
+<Layout {...{ title, description }}>
+  <article>
+    <div class="font-medium text-gray-300">
+      <Date dateString={date} />
+    </div>
+    <h2 class="m-0 text-2xl font-semibold">{title}</h2>
+    <div class="mt-2 text-gray-300">
+      <TagsNav ariaLabel="記事のタグ" {...{ tags }} />
+    </div>
+    <div class="markdown mt-12 last:[&>*]:mb-0">
+      <slot />
+    </div>
+  </article>
+</Layout>
+
+<style>
+  .markdown :global(blockquote, dl, h1, h2, h3, h4, h5, h6, hr, figure, p, pre) {
+    @apply my-6;
+  }
+
+  .markdown :global(h1) {
+    @apply mt-16 text-2xl font-bold;
+  }
+
+  .markdown :global(h2) {
+    @apply mt-14 text-xl font-semibold;
+  }
+
+  .markdown :global(h3) {
+    @apply mt-12 text-xl font-semibold;
+  }
+
+  .markdown :global(h4) {
+    @apply mt-10 text-lg font-semibold;
+  }
+
+  .markdown :global(h5) {
+    @apply mt-8 font-semibold;
+  }
+
+  .markdown :global(h6) {
+    @apply font-semibold;
+  }
+
+  .markdown :global(ul, ol) {
+    @apply ml-8;
+  }
+
+  .markdown :global(ul) {
+    @apply list-disc;
+  }
+
+  .markdown :global(ul ul) {
+    @apply list-circle;
+  }
+
+  .markdown :global(ul ul ul) {
+    @apply list-square;
+  }
+
+  .markdown :global(ol) {
+    @apply list-decimal;
+  }
+
+  .markdown :global(dt) {
+    @apply font-bold;
+  }
+
+  .markdown :global(a) {
+    @apply text-sky-400 hover:underline;
+  }
+
+  .markdown :global(blockquote) {
+    @apply relative px-4 text-gray-400 before:absolute before:h-full before:w-1 before:left-0 before:bg-gray-500;
+  }
+
+  /* 内容は画像一枚とキャプションのみの想定、それ以外を入れる場合はスタイルの見直しが必要 */
+  .markdown :global(figure) {
+    @apply flex flex-col items-center gap-2;
+  }
+
+  .markdown :global(figcaption) {
+    @apply text-gray-400;
+  }
+
+  .markdown :global(pre) {
+    @apply overflow-x-scroll p-4;
+  }
+
+  .markdown :global(code) {
+    @apply text-sm;
+  }
+</style>
