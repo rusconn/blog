@@ -4,27 +4,27 @@
   "private": true,
   "volta": {
     "node": "18.16.0",
-    "yarn": "1.22.19"
+    "pnpm": "8.5.1"
   },
   "scripts": {
     "dev": "TAILWIND_MODE=watch astro dev",
     "build": "run-s build:*",
-    "build:type": "yarn typecheck",
+    "build:type": "pnpm typecheck",
     "build:build": "astro build",
     "preview": "astro preview",
     "deploy": "run-s deploy:*",
-    "deploy:build": "yarn build",
+    "deploy:build": "pnpm build",
     "deploy:deploy": "firebase deploy",
     "fix": "run-s fix:*",
-    "fix:type": "yarn typecheck",
-    "fix:lint": "yarn lint --fix",
-    "fix:format": "yarn format",
+    "fix:type": "pnpm typecheck",
+    "fix:lint": "pnpm lint --fix",
+    "fix:format": "pnpm format",
     "lint-staged": "lint-staged --concurrent false",
     "typecheck": "run-s typecheck:*",
     "typecheck:tsc": "tsc --noEmit",
     "typecheck:astro": "astro check",
     "lint": "eslint src --cache",
-    "format": "prettier --write './**/*.{astro,js,jsx,ts,tsx,json,css,md}'",
+    "format": "prettier --write './**/*.{js,jsx,ts,tsx,json,css,md}'",
     "prepare": "husky install"
   },
   "dependencies": {
