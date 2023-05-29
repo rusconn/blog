@@ -26,8 +26,5 @@ tsconfig.tsbuildinfo
 # eslint
 .eslintcache
 
-# docker compose
-docker-compose.override.yml
-
 # firebase
 .firebase
