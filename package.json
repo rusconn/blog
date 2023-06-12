@@ -12,6 +12,7 @@
     "build:type": "pnpm typecheck",
     "build:build": "astro build",
     "preview": "astro preview",
+    "login": "firebase login",
     "deploy": "run-s deploy:*",
     "deploy:build": "pnpm build",
     "deploy:deploy": "firebase deploy",
