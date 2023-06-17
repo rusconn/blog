@@ -25,7 +25,7 @@ export async function getStaticPaths(): Promise<ParamsProps> {
       name,
       posts: allPosts
         .filter(({ frontmatter }) => frontmatter.tags.includes(slug))
-        .map(({ frontmatter, url }) => ({ ...frontmatter, href: `${url}/` })),
+        .map(({ frontmatter, url }) => ({ ...frontmatter, href: url })),
     },
   }));
 }

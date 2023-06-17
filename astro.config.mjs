@@ -8,7 +8,6 @@ import rehypeExternalLinks from "rehype-external-links";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://rusconn-blog.web.app/",
   integrations: [react(), tailwind()],
   markdown: {
     rehypePlugins: [[rehypeExternalLinks, { target: "_blank", rel: "noreferrer" }]],

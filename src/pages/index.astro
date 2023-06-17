@@ -6,7 +6,7 @@ import type { PostFrontmatter } from "@/types";
 const allPosts = await Astro.glob<PostFrontmatter>("/src/pages/posts/*.md");
 
 const posts = allPosts
-  .map(({ frontmatter, url }) => ({ ...frontmatter, href: `${url}/` }))
+  .map(({ frontmatter, url }) => ({ ...frontmatter, href: url }))
   .sort((x, y) => Date.parse(y.date) - Date.parse(x.date));
 ---
 
