@@ -17,8 +17,7 @@ const year = new Date().getFullYear();
     <TagsNav ariaLabel="すべてのタグ" {...{ tags }} />
     <div class="mt-6 text-right">
       <small class="text-sm text-gray-300">
-        &copy; {year}
-        {AUTHOR_NAME}
+        &copy; {`${year} ${AUTHOR_NAME}`}
       </small>
     </div>
   </div>
