@@ -25,7 +25,7 @@
     "typecheck:tsc": "tsc --noEmit",
     "typecheck:astro": "astro check",
     "lint": "eslint src --cache",
-    "format": "prettier --write './**/*.{js,jsx,ts,tsx,json,css,md}'",
+    "format": "prettier --cache --write './**/*.{js,jsx,ts,tsx,json,css,md}'",
     "prepare": "husky install"
   },
   "dependencies": {
