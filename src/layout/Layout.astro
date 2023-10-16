@@ -12,7 +12,7 @@ const { title = SITE_TITLE, description = "Blog posts by @rusconn" } = Astro.pro
 const tags = TAGS;
 ---
 
-<html lang="ja" class="h-full">
+<html lang="ja">
   <head>
     <title>{title}</title>
     <meta charset="utf-8" />
@@ -22,14 +22,10 @@ const tags = TAGS;
     <meta name="description" content={description} />
     <meta name="google-site-verification" content="LlndxXYLHOwTH1LOIcckAWY3xg3y9TMfL-U__wnKAFw" />
   </head>
-  <body class="h-full bg-slate-900 leading-relaxed text-gray-50">
-    <div class="flex min-h-full flex-col gap-y-12">
-      <div class="invisible"></div>
-      <Header />
-      <main class="flex grow justify-center">
-        <div class="w-full max-w-3xl px-6"><slot /></div>
-      </main>
-      <Footer {...{tags}} />
-    </div>
+  <body class="grid grid-rows-[0_3.25rem_1fr_auto] grid-cols-[1fr_minmax(20rem,_48rem)_1fr] gap-y-12 min-h-screen bg-slate-900 leading-relaxed text-gray-50">
+    <Header class="row-start-2 col-start-2 px-6" />
+    <main class="row-start-3 col-start-2 px-6"><slot /></main>
+    <div class="row-start-4 col-span-full border-t border-gray-600 bg-slate-800" />
+    <Footer class="row-start-4 col-start-2 z-10 px-6" {...{tags}} />
   </body>
 </html>

@@ -6,19 +6,19 @@ import { AUTHOR_NAME } from "@/constants";
 
 type Props = {
   tags: ComponentProps<typeof TagsNav>["tags"];
+  class?: string;
 };
 
 const { tags } = Astro.props;
 const year = new Date().getFullYear();
+const { class: style } = Astro.props;
 ---
 
-<footer class="flex justify-center border-t border-gray-600 bg-slate-800 py-12">
-  <div class="w-full max-w-3xl px-6">
-    <TagsNav ariaLabel="すべてのタグ" {...{ tags }} />
-    <div class="mt-6 text-right">
-      <small class="text-sm text-gray-300">
-        &copy; {`${year} ${AUTHOR_NAME}`}
-      </small>
-    </div>
+<footer class={`flex flex-col gap-6 py-12 h-fit ${style}`}>
+  <TagsNav ariaLabel="すべてのタグ" {...{ tags }} />
+  <div class="text-right">
+    <small class="text-sm text-gray-300">
+      &copy; {`${year} ${AUTHOR_NAME}`}
+    </small>
   </div>
 </footer>
