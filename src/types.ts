@@ -4,5 +4,5 @@ export type PostFrontmatter = {
   title: string;
   description: string;
   date: string;
-  tags: typeof TAGS[number]["slug"][];
+  tags: (typeof TAGS)[number]["slug"][];
 };
