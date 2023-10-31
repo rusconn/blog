@@ -1,0 +1,21 @@
+---
+import type { ComponentProps } from "react";
+
+import PostLink from "./PostLink.astro";
+
+type Props = {
+  posts: ComponentProps<typeof PostLink>[];
+};
+
+const { posts } = Astro.props;
+---
+
+<ol class="m-0 list-none">
+  {
+    posts.map(({ title, date, href }) => (
+      <li>
+        <PostLink {...{ title, date, href }} />
+      </li>
+    ))
+  }
+</ol>

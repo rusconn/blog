@@ -1,0 +1,19 @@
+---
+import type { ComponentProps } from "react";
+
+import PostList from "./PostList.astro";
+
+type Props = {
+  heading: string;
+  posts: ComponentProps<typeof PostList>["posts"];
+};
+
+const { heading, posts } = Astro.props;
+---
+
+<nav aria-labelledby="post-list-navigation">
+  <h2 id="post-list-navigation" class="mt-0 mb-6 text-xl font-semibold">
+    {heading}
+  </h2>
+  <PostList {...{ posts }} />
+</nav>

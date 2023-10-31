@@ -1,0 +1,21 @@
+---
+import type { ComponentProps } from "react";
+
+import TagLink from "./TagLink.astro";
+
+type Props = {
+  tags: ComponentProps<typeof TagLink>[];
+};
+
+const { tags } = Astro.props;
+---
+
+<ul class="m-0 flex list-none flex-wrap gap-1">
+  {
+    tags.map(({ slug, name }) => (
+      <li class="text-xs font-medium">
+        <TagLink {...{ slug, name }} />
+      </li>
+    ))
+  }
+</ul>
