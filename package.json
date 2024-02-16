@@ -2,9 +2,9 @@
   "name": "blog",
   "version": "0.1.0",
   "private": true,
-  "volta": {
-    "node": "18.16.0",
-    "pnpm": "8.5.1"
+  "packageManager": "pnpm@8.5.1",
+  "engines": {
+    "node": "^18.16.0"
   },
   "scripts": {
     "dev": "TAILWIND_MODE=watch astro dev",
