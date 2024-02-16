@@ -1,6 +1,0 @@
-{
-  "*.astro": "astro check",
-  "*.{ts,tsx}": "sh -c 'tsc --noEmit'",
-  "*.{js,jsx,ts,tsx}": "eslint src --cache --fix",
-  "*.{astro,js,jsx,ts,tsx,json,css,md}": "prettier --write"
-}
