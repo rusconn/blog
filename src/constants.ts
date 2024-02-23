@@ -3,6 +3,10 @@ export const SITE_TITLE = `${AUTHOR_NAME}'s blog` as const;
 
 export const TAGS = [
   {
+    slug: "typescript",
+    name: "TypeScript",
+  },
+  {
     slug: "docker",
     name: "Docker",
   },
