@@ -31,10 +31,10 @@
     "format": "prettier --cache './**/*.{astro,js,jsx,ts,tsx,json,css,md}'"
   },
   "dependencies": {
-    "@astrojs/check": "^0.2.1",
-    "@astrojs/react": "^3.0.3",
-    "@astrojs/tailwind": "^5.0.2",
-    "astro": "^3.3.0",
+    "@astrojs/check": "^0.5.5",
+    "@astrojs/react": "^3.0.10",
+    "@astrojs/tailwind": "^5.1.0",
+    "astro": "^4.4.4",
     "date-fns": "^2.29.3",
     "date-fns-tz": "^2.0.0",
     "react": "^18.2.0",
