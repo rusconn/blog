@@ -7,25 +7,36 @@
   "ignorePatterns": ["postcss.config.js", "tailwind.config.js"],
   "plugins": ["tailwindcss"],
   "extends": [
-    "airbnb",
-    "airbnb-typescript",
-    "airbnb/hooks",
+    "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
     "plugin:tailwindcss/recommended",
+    "plugin:astro/recommended",
     "prettier"
   ],
   "rules": {
     "no-console": "off",
     "no-else-return": "off",
-    "no-underscore-dangle": ["error", { "allow": ["_slug"] }],
+    "no-underscore-dangle": "error",
     "import/extensions": "off",
     "import/prefer-default-export": "off",
-    "import/no-unresolved": ["error", { "ignore": ["^@astrojs.+"] }],
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
     "@typescript-eslint/no-use-before-define": "off",
-    "react/react-in-jsx-scope": "off",
-    "react/require-default-props": "off"
-  }
+    "tailwindcss/no-custom-classname": ["error", { "whitelist": ["markdown"] }]
+  },
+  "overrides": [
+    {
+      "files": ["*.astro"],
+      "parser": "astro-eslint-parser",
+      "parserOptions": {
+        "parser": "@typescript-eslint/parser",
+        "extraFileExtensions": [".astro"]
+      },
+      "rules": {
+        // for const {} = Astro.props
+        "@typescript-eslint/no-unsafe-assignment": "off"
+      }
+    }
+  ]
 }

@@ -14,7 +14,7 @@ const year = new Date().getFullYear();
 const { class: style } = Astro.props;
 ---
 
-<footer class={`flex flex-col gap-6 py-12 h-fit ${style}`}>
+<footer class={`flex h-fit flex-col gap-6 py-12 ${style}`}>
   <TagsNav ariaLabel="すべてのタグ" {...{ tags }} />
   <div class="text-right">
     <small class="text-sm text-gray-300">
