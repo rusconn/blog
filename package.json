@@ -16,15 +16,19 @@
     "deploy": "run-s deploy:*",
     "deploy:build": "pnpm build",
     "deploy:deploy": "firebase deploy --project rusconn-blog",
+    "check": "run-s check:*",
+    "check:type": "pnpm typecheck",
+    "check:lint": "pnpm lint",
+    "check:format": "pnpm format --check",
     "fix": "run-s fix:*",
     "fix:type": "pnpm typecheck",
     "fix:lint": "pnpm lint --fix",
-    "fix:format": "pnpm format",
+    "fix:format": "pnpm format --write",
     "typecheck": "run-s typecheck:*",
     "typecheck:tsc": "tsc --noEmit",
     "typecheck:astro": "astro check",
     "lint": "eslint src --cache",
-    "format": "prettier --cache --write './**/*.{astro,js,jsx,ts,tsx,json,css,md}'"
+    "format": "prettier --cache './**/*.{astro,js,jsx,ts,tsx,json,css,md}'"
   },
   "dependencies": {
     "@astrojs/check": "^0.2.1",
