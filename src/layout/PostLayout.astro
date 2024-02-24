@@ -1,16 +1,17 @@
 ---
-import type { MarkdownLayoutProps } from "astro";
-
 import Date from "@/components/Date.astro";
 import TagsNav from "@/components/TagsNav.astro";
 import { TAGS } from "@/constants";
 import Layout from "./Layout.astro";
-import type { PostFrontmatter } from "@/types";
 
-type Props = MarkdownLayoutProps<PostFrontmatter>;
+type Props = {
+  title: string;
+  description: string;
+  date: Date;
+  tags: (typeof TAGS)[number]["slug"][];
+};
 
-const { frontmatter } = Astro.props;
-const { title, description, date, tags: tagSlugs } = frontmatter;
+const { title, description, date, tags: tagSlugs } = Astro.props;
 
 const tags = TAGS.filter(tag => tagSlugs.includes(tag.slug));
 ---
@@ -18,7 +19,7 @@ const tags = TAGS.filter(tag => tagSlugs.includes(tag.slug));
 <Layout {...{ title, description }}>
   <article>
     <div class="font-medium text-gray-300">
-      <Date dateString={date} />
+      <Date {...{ date }} />
     </div>
     <h2 class="m-0 text-2xl font-semibold">{title}</h2>
     <div class="mt-2 text-gray-300">

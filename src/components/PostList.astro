@@ -12,9 +12,9 @@ const { posts } = Astro.props;
 
 <ol class="m-0 list-none">
   {
-    posts.map(({ title, date, href }) => (
+    posts.map(({ title, date, slug }) => (
       <li>
-        <PostLink {...{ title, date, href }} />
+        <PostLink {...{ title, date, slug }} />
       </li>
     ))
   }

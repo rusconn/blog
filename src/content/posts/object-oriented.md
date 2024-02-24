@@ -1,5 +1,4 @@
 ---
-layout: "@/layout/PostLayout.astro"
 title: オブジェクト指向への一解釈
 description: オブジェクトの神話へ物申す
 date: 2024-02-23T01:27:19.000Z

@@ -26,3 +26,7 @@ tsconfig.tsbuildinfo
 
 # pnpm
 pnpm-lock.yaml
+
+# Astro
+.astro
+src/env.d.ts

@@ -1,5 +1,4 @@
 ---
-layout: "@/layout/PostLayout.astro"
 title: TypeScriptでプロトタイプ拡張
 description: TypeScriptでプロトタイプを拡張する方法のメモ
 date: 2024-02-23T06:34:01.000Z

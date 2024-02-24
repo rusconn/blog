@@ -1,14 +1,13 @@
 ---
-import { format, parseISO } from "date-fns";
+import { format } from "date-fns";
 import { utcToZonedTime } from "date-fns-tz";
 
 type Props = {
-  dateString: string;
+  date: Date;
 };
 
-const { dateString } = Astro.props;
-const date = parseISO(dateString);
+const { date } = Astro.props;
 const localDate = utcToZonedTime(date, "Asia/Tokyo");
 ---
 
-<time datetime={dateString}>{format(localDate, "yyyy-MM-dd")}</time>
+<time datetime={date.toISOString()}>{format(localDate, "yyyy-MM-dd")}</time>

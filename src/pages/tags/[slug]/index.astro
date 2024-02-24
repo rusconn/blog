@@ -1,10 +1,10 @@
 ---
 import type { ComponentProps } from "react";
+import { getCollection } from "astro:content";
 
 import PostsNav from "@/components/PostsNav.astro";
 import { TAGS } from "@/constants";
 import Layout from "@/layout/Layout.astro";
-import type { PostFrontmatter } from "@/types";
 
 type ParamsProps = {
   params: { slug: string };
@@ -17,15 +17,15 @@ type Props = {
 };
 
 export async function getStaticPaths(): Promise<ParamsProps> {
-  const allPosts = await Astro.glob<PostFrontmatter>("/src/pages/posts/*.md");
+  const allPosts = await getCollection("posts");
 
   return TAGS.map(({ slug, name }) => ({
     params: { slug },
     props: {
       name,
       posts: allPosts
-        .filter(({ frontmatter }) => frontmatter.tags.includes(slug))
-        .map(({ frontmatter, url }) => ({ ...frontmatter, href: url })),
+        .filter(({ data }) => (data.tags as string[]).includes(slug))
+        .map(({ data: { title, date }, slug }) => ({ title, date, slug })),
     },
   }));
 }

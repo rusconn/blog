@@ -1,0 +1,26 @@
+---
+import { getCollection } from "astro:content";
+
+import PostLayout from "@/layout/PostLayout.astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("posts");
+
+  return posts.map(post => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+
+// FIXME: TSはOKだがESLintがエラーを吐く
+/* eslint-disable @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call */
+const { title, date, description, tags } = post.data;
+const { Content } = await post.render();
+/* eslint-enable @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call */
+---
+
+<PostLayout {...{ title, date, description, tags }}>
+  <Content />
+</PostLayout>

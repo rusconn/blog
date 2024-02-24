@@ -1,13 +1,14 @@
 ---
+import { getCollection } from "astro:content";
+
 import PostsNav from "@/components/PostsNav.astro";
 import Layout from "@/layout/Layout.astro";
-import type { PostFrontmatter } from "@/types";
 
-const allPosts = await Astro.glob<PostFrontmatter>("/src/pages/posts/*.md");
+const allPosts = await getCollection("posts");
 
 const posts = allPosts
-  .map(({ frontmatter, url }) => ({ ...frontmatter, href: url }))
-  .sort((x, y) => Date.parse(y.date) - Date.parse(x.date));
+  .map(({ data: { date, title }, slug }) => ({ title, date, slug }))
+  .sort((x, y) => y.date.getTime() - x.date.getTime());
 ---
 
 <Layout>

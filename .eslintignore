@@ -23,3 +23,7 @@ tsconfig.tsbuildinfo
 
 # firebase
 .firebase
+
+# Astro
+.astro
+src/env.d.ts

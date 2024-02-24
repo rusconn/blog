@@ -1,5 +1,4 @@
 ---
-layout: "@/layout/PostLayout.astro"
 title: 開発環境構築メモ
 description: Docker や VS Code を使った開発環境構築方法を模索したのでメモしておく
 date: 2021-09-19T05:50:00.000Z
