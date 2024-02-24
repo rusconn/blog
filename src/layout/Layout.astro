@@ -1,4 +1,6 @@
 ---
+import { ViewTransitions } from "astro:transitions";
+
 import { SITE_TITLE, TAGS } from "@/constants";
 import Footer from "./Footer.astro";
 import Header from "./Header.astro";
@@ -21,6 +23,7 @@ const tags = TAGS;
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
     <meta name="google-site-verification" content="LlndxXYLHOwTH1LOIcckAWY3xg3y9TMfL-U__wnKAFw" />
+    <ViewTransitions />
   </head>
   <body
     class="grid min-h-screen grid-cols-[1fr_minmax(20rem,_48rem)_1fr] grid-rows-[0_3.25rem_1fr_auto] gap-y-12 bg-slate-900 leading-relaxed text-gray-50"
