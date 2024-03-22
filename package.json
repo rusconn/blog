@@ -28,23 +28,17 @@
     "typecheck:tsc": "tsc --noEmit",
     "typecheck:astro": "astro check",
     "lint": "eslint src --cache",
-    "format": "prettier --cache './**/*.{astro,js,jsx,ts,tsx,json,css,md}'"
+    "format": "prettier --cache './**/*.{astro,js,ts,json,css,md}'"
   },
   "dependencies": {
     "@astrojs/check": "^0.5.5",
-    "@astrojs/react": "^3.0.10",
     "astro": "^4.4.4",
     "date-fns": "^2.29.3",
     "date-fns-tz": "^2.0.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-icons": "^4.7.1",
     "rehype-external-links": "^2.0.1"
   },
   "devDependencies": {
     "@types/node": "~18.16.16",
-    "@types/react": "^18.0.26",
-    "@types/react-dom": "^18.0.10",
     "@typescript-eslint/eslint-plugin": "^6.7.5",
     "@typescript-eslint/parser": "^6.7.5",
     "eslint": "^8.29.0",

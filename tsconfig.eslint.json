@@ -1,4 +1,4 @@
 {
   "extends": "./tsconfig.json",
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.astro", "astro.config.mjs"]
+  "include": ["src/**/*.ts", "src/**/*.astro", "astro.config.mjs", "jsx.d.ts"]
 }

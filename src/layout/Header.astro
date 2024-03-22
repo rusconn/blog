@@ -1,9 +1,8 @@
 ---
-import { FaTwitter, FaGithub } from "react-icons/fa/index.js";
-
 import { AUTHOR_NAME, SITE_TITLE } from "@/constants";
+import GitHub from "@/icons/GitHub.astro";
+import Twitter from "@/icons/Twitter.astro";
 import ProfileImage from "./ProfileImage.astro";
-import SnsIcon from "./SnsIcon.astro";
 import SnsLink from "./SnsLink.astro";
 
 type Props = {
@@ -22,12 +21,12 @@ const { layout } = Astro.props;
     <ul>
       <li>
         <SnsLink href="https://twitter.com/rusconn" ariaLabel="rusconnのTwitterへ">
-          <SnsIcon Icon={FaTwitter} />
+          <Twitter class="icon" />
         </SnsLink>
       </li>
       <li>
         <SnsLink href="https://github.com/rusconn" ariaLabel="rusconnのGitHubへ">
-          <SnsIcon Icon={FaGithub} />
+          <GitHub class="icon" />
         </SnsLink>
       </li>
     </ul>
@@ -63,6 +62,16 @@ const { layout } = Astro.props;
 
     & nav ul {
       display: flex;
+
+      & li {
+        line-height: normal;
+
+        & .icon {
+          display: inline-block;
+          height: 1.5rem;
+          width: 1.5rem;
+        }
+      }
     }
   }
 </style>
