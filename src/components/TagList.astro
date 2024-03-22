@@ -1,10 +1,8 @@
 ---
-import type { ComponentProps } from "react";
+import TagLink, { type Props as TagLinkProps } from "./TagLink.astro";
 
-import TagLink from "./TagLink.astro";
-
-type Props = {
-  tags: ComponentProps<typeof TagLink>[];
+export type Props = {
+  tags: TagLinkProps[];
 };
 
 const { tags } = Astro.props;

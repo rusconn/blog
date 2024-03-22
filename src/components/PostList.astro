@@ -1,10 +1,8 @@
 ---
-import type { ComponentProps } from "react";
+import PostLink, { type Props as PostLinkProps } from "./PostLink.astro";
 
-import PostLink from "./PostLink.astro";
-
-type Props = {
-  posts: ComponentProps<typeof PostLink>[];
+export type Props = {
+  posts: PostLinkProps[];
 };
 
 const { posts } = Astro.props;

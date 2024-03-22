@@ -1,11 +1,9 @@
 ---
-import type { ComponentProps } from "react";
-
-import TagsNav from "@/components/TagsNav.astro";
+import TagsNav, { type Props as TagsNavProps } from "@/components/TagsNav.astro";
 import { AUTHOR_NAME } from "@/constants";
 
 type Props = {
-  tags: ComponentProps<typeof TagsNav>["tags"];
+  tags: TagsNavProps["tags"];
   class?: string;
 };
 

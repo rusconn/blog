@@ -1,11 +1,9 @@
 ---
-import type { ComponentProps } from "react";
+import Date, { type Props as DateProps } from "./Date.astro";
 
-import Date from "./Date.astro";
-
-type Props = {
+export type Props = {
   slug: string;
-  date: ComponentProps<typeof Date>["date"];
+  date: DateProps["date"];
   title: string;
 };
 

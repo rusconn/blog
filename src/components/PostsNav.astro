@@ -1,11 +1,9 @@
 ---
-import type { ComponentProps } from "react";
+import PostList, { type Props as PostListProps } from "./PostList.astro";
 
-import PostList from "./PostList.astro";
-
-type Props = {
+export type Props = {
   heading: string;
-  posts: ComponentProps<typeof PostList>["posts"];
+  posts: PostListProps["posts"];
 };
 
 const { heading, posts } = Astro.props;

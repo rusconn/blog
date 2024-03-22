@@ -1,11 +1,9 @@
 ---
-import type { ComponentProps } from "react";
+import TagList, { type Props as TagListProps } from "./TagList.astro";
 
-import TagList from "./TagList.astro";
-
-type Props = {
+export type Props = {
   ariaLabel: string;
-  tags: ComponentProps<typeof TagList>["tags"];
+  tags: TagListProps["tags"];
 };
 
 const { ariaLabel, tags } = Astro.props;

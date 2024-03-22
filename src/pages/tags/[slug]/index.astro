@@ -1,8 +1,7 @@
 ---
-import type { ComponentProps } from "react";
 import { getCollection } from "astro:content";
 
-import PostsNav from "@/components/PostsNav.astro";
+import PostsNav, { type Props as PostsNavProps } from "@/components/PostsNav.astro";
 import { TAGS } from "@/constants";
 import Layout from "@/layout/Layout.astro";
 
@@ -13,7 +12,7 @@ type ParamsProps = {
 
 type Props = {
   name: string;
-  posts: ComponentProps<typeof PostsNav>["posts"];
+  posts: PostsNavProps["posts"];
 };
 
 export async function getStaticPaths(): Promise<ParamsProps> {
