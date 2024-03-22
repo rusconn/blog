@@ -4,13 +4,10 @@
     "project": "./tsconfig.eslint.json"
   },
   "parser": "@typescript-eslint/parser",
-  "ignorePatterns": ["postcss.config.js", "tailwind.config.js"],
-  "plugins": ["tailwindcss"],
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
-    "plugin:tailwindcss/recommended",
     "plugin:astro/recommended",
     "prettier"
   ],
@@ -22,8 +19,7 @@
     "import/prefer-default-export": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
-    "@typescript-eslint/no-use-before-define": "off",
-    "tailwindcss/no-custom-classname": ["error", { "whitelist": ["markdown"] }]
+    "@typescript-eslint/no-use-before-define": "off"
   },
   "overrides": [
     {

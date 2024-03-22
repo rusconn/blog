@@ -18,94 +18,159 @@ const tags = TAGS.filter(tag => tagSlugs.includes(tag.slug));
 
 <Layout {...{ title, description }}>
   <article>
-    <div class="font-medium text-gray-300">
-      <Date {...{ date }} />
-    </div>
-    <h2 class="m-0 text-2xl font-semibold">{title}</h2>
-    <div class="mt-2 text-gray-300">
-      <TagsNav ariaLabel="記事のタグ" {...{ tags }} />
-    </div>
-    <div class="markdown mt-12 last:[&>*]:mb-0">
-      <slot />
-    </div>
+    <div class="date"><Date {...{ date }} /></div>
+    <h2 class="title">{title}</h2>
+    <div class="tags-nav"><TagsNav ariaLabel="記事のタグ" {...{ tags }} /></div>
+    <div class="markdown"><slot /></div>
   </article>
 </Layout>
 
 <style>
-  .markdown :global(blockquote, dl, h1, h2, h3, h4, h5, h6, hr, figure, p, pre) {
-    @apply my-6;
-  }
+  article {
+    & .date {
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
 
-  .markdown :global(h1) {
-    @apply mt-16 text-2xl font-bold;
-  }
+    & .title {
+      margin: 0;
+      font-size: 1.5rem;
+      line-height: 2rem;
+      font-weight: 600;
+    }
 
-  .markdown :global(h2) {
-    @apply mt-14 text-xl font-semibold;
-  }
+    & .tags-nav {
+      margin-top: 0.5rem;
+      color: var(--text-secondary);
+    }
 
-  .markdown :global(h3) {
-    @apply mt-12 text-xl font-semibold;
-  }
+    & .markdown {
+      margin-top: 3rem;
 
-  .markdown :global(h4) {
-    @apply mt-10 text-lg font-semibold;
-  }
+      > :last-child {
+        margin-bottom: 0;
+      }
 
-  .markdown :global(h5) {
-    @apply mt-8 font-semibold;
-  }
+      & blockquote,
+      dl,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      hr,
+      figure,
+      p,
+      pre {
+        margin: 1.5rem 0;
+      }
 
-  .markdown :global(h6) {
-    @apply font-semibold;
-  }
+      & h1 {
+        margin-top: 4rem;
+        font-size: 1.5rem;
+        line-height: 2rem;
+        font-weight: 700;
+      }
 
-  .markdown :global(ul, ol) {
-    @apply ml-8;
-  }
+      & h2 {
+        margin-top: 3.5rem;
+        font-size: 1.25rem;
+        line-height: 1.75rem;
+        font-weight: 600;
+      }
 
-  .markdown :global(ul) {
-    @apply list-disc;
-  }
+      & h3 {
+        margin-top: 3rem;
+        font-size: 1.25rem;
+        line-height: 1.75rem;
+        font-weight: 600;
+      }
 
-  .markdown :global(ul ul) {
-    @apply list-circle;
-  }
+      & h4 {
+        margin-top: 2.5rem;
+        font-size: 1.125rem;
+        line-height: 1.75rem;
+        font-weight: 600;
+      }
 
-  .markdown :global(ul ul ul) {
-    @apply list-square;
-  }
+      & h5 {
+        margin-top: 2rem;
+        font-weight: 600;
+      }
 
-  .markdown :global(ol) {
-    @apply list-decimal;
-  }
+      & h6 {
+        font-weight: 600;
+      }
 
-  .markdown :global(dt) {
-    @apply font-bold;
-  }
+      & ul,
+      ol {
+        margin-left: 2rem;
+      }
 
-  .markdown :global(a) {
-    @apply text-sky-400 hover:underline;
-  }
+      & ul {
+        list-style-type: disc;
+      }
 
-  .markdown :global(blockquote) {
-    @apply relative px-4 text-gray-400 before:absolute before:h-full before:w-1 before:left-0 before:bg-gray-500;
-  }
+      & ul ul {
+        list-style-type: circle;
+      }
 
-  /* 内容は画像一枚とキャプションのみの想定、それ以外を入れる場合はスタイルの見直しが必要 */
-  .markdown :global(figure) {
-    @apply flex flex-col items-center gap-2;
-  }
+      & ul ul ul {
+        list-style-type: square;
+      }
 
-  .markdown :global(figcaption) {
-    @apply text-gray-400;
-  }
+      & ol {
+        list-style-type: decimal;
+      }
 
-  .markdown :global(pre) {
-    @apply overflow-x-scroll p-4;
-  }
+      & dt {
+        font-weight: 700;
+      }
 
-  .markdown :global(code) {
-    @apply text-sm;
+      & a {
+        color: var(--text-link);
+
+        &:hover {
+          text-decoration-line: underline;
+        }
+      }
+
+      & blockquote {
+        position: relative;
+        padding: 0 1rem;
+        color: var(--text-muted);
+
+        ::before {
+          position: absolute;
+          height: 100%;
+          width: 0.25rem;
+          left: 0;
+          background-color: rgb(107 114 128);
+        }
+      }
+
+      /* 内容は画像一枚とキャプションのみの想定、それ以外を入れる場合はスタイルの見直しが必要 */
+      & figure {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      & figcaption {
+        color: var(--text-muted);
+      }
+
+      & pre {
+        overflow-x: scroll;
+        padding: 1rem;
+      }
+
+      & code {
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+      }
+    }
   }
 </style>

@@ -8,12 +8,28 @@ export type Props = {
 const { tags } = Astro.props;
 ---
 
-<ul class="m-0 flex list-none flex-wrap gap-1">
+<ul>
   {
     tags.map(({ slug, name }) => (
-      <li class="text-xs font-medium">
+      <li>
         <TagLink {...{ slug, name }} />
       </li>
     ))
   }
 </ul>
+
+<style>
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    margin: 0;
+    list-style-type: none;
+
+    & li {
+      font-size: 0.75rem;
+      line-height: 1rem;
+      font-weight: 500;
+    }
+  }
+</style>

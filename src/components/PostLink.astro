@@ -10,12 +10,36 @@ export type Props = {
 const { slug, date, title } = Astro.props;
 ---
 
-<a
-  class="-ml-2 block rounded-lg p-2 text-gray-50 hover:bg-slate-800 hover:no-underline"
-  href={`/posts/${slug}`}
->
-  <div class="text-sm font-medium text-gray-300">
-    <Date {...{ date }} />
-  </div>
-  <h3 class="m-0 text-lg font-semibold">{title}</h3>
+<a href={`/posts/${slug}`}>
+  <div class="date"><Date {...{ date }} /></div>
+  <h3 class="title">{title}</h3>
 </a>
+
+<style>
+  a {
+    display: block;
+    margin-left: -0.5rem;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    color: var(--text-primary);
+
+    &:hover {
+      background-color: var(--bg-secondary);
+      text-decoration-line: none;
+    }
+
+    & .date {
+      font-size: 0.875rem;
+      line-height: 1.25rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    & .title {
+      margin: 0;
+      font-size: 1.125rem;
+      line-height: 1.75rem;
+      font-weight: 600;
+    }
+  }
+</style>

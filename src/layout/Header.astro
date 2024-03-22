@@ -7,19 +7,19 @@ import SnsIcon from "./SnsIcon.astro";
 import SnsLink from "./SnsLink.astro";
 
 type Props = {
-  class?: string;
+  layout: string;
 };
 
-const { class: style } = Astro.props;
+const { layout } = Astro.props;
 ---
 
-<header class={`flex items-center justify-between ${style}`}>
-  <a class="-ml-2 flex gap-2 rounded-lg p-2 hover:bg-slate-800" href="/">
+<header style={layout}>
+  <a href="/">
     <ProfileImage height={36} width={36} />
-    <h1 class="m-0 h-9 text-2xl font-bold">{SITE_TITLE}</h1>
+    <h1>{SITE_TITLE}</h1>
   </a>
   <nav aria-label={`${AUTHOR_NAME}のSNS`}>
-    <ul class="flex">
+    <ul>
       <li>
         <SnsLink href="https://twitter.com/rusconn" ariaLabel="rusconnのTwitterへ">
           <SnsIcon Icon={FaTwitter} />
@@ -33,3 +33,36 @@ const { class: style } = Astro.props;
     </ul>
   </nav>
 </header>
+
+<style>
+  header {
+    padding: 0 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    & a {
+      display: flex;
+      gap: 0.5rem;
+      margin-left: -0.5rem;
+      border-radius: 0.5rem;
+      padding: 0.5rem;
+
+      &:hover {
+        background-color: var(--bg-secondary);
+      }
+
+      & h1 {
+        margin: 0;
+        height: 2.25rem;
+        font-size: 1.5rem;
+        line-height: 2rem;
+        font-weight: 700;
+      }
+    }
+
+    & nav ul {
+      display: flex;
+    }
+  }
+</style>

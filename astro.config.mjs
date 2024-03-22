@@ -2,14 +2,13 @@ import { defineConfig } from "astro/config";
 
 // https://astro.build/config
 import react from "@astrojs/react";
-import tailwind from "@astrojs/tailwind";
 
 import rehypeExternalLinks from "rehype-external-links";
 
 // https://astro.build/config
 export default defineConfig({
   // react は react-icons のレンダリングに使っている
-  integrations: [react(), tailwind()],
+  integrations: [react()],
   markdown: {
     rehypePlugins: [[rehypeExternalLinks, { target: "_blank", rel: "noreferrer" }]],
     shikiConfig: {

@@ -8,7 +8,7 @@ export type Props = {
 const { posts } = Astro.props;
 ---
 
-<ol class="m-0 list-none">
+<ol>
   {
     posts.map(({ title, date, slug }) => (
       <li>
@@ -17,3 +17,10 @@ const { posts } = Astro.props;
     ))
   }
 </ol>
+
+<style>
+  ol {
+    margin: 0;
+    list-style-type: none;
+  }
+</style>

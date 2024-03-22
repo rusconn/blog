@@ -7,12 +7,21 @@ type Props = {
 const { href, ariaLabel } = Astro.props;
 ---
 
-<a
-  class="inline-block rounded-full p-2 align-middle text-gray-50 hover:bg-slate-800 hover:no-underline"
-  href={href}
-  target="_blank"
-  rel="noopener noreferrer"
-  aria-label={ariaLabel}
->
+<a {...{ href }} target="_blank" rel="noopener noreferrer" aria-label={ariaLabel}>
   <slot />
 </a>
+
+<style>
+  a {
+    display: inline-block;
+    border-radius: 9999px;
+    padding: 0.5rem;
+    vertical-align: middle;
+    color: var(--text-primary);
+
+    &:hover {
+      background-color: var(--bg-secondary);
+      text-decoration-line: none;
+    }
+  }
+</style>

@@ -4,7 +4,6 @@
     "dbaeumer.vscode-eslint",
     "mhutchie.git-graph",
     "esbenp.prettier-vscode",
-    "bradlc.vscode-tailwindcss",
     "astro-build.astro-vscode"
   ]
 }

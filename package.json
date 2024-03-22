@@ -7,7 +7,7 @@
     "node": "^18.16.0"
   },
   "scripts": {
-    "dev": "TAILWIND_MODE=watch astro dev",
+    "dev": "astro dev",
     "build": "run-s build:*",
     "build:type": "pnpm typecheck",
     "build:build": "astro build",
@@ -33,7 +33,6 @@
   "dependencies": {
     "@astrojs/check": "^0.5.5",
     "@astrojs/react": "^3.0.10",
-    "@astrojs/tailwind": "^5.1.0",
     "astro": "^4.4.4",
     "date-fns": "^2.29.3",
     "date-fns-tz": "^2.0.0",
@@ -48,17 +47,13 @@
     "@types/react-dom": "^18.0.10",
     "@typescript-eslint/eslint-plugin": "^6.7.5",
     "@typescript-eslint/parser": "^6.7.5",
-    "autoprefixer": "^10.4.13",
     "eslint": "^8.29.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-astro": "^0.31.4",
     "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-tailwindcss": "^3.7.1",
     "npm-run-all": "^4.1.5",
-    "postcss": "^8.4.19",
     "prettier": "^3.0.3",
     "prettier-plugin-astro": "^0.12.1",
-    "tailwindcss": "^3.2.4",
     "typescript": "^5.2.2"
   }
 }

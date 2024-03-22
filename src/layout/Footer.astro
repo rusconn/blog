@@ -3,20 +3,37 @@ import TagsNav, { type Props as TagsNavProps } from "@/components/TagsNav.astro"
 import { AUTHOR_NAME } from "@/constants";
 
 type Props = {
+  layout: string;
   tags: TagsNavProps["tags"];
-  class?: string;
 };
 
-const { tags } = Astro.props;
+const { layout, tags } = Astro.props;
 const year = new Date().getFullYear();
-const { class: style } = Astro.props;
 ---
 
-<footer class={`flex h-fit flex-col gap-6 py-12 ${style}`}>
+<footer style={layout}>
   <TagsNav ariaLabel="すべてのタグ" {...{ tags }} />
-  <div class="text-right">
-    <small class="text-sm text-gray-300">
-      &copy; {`${year} ${AUTHOR_NAME}`}
-    </small>
+  <div>
+    <small>&copy; {year} {AUTHOR_NAME}</small>
   </div>
 </footer>
+
+<style>
+  footer {
+    padding: 3rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    height: fit-content;
+
+    & div {
+      text-align: right;
+
+      & small {
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+        color: var(--text-secondary);
+      }
+    }
+  }
+</style>

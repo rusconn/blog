@@ -9,11 +9,12 @@ type Props = {
 const { height, width } = Astro.props;
 ---
 
-<img
-  class="rounded-full bg-gray-100 p-1"
-  src="/images/profile.avif"
-  height={height}
-  width={width}
-  alt={AUTHOR_NAME}
-  decoding="async"
-/>
+<img src="/images/profile.avif" height={height} width={width} alt={AUTHOR_NAME} decoding="async" />
+
+<style>
+  img {
+    border-radius: 9999px;
+    background-color: rgb(243 244 246);
+    padding: 0.25rem;
+  }
+</style>
