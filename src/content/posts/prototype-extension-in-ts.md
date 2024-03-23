@@ -9,7 +9,7 @@ tags: ["typescript"]
 
 実装方法が正しいのかどうかはよくわかっていない😇
 
-### main.ts
+## main.ts
 
 ```typescript
 import "./set.ts"; // これが無いと実行時エラー💦
@@ -28,7 +28,7 @@ console.log(s5); // Set(1) { 2 }
 console.log(s6); // Set(3) { 1, 3, 4 }
 ```
 
-### set.ts
+## set.ts
 
 ```typescript
 /// <reference types="./set.d.ts" />
@@ -92,7 +92,7 @@ Set.prototype.symmetricDifference ??= function <T>(this: Set<T>, other: Set<T>) 
 };
 ```
 
-### set.d.ts
+## set.d.ts
 
 ```typescript
 interface Set<T> {
@@ -103,7 +103,7 @@ interface Set<T> {
 }
 ```
 
-### 環境
+## 環境
 
 ```text
 > deno --version

@@ -10,9 +10,9 @@ const { heading, posts } = Astro.props;
 ---
 
 <nav aria-labelledby="post-list-navigation">
-  <h2 id="post-list-navigation" class="heading">
+  <h1 id="post-list-navigation" class="heading">
     {heading}
-  </h2>
+  </h1>
   <PostList {...{ posts }} />
 </nav>
 

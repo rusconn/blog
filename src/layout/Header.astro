@@ -15,7 +15,7 @@ const { layout } = Astro.props;
 <header style={layout}>
   <a href="/">
     <ProfileImage height={36} width={36} />
-    <h1>{SITE_TITLE}</h1>
+    <span class="title">{SITE_TITLE}</span>
   </a>
   <nav aria-label={`${AUTHOR_NAME}のSNS`}>
     <ul>
@@ -51,7 +51,7 @@ const { layout } = Astro.props;
         background-color: var(--bg-secondary);
       }
 
-      & h1 {
+      & .title {
         margin: 0;
         height: 2.25rem;
         font-size: 1.5rem;

@@ -19,7 +19,7 @@ const tags = TAGS.filter(tag => tagSlugs.includes(tag.slug));
 <Layout {...{ title, description }}>
   <article>
     <div class="date"><Date {...{ date }} /></div>
-    <h2 class="title">{title}</h2>
+    <h1 class="title">{title}</h1>
     <div class="tags-nav"><TagsNav ariaLabel="記事のタグ" {...{ tags }} /></div>
     <div class="markdown"><slot /></div>
   </article>
@@ -53,7 +53,6 @@ const tags = TAGS.filter(tag => tagSlugs.includes(tag.slug));
 
       & blockquote,
       dl,
-      h1,
       h2,
       h3,
       h4,
@@ -66,40 +65,26 @@ const tags = TAGS.filter(tag => tagSlugs.includes(tag.slug));
         margin: 1.5rem 0;
       }
 
-      & h1 {
-        margin-top: 4rem;
-        font-size: 1.5rem;
-        line-height: 2rem;
-        font-weight: 700;
-      }
-
       & h2 {
-        margin-top: 3.5rem;
-        font-size: 1.25rem;
-        line-height: 1.75rem;
-        font-weight: 600;
-      }
-
-      & h3 {
         margin-top: 3rem;
         font-size: 1.25rem;
         line-height: 1.75rem;
         font-weight: 600;
       }
 
-      & h4 {
+      & h3 {
         margin-top: 2.5rem;
         font-size: 1.125rem;
         line-height: 1.75rem;
         font-weight: 600;
       }
 
-      & h5 {
+      & h4 {
         margin-top: 2rem;
         font-weight: 600;
       }
 
-      & h6 {
+      & h5 {
         font-weight: 600;
       }
 
