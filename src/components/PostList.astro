@@ -1,8 +1,10 @@
 ---
-import PostLink, { type Props as PostLinkProps } from "./PostLink.astro";
+import type { ComponentProps } from "astro/types";
 
-export type Props = {
-  posts: PostLinkProps[];
+import PostLink from "./PostLink.astro";
+
+type Props = {
+  posts: readonly ComponentProps<typeof PostLink>[];
 };
 
 const { posts } = Astro.props;
@@ -10,9 +12,9 @@ const { posts } = Astro.props;
 
 <ol>
   {
-    posts.map(({ title, date, slug }) => (
+    posts.map(post => (
       <li>
-        <PostLink {...{ title, date, slug }} />
+        <PostLink {...post} />
       </li>
     ))
   }

@@ -14,7 +14,7 @@ const { layout } = Astro.props;
 
 <header style={layout}>
   <a href="/">
-    <ProfileImage height={36} width={36} />
+    <ProfileImage size={36} />
     <span class="title">{SITE_TITLE}</span>
   </a>
   <nav aria-label={`${AUTHOR_NAME}のSNS`}>
@@ -67,7 +67,6 @@ const { layout } = Astro.props;
         line-height: normal;
 
         & .icon {
-          display: inline-block;
           height: 1.5rem;
           width: 1.5rem;
         }

@@ -1,11 +1,15 @@
 ---
-import Date, { type Props as DateProps } from "./Date.astro";
+import type { CollectionEntry } from "astro:content";
 
-export type Props = {
-  slug: string;
-  date: DateProps["date"];
-  title: string;
+import Date from "./Date.astro";
+
+type Props = {
+  slug: PostEntry["slug"];
+  date: PostEntry["data"]["date"];
+  title: PostEntry["data"]["title"];
 };
+
+type PostEntry = CollectionEntry<"posts">;
 
 const { slug, date, title } = Astro.props;
 ---

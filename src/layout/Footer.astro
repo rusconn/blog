@@ -1,10 +1,12 @@
 ---
-import TagsNav, { type Props as TagsNavProps } from "@/components/TagsNav.astro";
+import type { ComponentProps } from "astro/types";
+
+import TagsNav from "@/components/TagsNav.astro";
 import { AUTHOR_NAME } from "@/constants";
 
 type Props = {
   layout: string;
-  tags: TagsNavProps["tags"];
+  tags: ComponentProps<typeof TagsNav>["tags"];
 };
 
 const { layout, tags } = Astro.props;

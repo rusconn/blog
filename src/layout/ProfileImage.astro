@@ -2,18 +2,17 @@
 import { AUTHOR_NAME } from "@/constants";
 
 type Props = {
-  height: number;
-  width: number;
+  size: number;
 };
 
-const { height, width } = Astro.props;
+const { size } = Astro.props;
 ---
 
-<img src="/images/profile.avif" height={height} width={width} alt={AUTHOR_NAME} decoding="async" />
+<img src="/images/profile.avif" width={size} height={size} alt={AUTHOR_NAME} decoding="async" />
 
 <style>
   img {
-    border-radius: 9999px;
+    border-radius: 50%;
     background-color: rgb(243 244 246);
     padding: 0.25rem;
   }

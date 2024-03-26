@@ -1,18 +1,14 @@
 ---
+import type { CollectionEntry } from "astro:content";
+
 import Date from "@/components/Date.astro";
 import TagsNav from "@/components/TagsNav.astro";
 import { TAGS } from "@/constants";
 import Layout from "./Layout.astro";
 
-type Props = {
-  title: string;
-  description: string;
-  date: Date;
-  tags: (typeof TAGS)[number]["slug"][];
-};
+type Props = CollectionEntry<"posts">["data"];
 
 const { title, description, date, tags: tagSlugs } = Astro.props;
-
 const tags = TAGS.filter(tag => tagSlugs.includes(tag.slug));
 ---
 
@@ -51,17 +47,7 @@ const tags = TAGS.filter(tag => tagSlugs.includes(tag.slug));
         margin-bottom: 0;
       }
 
-      & blockquote,
-      dl,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6,
-      hr,
-      figure,
-      p,
-      pre {
+      & :where(blockquote, dl, h2, h3, h4, h5, h6, hr, figure, p, pre) {
         margin: 1.5rem 0;
       }
 
@@ -88,8 +74,7 @@ const tags = TAGS.filter(tag => tagSlugs.includes(tag.slug));
         font-weight: 600;
       }
 
-      & ul,
-      ol {
+      & :where(ul, ol) {
         margin-left: 2rem;
       }
 

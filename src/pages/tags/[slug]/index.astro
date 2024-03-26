@@ -1,40 +1,30 @@
 ---
+import type { GetStaticPaths } from "astro";
 import { getCollection } from "astro:content";
 
-import PostsNav, { type Props as PostsNavProps } from "@/components/PostsNav.astro";
+import PostsNav from "@/components/PostsNav.astro";
 import { TAGS } from "@/constants";
 import Layout from "@/layout/Layout.astro";
 
-type ParamsProps = {
-  params: { slug: string };
-  props: Props;
-}[];
-
-type Props = {
-  name: string;
-  posts: PostsNavProps["posts"];
-};
-
-export async function getStaticPaths(): Promise<ParamsProps> {
+export const getStaticPaths = (async () => {
   const allPosts = await getCollection("posts");
 
-  return TAGS.map(({ slug, name }) => ({
-    params: { slug },
+  return TAGS.map(tag => ({
+    params: { slug: tag.slug },
     props: {
-      name,
+      name: tag.name,
       posts: allPosts
-        .filter(({ data }) => (data.tags as string[]).includes(slug))
-        .map(({ data: { title, date }, slug }) => ({ title, date, slug })),
+        .filter(({ data }) => data.tags.includes(tag.slug))
+        .map(({ slug, data: { date, title } }) => ({ slug, date, title })),
     },
   }));
-}
+}) satisfies GetStaticPaths;
 
 const { name, posts } = Astro.props;
-
-const title = `${name}の記事`;
-const description = `${name}の記事`;
+const title = `${name}の記事` as const;
+const description = title;
 ---
 
 <Layout {...{ title, description }}>
-  <PostsNav heading={`${name}の記事`} {...{ posts }} />
+  <PostsNav heading={title} {...{ posts }} />
 </Layout>

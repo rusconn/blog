@@ -1,8 +1,7 @@
 ---
-export type Props = {
-  slug: string;
-  name: string;
-};
+import type { TAGS } from "@/constants";
+
+type Props = (typeof TAGS)[number];
 
 const { slug, name } = Astro.props;
 ---

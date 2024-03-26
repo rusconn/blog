@@ -1,6 +1,5 @@
 {
   "name": "blog",
-  "version": "0.1.0",
   "private": true,
   "packageManager": "pnpm@8.5.1",
   "engines": {
@@ -30,17 +29,13 @@
     "lint": "eslint src --cache",
     "format": "prettier --cache './**/*.{astro,js,ts,json,css,md}'"
   },
-  "dependencies": {
+  "devDependencies": {
     "@astrojs/check": "^0.5.5",
+    "@typescript-eslint/eslint-plugin": "^6.7.5",
+    "@typescript-eslint/parser": "^6.7.5",
     "astro": "^4.4.4",
     "date-fns": "^2.29.3",
     "date-fns-tz": "^2.0.0",
-    "rehype-external-links": "^2.0.1"
-  },
-  "devDependencies": {
-    "@types/node": "~18.16.16",
-    "@typescript-eslint/eslint-plugin": "^6.7.5",
-    "@typescript-eslint/parser": "^6.7.5",
     "eslint": "^8.29.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-astro": "^0.31.4",
@@ -48,6 +43,7 @@
     "npm-run-all": "^4.1.5",
     "prettier": "^3.0.3",
     "prettier-plugin-astro": "^0.12.1",
-    "typescript": "^5.2.2"
+    "rehype-external-links": "^2.0.1",
+    "typescript": "~5.2.0"
   }
 }

@@ -1,5 +1,5 @@
 export const AUTHOR_NAME = "rusconn";
-export const SITE_TITLE = `${AUTHOR_NAME}'s blog` as const;
+export const SITE_TITLE = `${AUTHOR_NAME}'s blog`;
 
 export const TAGS = [
   {
@@ -22,4 +22,4 @@ export const TAGS = [
     slug: "others",
     name: "その他",
   },
-];
+] as const;

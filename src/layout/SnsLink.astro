@@ -7,14 +7,14 @@ type Props = {
 const { href, ariaLabel } = Astro.props;
 ---
 
-<a {...{ href }} target="_blank" rel="noopener noreferrer" aria-label={ariaLabel}>
+<a {...{ href }} target="_blank" rel="noreferrer" aria-label={ariaLabel}>
   <slot />
 </a>
 
 <style>
   a {
     display: inline-block;
-    border-radius: 9999px;
+    border-radius: 50%;
     padding: 0.5rem;
     vertical-align: middle;
     color: var(--text-primary);

@@ -1,8 +1,10 @@
 ---
-import TagLink, { type Props as TagLinkProps } from "./TagLink.astro";
+import type { ComponentProps } from "astro/types";
 
-export type Props = {
-  tags: TagLinkProps[];
+import TagLink from "./TagLink.astro";
+
+type Props = {
+  tags: readonly ComponentProps<typeof TagLink>[];
 };
 
 const { tags } = Astro.props;
@@ -10,9 +12,9 @@ const { tags } = Astro.props;
 
 <ul>
   {
-    tags.map(({ slug, name }) => (
+    tags.map(tag => (
       <li>
-        <TagLink {...{ slug, name }} />
+        <TagLink {...tag} />
       </li>
     ))
   }
