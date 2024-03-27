@@ -13,12 +13,6 @@ devDependencies:
   astro:
     specifier: ^4.4.4
     version: 4.4.4(typescript@5.2.2)
-  date-fns:
-    specifier: ^2.29.3
-    version: 2.29.3
-  date-fns-tz:
-    specifier: ^2.0.0
-    version: 2.0.0(date-fns@2.29.3)
   eslint:
     specifier: ^8.29.0
     version: 8.29.0
@@ -1712,19 +1706,6 @@ packages:
     resolution: {integrity: sha512-/Tb/JcjK111nNScGob5MNtsntNM1aCNUDipB/TkwZFhyDrrE47SOx/18wF2bbjgc3ZzCSKW1T5nt5EbFoAz/Vg==}
     engines: {node: '>=4'}
     hasBin: true
-    dev: true
-
-  /date-fns-tz@2.0.0(date-fns@2.29.3):
-    resolution: {integrity: sha512-OAtcLdB9vxSXTWHdT8b398ARImVwQMyjfYGkKD2zaGpHseG2UPHbHjXELReErZFxWdSLph3c2zOaaTyHfOhERQ==}
-    peerDependencies:
-      date-fns: '>=2.0.0'
-    dependencies:
-      date-fns: 2.29.3
-    dev: true
-
-  /date-fns@2.29.3:
-    resolution: {integrity: sha512-dDCnyH2WnnKusqvZZ6+jA1O51Ibt8ZMRNkDZdyAyK4YfbDwa/cEmuztzG5pk6hqlp9aSBPYcjOlktquahGwGeA==}
-    engines: {node: '>=0.11'}
     dev: true
 
   /debug@2.6.9:
